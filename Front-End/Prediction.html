@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results - CineScore</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Favicon.png">
+    <link rel="stylesheet" href="Base.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div id="global-page-loader" class="global-loader">
+
+        <div class="loader-frame clapperboard-loader" id="frame-1" style="display: none;">
+            <div class="clapper-stick"></div>
+            <div class="clapper-bottom"></div>
+        </div>
+
+        <div class="loader-frame film-strip-loader" id="frame-2" style="display: none;">
+            <i class="fa-solid fa-play film-play-icon"></i>
+        </div>
+
+        <h2 id="cinematic-loader-text" class="loader-text-cinematic"></h2>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="row-between">
+                    <a href="index.html" class="navlogo">
+                        <img id="nav-logo" class="logo" src="Assets/CineScore-Light.png" alt="CineScore">
+                    </a>
+                    <ul class="nav-links row">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Prediction.html" class="active">Predictions</a></li>
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+
+                    <div class="row" style="gap: 16px;">
+                        <div class="row auth-group" id="auth-buttons">
+                            <div>
+                                <a href="#" class="nav-link-login" id="nav-login-btn">Log In</a>
+                                <button class="small nav-button-primary" id="nav-signup-btn">Sign Up</button>
+                            </div>
+                        </div>
+
+                        <div class="user-menu-wrapper row" id="user-menu-wrapper"
+                            style="gap: 12px; align-items: center; justify-content: center;">
+
+                            <button id="nav-upgrade-btn" class="small nav-button-primary" style="margin-right: 4px;"
+                                onclick="triggerPaywallExplanation()">Upgrade to Pro</button>
+
+                            <div class="avatar-container"
+                                style="position: relative; display: flex; align-items: center;">
+                                <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" alt="User"
+                                    class="user-avatar" id="user-avatar-btn"
+                                    style="flex-shrink: 0; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
+
+                                <div class="avatar-hover-card">
+                                    <p
+                                        style="font-size: 10px; color: var(--color-tertiary); text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px; font-weight: 700;">
+                                        CineScore Account</p>
+                                    <h4 class="profile-name-display"
+                                        style="margin: 0; font-size: 15px; color: var(--color-primary);">Omi Sir</h4>
+                                    <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--color-secondary);">
+                                        omi@cinescore.com</p>
+
+                                    <div id="hover-pro-badge"
+                                        style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                                        <span
+                                            style="color: var(--color-warning); font-size: 11px; font-weight: 800; letter-spacing: 0.5px;"><i
+                                                class="fa-solid fa-crown"></i> PRO MEMBER</span>
+                                    </div>
+                                </div>
+
+                                <ul class="avatar-dropdown" id="avatar-dropdown"
+                                    style="width: 280px; padding: 24px 20px;">
+                                    <li class="stack"
+                                        style="gap: 4px; margin-bottom: 16px; text-align: center; align-items: center;">
+
+                                        <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" class="user-avatar"
+                                            style="width: 64px; height: 64px; margin-bottom: 8px;">
+
+                                        <h3 style="margin: 0; line-height: 1; font-size: 18px;"
+                                            class="profile-name-display">Omi Sir</h3>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 4px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Handle:</span>
+                                            <span class="small profile-handle-display"
+                                                style="color: var(--color-primary); font-weight: 700;">@omisir</span>
+                                        </div>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 2px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Rank:</span>
+                                            <span class="meta"
+                                                style="color: var(--color-accent) !important; font-weight: 800;"><i
+                                                    class="fa-solid fa-star" style="font-size: 10px;"></i>
+                                                Studio Head</span>
+                                        </div>
+                                    </li>
+
+                                    <hr style="margin: 16px 0; border-color: var(--color-border);">
+                                    <li><a href="Hub.html#account"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                            Profile</a></li>
+                                    <li><a href="#" id="logout-btn" style="color: var(--color-danger);"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button id="theme-toggle" class="cinematic-toggle" aria-label="Toggle Theme">
+                            <div class="cinematic-thumb">
+                                <i class="fa-solid fa-play icon-play"></i>
+                                <i class="fa-solid fa-stop icon-pause"></i>
+                            </div>
+                        </button>
+
+                        <button class="icon-btn" id="drawer-toggle-btn"
+                            style="background: var(--color-primary); border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; color: var(--bg-page); cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="back-to-lab" style="display: none; position: absolute; top: 100px; left: 30px; z-index: 100;">
+        <button onclick="window.resetToBlankState()" title="Click to go to default view"
+            style="width: 44px; height: 44px; padding: 0; background: rgba(11, 25, 44, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--color-secondary); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <main class="dashboard-content parallax-wrapper" style="position: relative; padding-top: 0;">
+
+
+        <div id="blank-slate-view" class="view-visible"
+            style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; width: 100vw; margin: -65px calc(-50vw + 50%); padding-top: 150px; padding-bottom: 60px; text-align: center; overflow: visible; z-index: 5;">
+
+            <div class="cinematic-slider"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; border-bottom-left-radius:48px !important; border-bottom-right-radius: 48px!important;">
+                <img class="active" style="background-position: top" src="Assets/Blank-State-Hero-1.jpg" alt="Background">
+                <img style="background-position: top" src="Assets/Blank-State-Hero-2.jpg" alt="Background">
+                <img style="background-position: top" src="Assets/Blank-State-Hero-3.jpg" alt="Background">
+                <img style="background-position: top" src="Assets/Blank-State-Hero-4.jpg" alt="Background">
+                <img style="background-position: top" src="Assets/Blank-State-Hero-5.jpg" alt="Background">
+                <img style="background-position: top" src="Assets/Blank-State-Hero-6.jpg" alt="Background">
+
+                <div class="hero-ambient-overlay"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;">
+                </div>
+                
+            </div>
+
+            <div class="blank-slate-content"
+                style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; padding: 0 24px;">
+
+                <span id="state-badge" class="badge" style="margin-bottom: 24px; text-transform: uppercase;">
+                    The Director's Chair 🪑
+                </span>
+
+                <h1 id="blank-slate-heading"
+                    style="font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: var(--color-primary); margin-bottom: 16px; letter-spacing: -1px;">
+                    Predicting <span class="text-accent">Cinematic Success.</span></h1>
+
+                <p id="blank-slate-sub"
+                    style="color: var(--color-secondary); font-size: 18px; font-weight: 700; margin-bottom: 40px; max-width: 600px; line-height: 1.5;">
+                    Where cinematic passion meets predictive precision. Search for an upcoming film to receive our AI
+                    Box Office forecast.</p>
+
+                <div class="massive-search-wrapper breathing-search"
+                    style="position: relative; width: 100%; margin: 0 auto; z-index: 90;">
+
+                    <div id="search-onboarding-tooltip" class="hidden"
+                        style="position: absolute; top: -55px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: #FFF; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,85,255,0.4); display: flex; gap: 12px; align-items: center; z-index: 100;">
+
+                        <span>Let's run your first AI analysis!</span>
+
+                        <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; transition: opacity 0.2s;"
+                            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'"
+                            onclick="document.getElementById('search-onboarding-tooltip').style.display='none'"></i>
+
+                        <div
+                            style="position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid var(--color-accent);">
+
+                        </div>
+                    </div>
+
+                    <div class="massive-search-container">
+                        <i class="fa-solid fa-magnifying-glass" style="color: var(--color-primary);"></i>
+                        <input type="text" id="default-view-search-input"
+                            placeholder="Search here (e.g 'Avengers: Doomsday')"
+                            style="flex: 1; background: transparent; border: none; outline: none; font-size: 16px; font-weight: 500;"
+                            autocomplete="off">
+
+                        <i class="fa-solid fa-xmark" id="default-view-search-clear"
+                            style="display: none; color: #FFF; cursor: pointer; font-size: 18px; margin-right: 16px; transition: color 0.2s;"
+                            onmouseover="this.style.color='var(--color-primary)'"
+                            onmouseout="this.style.color='#FFF'"></i>
+
+                        <button id="default-view-search-btn" class="btn btn-primary interactive-btn"
+                            style="padding: 12px 32px; font-size: 16px; border-radius: 50px;">Analyze</button>
+                    </div>
+
+                    <ul class="autocomplete-menu hidden" id="default-view-search-dropdown">
+                    </ul>
+                </div>
+
+                <div id="unlogged-cta-group" class="row"
+                    style="gap: 16px; margin-top: 32px; justify-content: center; z-index: 80;">
+                    <button class="btn btn-primary interactive-btn"
+                        style="padding: 10px 24px; font-size: 14px; border-radius: 8px;"
+                        onclick="document.getElementById('signupModal').style.display='flex'">Join the Studio</button>
+                    <button class="btn interactive-outline"
+                        style="background: rgba(0, 0, 0,0.2); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); padding: 10px 24px; font-size: 14px; border-radius: 8px;"
+                        onclick="document.getElementById('loginModal').style.display='flex'">Log In</button>
+                </div>
+
+                <div id="state-trending-posters" style="display: none; margin-top: 64px;">
+                    <p
+                        style="font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 24px; margin-top: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;">
+                        Trending Analysis</p>
+
+                    <div id="blank-slate-trending-track" class="row"
+                        style="gap: 32px; justify-content: center; flex-wrap: wrap;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="prediction-results-view" class="view-hidden"
+            style="display: none; width: 100vw; position: relative; margin-left: calc(-50vw + 50%);">
+
+
+
+            <div id="paywall-overlay" class="paywall-overlay hidden">
+                <div class="paywall-card">
+                    <div class="paywall-icon-ring">
+                        <i class="fa-solid fa-user-lock paywall-icon"></i>
+                    </div>
+
+
+
+                    <h3
+                        style="display: block; width: 100%; text-align: center; color: var(--color-accent); font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 24px; margin-bottom: 16px;">
+                        Analysis Complete</h3>
+
+                    <span
+                        style="display: block; margin: 0 0 16px 0; font-size: 15px; font-weight: 600; color: var(--color-primary) !important;">You
+                        are just a <strong style="color: var(--color-accent)">Click Away</strong></span>
+
+                    <p style="margin: 0 0 24px 0; line-height: 1.5; color: var(--color-secondary);">The AI has generated
+                        the Box Office forecast for <strong id="paywall-movie-title"
+                            style="color: var(--color-primary);">this film</strong>. Create a free profile to unlock the
+                        metrics.</p>
+
+                    <button class="btn btn-primary"
+                        style="width: 100%; font-size: 16px; padding: 14px; transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                        onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 20px rgba(0,85,255,0.4)';"
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
+                        onclick="document.getElementById('signupModal').style.display='flex'">Become a Member to
+                        Unlock</button>
+
+                    <p style="margin-top: 16px; margin-bottom: 0; font-size: 12px; color: var(--color-secondary);">
+                        Already a member?
+                        <a href="#" style="color: var(--color-accent); text-decoration: none; transition: all 0.2s;"
+                            onmouseover="this.style.textDecoration='underline'"
+                            onmouseout="this.style.textDecoration='none'"
+                            onclick="document.getElementById('loginModal').style.display='flex'">Log in</a>
+                    </p>
+                </div>
+            </div>
+
+            <div id="prediction-content-wrapper" class="parallax-wrapper"
+                style="background-color: var(--bg-body); overflow: visible; border-radius: 0; border-bottom: none; box-shadow: none;">
+
+                <div class="hero-scroll-track" style="height: 300vh; position: relative; z-index: 1;">
+
+                    <section class="prediction-hero sticky-hero"
+                        style="position: sticky; top: 0; z-index: 0; height: 100vh; display: flex; align-items: center; overflow: visible; padding-top: 10px; width: 100vw; margin-left: calc(-50vw + 50%);">
+
+                        <div id="hero-bg-blur"
+                            style="position: absolute; inset: -100px; background: url('https://placehold.co/1200x800/111/FFF?text=Loading') center/cover; filter: blur(15px) brightness(0.25); z-index: -1;">
+                        </div>
+
+                        <div class="container" style="position: relative; z-index: 1;">
+
+                            <div class="pred-dash-root glass-panel">
+
+                                <div class="pred-poster-col" style="display: flex; flex-direction: column; gap: 16px;">
+                                    <a href="#" class="pred-poster-frame"
+                                        style="flex: 1; display: flex; flex-direction: column;">
+                                        <div class="pred-play-overlay">
+                                            <div class="pred-play-circle"><i class="fa-solid fa-play"></i></div>
+                                        </div>
+                                        <img id="dyn-poster"
+                                            src="https://placehold.co/600x900/0B192C/FFFFFF?text=Batman+II" alt="Poster"
+                                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                                    </a>
+
+                                    <button class="nav-button-primary pred-watchlist-btn">
+                                        <i class="fa-regular fa-bookmark"></i> Add to Watchlist
+                                    </button>
+                                </div>
+
+                                <div class="pred-info-col">
+                                    <div class="stack" style="gap: 16px;">
+                                        <div class="row" style="gap: 12px; margin-bottom: 4px;">
+                                            <span class="badge">Live Analysis <i
+                                                    class="fa-solid fa-tower-broadcast"></i></span>
+                                            <span id="prediction-hash" class="meta">#CS-8924B</span>
+                                        </div>
+
+                                        <h1 id="predicted-movie-title"
+                                            style="font-size: 52px; line-height: 1.1; margin: 0; letter-spacing: -1px; color: var(--color-primary);">
+                                            The Batman: Part II</h1>
+
+                                        <div class="row" style="gap: 12px; flex-wrap: wrap; align-items: center;">
+                                            <span id="dyn-year"
+                                                style="font-weight: 700; color: var(--color-primary);">2026</span>
+                                            <div style="display: flex; gap: 6px;" id="dyn-genres">
+                                                <span class="genre-pill" style="margin: 0;">Crime</span>
+                                                <span class="genre-pill" style="margin: 0;">Noir</span>
+                                            </div>
+                                            <span id="dyn-trending-pill"
+                                                style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(255, 159, 28, 0.15); color: var(--color-warning); border: 1px solid rgba(255, 159, 28, 0.3); border-radius: 100px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                                🔥Trending
+                                            </span>
+                                        </div>
+
+                                        <div class="stack" style="gap: 4px; margin-top: 8px;">
+                                            <p class="small" style="margin: 0;"><strong>Director:</strong> <span
+                                                    id="dyn-director" style="color: var(--color-primary);">Matt
+                                                    Reeves</span>
+                                            </p>
+                                            <p class="small" style="margin: 0;"><strong>Top Cast:</strong> <span
+                                                    id="dyn-cast" style="color: var(--color-primary);">Robert Pattinson,
+                                                    Zoe Kravitz</span>
+                                            </p>
+                                            <p class="small" style="margin: 0;"><strong>Studio:</strong> <span
+                                                    id="dyn-studio" style="color: var(--color-primary);">Warner Bros.
+                                                    Pictures</span></p>
+                                        </div>
+
+                                        <div id="dyn-synopsis-wrapper"
+                                            style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--color-border);">
+                                            <p class="small" style="margin: 0; line-height: 1.5; white-space: normal;">
+                                                <span id="dyn-synopsis"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        style="padding-top: 24px; border-top: 1px solid var(--color-border); margin-top: auto;">
+                                        <div class="action-buttons-wrapper">
+                                            <span class="pred-action-btn vote-btn" data-vote="up"><i
+                                                    class="fa-regular fa-thumbs-up"></i> Good Prediction</span>
+                                            <span class="pred-action-btn vote-btn" data-vote="down"><i
+                                                    class="fa-regular fa-thumbs-down"></i> Bad Prediction</span>
+                                            <span id="share-btn" class="pred-action-btn"><i
+                                                    class="fa-regular fa-paper-plane"></i> Share Snapshot</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pred-sidebar-col">
+                                    <div class="pred-credibility-stamp"
+                                        style=" border: 1px solid rgba(255,255,255,0.2) !important;">
+                                        <div class="ai-gauge-wrapper">
+                                            <svg class="ai-gauge-svg" viewBox="0 0 100 100">
+                                                <circle class="ai-gauge-bg" cx="50" cy="50" r="42"></circle>
+                                                <circle class="ai-gauge-fill" cx="50" cy="50" r="42"
+                                                    style="stroke-dasharray: 264; stroke-dashoffset: 16;"></circle>
+                                            </svg>
+                                            <div class="ai-gauge-value"><span id="dyn-ai-score">94</span><span
+                                                    style="font-size: 18px;">%</span></div>
+                                        </div>
+                                        <div class="ai-stamp-text">
+                                            <span class="ai-certified-badge"><i class="fa-solid fa-check-circle"></i> AI
+                                                Certified</span>
+                                            <span
+                                                style="font-size: 20px; font-weight: 700; color: var(--color-primary); line-height: 1.2;">High
+                                                Confidence</span>
+                                            <span class="small" style="font-size: 12px;">Based on <span
+                                                    id="dyn-data-points">
+                                                    2.4M </span> data points </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="pred-stat-card"
+                                        style="background: transparent !important; border: 1px solid rgba(255,255,255,0.2) !important;">
+                                        <span class="small"
+                                            style="text-transform: uppercase; font-weight: 800; font-size: 10px; letter-spacing: 1px;">Audience
+                                            Sentiment</span>
+                                        <div class="row" style="align-items: baseline; gap: 8px; margin: 6px 0;">
+                                            <h1 id="dyn-sentiment-score"
+                                                style="font-size: 36px; margin: 0; color: var(--color-primary); line-height: 1;">
+                                                8.7
+                                            </h1>
+                                            <span class="small" style="font-weight: 700;">/ 10</span>
+                                        </div>
+
+                                        <div class="sentiment-track" style="margin-top: 8px;">
+                                            <div class="sentiment-pointer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                </div>
+
+                <div class="content-slider"
+                    style=" width: 100vw; position: relative; z-index: 20; margin-top: -150vh; background-color: var(--bg-page); border-top-left-radius: 40px; border-top-right-radius: 40px; box-shadow: 0 -20px 40px rgba(0,0,0,0.3); padding-top: 60px; padding-bottom: 0; margin-left: calc(-50vw + 50%);">
+
+                    <section class="prediction-dashboard container section">
+
+                        <div class="search-bar-inline glass-panel neo-brutalist"
+                            style="position: relative; z-index: 9999; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; padding: 12px 24px; border-radius: 100px !important;">
+
+                            <i class="fa-solid fa-magnifying-glass"
+                                style="color: var(--color-secondary); font-size: 20px;"></i>
+
+                            <input type="text" id="result-view-search-input"
+                                placeholder="Got another Blockbuster in mind? Search here ..."
+                                style="flex: 1; background: transparent; border: none; outline: none; color: var(--color-primary); font-size: 16px; font-weight: 500;"
+                                autocomplete="off">
+
+                            <i class="fa-solid fa-xmark" id="pred-clear-btn"
+                                style="display: none; cursor: pointer; color: var(--color-secondary); font-size: 18px; padding: 0 8px;"></i>
+
+                            <button id="result-view-search-btn" class="nav-button-primary"
+                                style="padding: 10px 32px; border-radius: 100px; align-items: center; justify-content: center;"><i
+                                    class="fa-solid fa-magnifying-glass"></i> Predict</button>
+
+                            <ul class="search-dropdown" id="result-view-search-dropdown"
+                                style="display: none; position: absolute; top: 110%; left: 0; width: 100%; border-radius: 16px; padding: 8px; z-index: 100; background: var(--bg-card); border: 1px solid var(--color-border); box-shadow: 0 15px 40px rgba(0,0,0,0.6); max-height: 260px; overflow-y: auto; opacity: 1;">
+                            </ul>
+                            </ul>
+                        </div>
+
+                        <div class="container" style="margin-bottom: 24px;">
+                            <div class="row-between"
+                                style="align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--color-border);">
+                                <h2
+                                    style="font-size: 20px; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary);">
+                                    <i class="fa-solid fa-bullseye"
+                                        style="color: var(--color-danger); margin-right: 8px;"></i>
+                                    Summary Stats
+                                    <p class="meta" style="font-size: var(--fs-meta); margin: 8px;">High-level
+                                        performance
+                                        indicators aggregating AI on glance.</p>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div style="width: 100%; margin-bottom: 40px;">
+                            <div class="grid grid-4">
+
+                                <div class="metric-card-wrapper">
+                                    <i class="fa-solid fa-trophy watermark-icon"
+                                        style="color: var(--color-accent);"></i>
+                                    <div class="metric-content">
+                                        <div class="row" style="gap: 8px; margin-bottom: 12px;">
+                                            <i class="fa-solid fa-bolt" style="color: var(--color-accent);"></i>
+                                            <span class="small"
+                                                style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;">Performance
+                                                Verdict</span>
+                                        </div>
+                                        <h1 id="dyn-verdict"
+                                            style="font-size: 30px; margin: 0; line-height: 1.1; letter-spacing: -1px; color: var(--color-accent); width: 100%; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: normal; hyphens: none; word-break: normal;">
+                                            Projected Mega-Hit</h1>
+
+                                        <p class="small" id="dyn-verdict-meta"
+                                            title="Calculated by weighing early social reactions against historical franchise momentum, buzzwords, and comparative presales."
+                                            style="margin-top: 12px; margin-bottom: 0; width: 100%; color: var(--color-secondary);">
+                                            <i class="fa-solid fa-arrow-trend-up"></i> <span id="dyn-verdict-text"
+                                                style="font-weight: 600; color: var(--color-primary);">Aggregated ROI
+                                                Analysis</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="metric-card-wrapper">
+                                    <i class="fa-solid fa-magnifying-glass-dollar watermark-icon"
+                                        style="color: var(--color-success);"></i>
+                                    <div class="metric-content">
+                                        <div class="row" style="gap: 8px; margin-bottom: 12px;">
+                                            <i class="fa-solid fa-sack-dollar" style="color: var(--color-success);"></i>
+                                            <span class="small"
+                                                style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;">Financial
+                                                Projection</span>
+                                        </div>
+                                        <h1 id="dyn-box-office"
+                                            style="font-size: var(--fs-h1); margin: 0; line-height: 1.2; color: var(--color-success);">
+                                            $847<span style="font-size: 24px;">M</span></h1>
+                                        <p id="dyn-box-office-meta"
+                                            title="Margin of error accounts for global volatility and late-stage shakeupsÃ¢â‚¬â€from geopolitical shifts, regional censorship,content-restrictions and volatile exchange rates to sudden viral marketing, Super Bowl trailer momentum, last-minute reshoots, and unexpected cast changes."
+                                            style="margin-top: 12px; margin-bottom: 0; width: 100%; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; font-size: 13px; letter-spacing: -0.2px; white-space: normal; hyphens: none; word-break: normal; color: var(--color-secondary);">
+                                            <i class="fa-solid fa-circle-info"></i> <span
+                                                style="font-weight: 600; color: var(--color-primary);">+/- 12% margin of
+                                                error</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="metric-card-wrapper">
+                                    <i class="fa-brands fa-imdb watermark-icon" style="color: #F5C518;"></i>
+                                    <div class="metric-content">
+                                        <div class="row" style="gap: 8px; margin-bottom: 12px;">
+                                            <i class="fa-brands fa-imdb" style="color: #F5C518; font-size: 16px;"></i>
+                                            <span class="small"
+                                                style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;">Predicted
+                                                IMDb</span>
+                                        </div>
+                                        <h1 id="dyn-imdb"
+                                            style="font-size: var(--fs-h1); margin: 0; line-height: 1.2; color: #F5C518;">
+                                            8.2
+                                            <span style="font-size: 24px; color: var(--color-secondary);">/10</span>
+                                        </h1>
+                                        <p id="dyn-imdb-meta"
+                                            title="Verdict synthesized by comparing the director's critical baseline with test-screening sentiment, word of mouth, screen-play and performances, and genre-specific audience bias curves."
+                                            style="margin-top: 12px; margin-bottom: 0; width: 100%; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; font-size: 13px; letter-spacing: -0.2px; white-space: normal; hyphens: none; word-break: normal; color: var(--color-secondary);">
+                                            <i class="fa-solid fa-check"></i> <span id="dyn-imdb-text"
+                                                style="font-weight: 600; color: var(--color-primary);">Strong Critical
+                                                Consensus</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="metric-card-wrapper">
+                                    <i class="fa-solid fa-filter-circle-dollar watermark-icon"
+                                        style="color: var(--color-tertiary);"></i>
+                                    <div class="metric-content">
+                                        <div class="row" style="gap: 8px; margin-bottom: 12px;">
+                                            <i class="fa-solid fa-hand-holding-dollar" style="color: #966fd6;"></i>
+                                            <span class="small"
+                                                style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;">Profitability
+                                                Target</span>
+                                        </div>
+                                        <h1 id="dyn-profit-target"
+                                            style="font-size: var(--fs-h1); margin: 0; line-height: 1.2; color: #8B5CF6;">
+                                            $650<span style="font-size: 24px;">M</span></h1>
+                                        <div class="row" style="align-items: center; gap: 6px; margin-top: 12px;">
+                                            <span id="dyn-est-budget" class="small"
+                                                style="color: var(--color-warning); font-weight: 700;">Est.
+                                                Budget: $250M</span>
+                                            <i class="fa-solid fa-circle-info tooltip-trigger"
+                                                style="color: var(--color-secondary); font-size: 12px; cursor: pointer;"
+                                                title="Official budget may vary if unconfirmed or unreported. AI estimation factors in standard P&A (Prints & Advertising) costs against genre averages and prequel's success to calculate true break-even thresholds."></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row-between collapse-trigger" data-target="analytics-collapse"
+                            style="align-items: center; margin-top: 24px; margin-bottom: 16px; padding-top: 24px; border-top: 1px solid var(--color-border);">
+                            <h3
+                                style="margin: 0; font-size: var(--fs-h3); color: var(--color-secondary); text-transform: uppercase; letter-spacing: 1px;">
+                                <i class="fa-solid fa-chart-simple" style="color: var(--color-accent);"></i>
+                                Comparitive Analytics
+                                <p class="meta" style="font-size: var(--fs-meta); margin-right: 8px; margin-top: 8px;">
+                                    Algorithmic benchmarking against historical releases</p>
+                            </h3>
+
+                            <i class="fa-solid fa-chevron-down collapse-icon"
+                                style="color: var(--color-secondary);"></i>
+                        </div>
+
+                        <div class="collapsible-grid" id="analytics-collapse">
+                            <div class="collapsible-inner">
+                                <div style="padding: 16px 12px;">
+
+                                    <div class="grid grid-65-35" style="gap: 24px;">
+                                        <div class="card stack" style="padding: 32px; height: 100%;">
+                                            <div class="row row-between"
+                                                style="margin-bottom: 24px; align-items: center; flex-wrap: wrap; gap: 16px;">
+                                                <h3 style="margin: 0; font-size: 20px;"><i
+                                                        class="fa-solid fa-chart-column"
+                                                        style="color: var(--color-accent); margin-right: 8px;"></i>
+                                                    Comparable
+                                                    Releases (Total Run) </h3>
+                                                <span class="badge"
+                                                    style="background: rgba(0, 85, 255, 0.1); color: var(--color-accent);">Model's
+                                                    Comp</span>
+                                            </div>
+                                            <div style="width: 100%; height: 280px; position: relative;">
+                                                <canvas id="compsChart"></canvas>
+                                            </div>
+                                        </div>
+
+                                        <div class="card stack" id="neural-sandbox"
+                                            style="gap: 16px; padding: 32px; height: 100%; position: relative; overflow: hidden;">
+                                            <div style="text-align: center; margin-bottom: 24px;">
+                                                <span
+                                                    style="font-size: 11px; color: var(--color-accent); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">CineScore
+                                                    Meter</span>
+                                                <h3
+                                                    style="color: var(--color-primary); margin: 8px 0 0 0; font-size: 20px;">
+                                                    Test Your Hypothesis</h3>
+                                            </div>
+
+                                            <div
+                                                style="position: relative; width: 100%; max-width: 280px; height: 155px; margin: 0 auto 32px auto;">
+
+
+                                                <div
+                                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 280px; border-radius: 50%; background: conic-gradient(from 270deg, var(--color-danger) 0deg, var(--color-warning) 90deg, var(--color-success) 180deg, transparent 180deg); -webkit-mask: radial-gradient(transparent 50%, black 51%); mask:radial-gradient(transparent 50%, black 51%); z-index: 1;">
+                                                </div>
+
+                                                <div
+                                                    style="position: absolute; bottom: 0px; left: -10px; font-size: 10px; font-weight: 800; color: var(--color-danger); text-transform: uppercase; letter-spacing: 1px; z-index: 5;">
+                                                    High Risk</div>
+                                                <div
+                                                    style="position: absolute; bottom: 0px; right: -10px; font-size: 10px; font-weight: 800; color: var(--color-success); text-transform: uppercase; letter-spacing: 1px; z-index: 5;">
+                                                    Surefire Hit</div>
+
+                                                <div id="gauge-needle"
+                                                    style="position: absolute; bottom: 15px; left: 50%; width: 4px; height: 110px; background: var(--color-accent); transform-origin: bottom center; transform: rotate(-90deg) translateX(-50%); transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 3;">
+                                                </div>
+                                                <div
+                                                    style="position: absolute; bottom: 9px; left: 50%; width: 12px; height: 12px; background: #FFF; border-radius: 50%; transform: translateX(-50%); z-index: 4; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                                                </div>
+
+                                                <div
+                                                    style="position: absolute; bottom: 25px; left: 0; width: 100%; text-align: center; z-index: 2;">
+                                                    <span id="algo-final-score"
+                                                        style="font-size: 36px; font-weight: 900; color: var(--color-primary);">0</span>
+                                                </div>
+                                            </div>
+
+                                            <div id="algo-sliders-container"
+                                                style="position: relative; z-index: 10; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                            </div>
+
+                                            <div id="algo-sliders-container"
+                                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-between collapse-trigger" data-target="showdown-collapse"
+                            style="align-items: center; margin-top: 24px; margin-bottom: 16px; padding-top: 24px; border-top: 1px solid var(--color-border);">
+                            <h3
+                                style="margin: 0; font-size: var(--fs-h3); color: var(--color-secondary); text-transform: uppercase; letter-spacing: 1px;">
+                                <!-- <i class="fa-solid fa-bolt" style="color: var(--color-warning);"></i> -->
+                                Showdown Analysis
+                                <p class="meta" style="font-size: var(--fs-meta); margin-right: 8px; margin-top: 8px;">
+                                    A direct head-to-head comparison against most relevant predecessor or genre rival.
+                                </p>
+                            </h3>
+
+                            <i class="fa-solid fa-chevron-down collapse-icon"
+                                style="color: var(--color-secondary);"></i>
+                        </div>
+
+                        <div class="collapsible-grid" id="showdown-collapse">
+                            <div class="collapsible-inner"
+                                style="border-bottom: 1px solid var(--color-border); padding-bottom: 16px;">
+                                <div style="padding: 16px 12px;">
+
+                                    <div class="grid grid-35-65" style="gap: 24px; align-items: stretch;">
+                                        <div style="display: flex; flex-direction: column; gap: 16px; height: 100%;">
+                                            <div class="card stack verdict-card-left"
+                                                style="flex: 1; padding: 16px 20px; justify-content: center;">
+                                                <h4
+                                                    style="margin: 0 0 6px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-accent);">
+                                                    <i class="fa-solid fa-ranking-star"></i> Success Potential
+                                                </h4>
+                                                <p class="small"
+                                                    style="color: var(--color-primary); line-height: 1.5; font-weight: 500; border-left: 4px solid var(--color-accent); padding-left: 16px; margin: 0;">
+                                                    <i id="verdict-general">The active prediction is positioned as a
+                                                        high-value asset. Real-time market saturation levels suggest its
+                                                        specific sub-genre and branding will allow it to bypass standard
+                                                        theatrical declines, drawing both core fandoms and casual
+                                                        moviegoers seeking premium cinema.</i>
+                                                </p>
+                                            </div>
+
+                                            <div class="card stack verdict-card-left"
+                                                style="flex: 1; padding: 16px 20px; justify-content: center;">
+                                                <h4
+                                                    style="margin:0 0 6px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-success);">
+                                                    <i class="fa-solid fa-magnifying-glass-dollar"></i> Financial
+                                                    Breakdown
+                                                </h4>
+                                                <p class="small"
+                                                    style="color: var(--color-primary); padding-left: 16px; border-left: 4px solid var(--color-success); margin: 0; line-height: 1.5; font-weight: 500;">
+                                                    <i id="verdict-finance">Factoring in comparable historical success,
+                                                        the model projects a strong uptick in opening velocity. This is
+                                                        driven by established IP loyalty, inflation-adjusted
+                                                        premium-format ticket demand (IMAX/Dolby), and highly strategic
+                                                        release corridor placement.</i>
+                                                </p>
+                                            </div>
+
+                                            <div class="card stack verdict-card-left"
+                                                style="flex: 1; padding: 16px 20px; justify-content: center;">
+                                                <h4
+                                                    style="margin: 0 0 6px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-warning);">
+                                                    <i class="fa-solid fa-award"></i> Critical Reception
+                                                </h4>
+                                                <p class="small"
+                                                    style="padding-left: 16px; color: var(--color-primary); border-left: 4px solid var(--color-warning);margin: 0; line-height: 1.5; font-weight: 500;">
+                                                    <i id="verdict-critical">Anticipated high-contrast cinematography,
+                                                        practical VFX, and a grounded auteur approach are heavily
+                                                        weighted to maintain an 'A-tier' critical aggregate score,
+                                                        ensuring strong week-to-week audience retention.</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="card stack"
+                                            style="padding: 24px; justify-content: center; height: 100%;">
+                                            <div class="stack"
+                                                style="align-items: center; text-align: center; margin-bottom: 12px;">
+                                                <span class="badge"
+                                                    style="background: rgba(255, 159, 28, 0.1); color: var(--color-warning); margin-bottom: 6px;">1-v-1
+                                                    Showdown</span>
+                                                <h3 id="showdown-title"
+                                                    style="margin: 0; font-size: 24px; font-weight: 800;">Ã¢Å¡â€
+                                                    Analysis
+                                                    Arena</h3>
+                                            </div>
+
+                                            <div style="margin-bottom: 24px; position: relative; z-index: 10;">
+                                                <i class="fa-solid fa-user-ninja"
+                                                    style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--color-tertiary);"></i>
+                                                <input type="text" id="opponent-search-input"
+                                                    placeholder="Search database for opponent (e.g. Dune: Part Three)..."
+                                                    style="width: 100%; padding: 12px 16px 12px 40px; border-radius: 8px; border: 1px solid var(--color-border); background: rgba(0,0,0,0.2); color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s;"
+                                                    onfocus="this.style.borderColor='var(--color-accent)'"
+                                                    onblur="this.style.borderColor='var(--color-border)'"
+                                                    autocomplete="off">
+
+                                                <div id="opponent-search-dropdown"
+                                                    style="position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 8px; margin-top: 4px; display: none; max-height: 200px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                                                </div>
+                                            </div>
+
+                                            <div class="row"
+                                                style="justify-content: center; align-items: center; position: relative;">
+                                                <div class="stack"
+                                                    style="align-items: center; width: 50%; max-width: 280px; position: relative; z-index: 3;">
+                                                    <img src="https://placehold.co/400x600/111/FFF?text=Predicted"
+                                                        id="showdown-poster-1"
+                                                        style="width: 100%; border-radius: 12px; aspect-ratio: 2/3; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                                                    <span id="showdown-name-1" class="small"
+                                                        style="margin-top: 12px; font-weight: 800; color: var(--color-primary); text-align: center; line-height: 1.2; font-size: 14px;">Loading...</span>
+                                                </div>
+
+                                                <div
+                                                    style="background: var(--color-accent); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; font-style: italic; z-index: 90; margin: 0 -25px; box-shadow: 0 0 20px rgba(0, 85, 255, 0.6); border: 3px solid var(--color-primary); flex-shrink: 0;">
+                                                    VS</div>
+
+                                                <div class="stack"
+                                                    style="align-items: center; width: 50%; max-width: 280px; position: relative; z-index: 3;">
+                                                    <img src="https://placehold.co/400x600/333/FFF?text=Opponent"
+                                                        id="showdown-poster-2"
+                                                        style="width: 100%; border-radius: 12px; aspect-ratio: 2/3; object-fit: cover; opacity: 0.6; filter: grayscale(50%); box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                                                    <span id="showdown-name-2" class="small"
+                                                        style="margin-top: 12px; font-weight: 800; opacity: 0.7; text-align: center; line-height: 1.2; font-size: 14px;">Choose
+                                                        Opponent</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="stack"
+                                                style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-border); position: relative;">
+
+                                                <div
+                                                    style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--color-warning); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; font-style: italic; z-index: 2; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); border: 3px solid var(--color-primary)">
+                                                    VS</div>
+
+                                                <div id="showdown-metrics-grid"
+                                                    style="display: flex; flex-direction: column; width: 100%; padding-top: 8px;">
+
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                                        <strong id="sd-total-1"
+                                                            style="color: var(--color-success); font-size: 18px; flex: 1; text-align: right;">$847.0M</strong>
+                                                        <span
+                                                            style="font-size: 10px; font-weight: 800; color: var(--color-primary); text-transform: uppercase; flex: 1; text-align: center; letter-spacing: 1px;">Total
+                                                            Run</span>
+                                                        <strong id="sd-total-2"
+                                                            style="color: var(--color-primary); font-size: 18px; flex: 1; text-align: left;">$772.2M</strong>
+                                                    </div>
+
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                                        <strong id="sd-open-1"
+                                                            style="color: var(--color-success); font-size: 18px; flex: 1; text-align: right;">$145M</strong>
+                                                        <span
+                                                            style="font-size: 10px; font-weight: 800; color: var(--color-tertiary); text-transform: uppercase; flex: 1; text-align: center; letter-spacing: 1px;">Opening
+                                                            Wknd</span>
+                                                        <strong id="sd-open-2"
+                                                            style="color: var(--color-primary); font-size: 18px; flex: 1; text-align: left;">$134M</strong>
+                                                    </div>
+
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                                        <strong id="sd-sent-1"
+                                                            style="color: var(--color-success); font-size: 18px; flex: 1; text-align: right;">88%</strong>
+                                                        <span
+                                                            style="font-size: 10px; font-weight: 800; color: var(--color-tertiary); text-transform: uppercase; flex: 1; text-align: center; letter-spacing: 1px;">Sentiment</span>
+                                                        <strong id="sd-sent-2"
+                                                            style="color: var(--color-primary); font-size: 18px; flex: 1; text-align: left;">85%</strong>
+                                                    </div>
+
+                                                    <div
+                                                        style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                                                        <strong id="sd-hype-1"
+                                                            style="color: var(--color-success); font-size: 18px; flex: 1; text-align: right;">9.2</strong>
+                                                        <span
+                                                            style="font-size: 10px; font-weight: 800; color: var(--color-tertiary); text-transform: uppercase; flex: 1; text-align: center; letter-spacing: 1px;">Momentum</span>
+                                                        <strong id="sd-hype-2"
+                                                            style="color: var(--color-primary); font-size: 18px; flex: 1; text-align: left;">8.4</strong>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <section class="section" style="background-color: var(--bg-page); padding: 24px 0;">
+                        <div class="container stack">
+
+                            <div class="stack collapse-trigger" data-target="market-collapse" style="gap: 24px;">
+                                <div class="row-between" style="align-items: center; flex-wrap: wrap; gap: 20px;">
+
+                                    <div class="stack" style="gap: 8px; flex: 1;">
+                                        <div class="row" style="gap: 12px; align-items: center;">
+                                            <h2
+                                                style="font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--color-primary); margin: 0;">
+                                                <i class="fa-solid fa-arrow-up-right-dots"
+                                                    style="color: var(--color-success); margin-left: 8px;"></i>
+                                                Market Projections
+                                            </h2>
+                                            <span class="badge"
+                                                style="background: rgba(0, 85, 255, 0.1); color: var(--color-accent); border: none;">Live
+                                                Data Feed</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="gap: 16px; align-items: center;">
+                                        <div class="scenario-toggle">
+                                            <div class="scenario-slider"></div>
+                                            <button class="scenario-btn active bull"><i
+                                                    class="fa-solid fa-arrow-trend-up"></i>
+                                                Bull Case</button>
+                                            <button class="scenario-btn"><i class="fa-solid fa-arrow-trend-down"></i>
+                                                Bear
+                                                Case</button>
+                                        </div>
+                                        <i class="fa-solid fa-chevron-down collapse-icon"
+                                            style="color: var(--color-secondary); font-size: 20px;"></i>
+                                    </div>
+
+                                </div>
+                                <div class="collapsible-grid" id="market-collapse">
+                                    <div class="collapsible-inner">
+                                        <div style="padding: 16px 12px;">
+
+                                            <div
+                                                style="display: flex; justify-content: center; width: 100%; margin-bottom: 24px;">
+                                                <h3
+                                                    style="font-size: 16px; font-weight: 700; color: var(--color-tertiary); margin: 0; text-transform: uppercase; letter-spacing: 2px;">
+                                                    <i class="fa-solid fa-angle-down"
+                                                        style="color: var(--color-accent); margin-right: 8px;"></i>
+                                                    In-Depth
+                                                    Analysis
+                                                </h3>
+                                            </div>
+
+                                            <div class="chart-grid-layout">
+                                                <div class="chart-card">
+                                                    <div class="chart-header">
+                                                        <h3 class="chart-title"><i class="fa-regular fa-comments"
+                                                                style="color: #3B82F6; margin-right: 8px;"></i> Social
+                                                            Velocity
+                                                        </h3>
+                                                        <span class="chart-subtitle">Platform Buzz Breakdown</span>
+                                                    </div>
+                                                    <div class="chart-container"><canvas id="socialDonut"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-card">
+                                                    <div class="chart-header">
+                                                        <h3 class="chart-title"><i class="fa-solid fa-chart-line"
+                                                                style="color: #10B981; margin-right: 8px;"></i>
+                                                            Sentiment Trend
+                                                        </h3>
+                                                        <span class="chart-subtitle">30-Day Trajectory</span>
+                                                    </div>
+                                                    <div class="chart-container"><canvas id="sentimentLine"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-card">
+                                                    <div class="chart-header">
+                                                        <h3 class="chart-title"><i class="fa-solid fa-chart-pie"
+                                                                style="color: #8B5CF6; margin-right: 8px;"></i>
+                                                            Production
+                                                            Impact</h3>
+                                                        <span class="chart-subtitle">Demographic Reach</span>
+                                                    </div>
+                                                    <div class="chart-container"><canvas id="appealSonar"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-card">
+                                                    <div class="chart-header">
+                                                        <h3 class="chart-title"><i
+                                                                class="fa-solid fa-filter-circle-dollar"
+                                                                style="color: #F59E0B; margin-right: 8px;"></i>
+                                                            Profitability
+                                                            Funnel
+                                                        </h3>
+                                                        <span class="chart-subtitle">Budget vs. Gross</span>
+                                                    </div>
+                                                    <div class="chart-container"><canvas id="roiFunnel"></canvas></div>
+                                                </div>
+                                                <div class="chart-card dashboard-wide">
+                                                    <div class="chart-header">
+                                                        <h3 class="chart-title"><i class="fa-solid fa-chart-area"
+                                                                style="color: #0055FF; margin-right: 8px;"></i> Global
+                                                            Box
+                                                            Office
+                                                            Trajectory</h3>
+                                                        <span class="chart-subtitle">Cumulative Gross ($M)</span>
+                                                    </div>
+                                                    <div class="chart-container"><canvas
+                                                            id="revenueTrajectory"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+
+                    <section class="section" style="padding: 40px 0; border-top: 1px solid var(--color-border);">
+                        <div class="container stack">
+
+                            <div class="row-between collapse-trigger" data-target="comps-collapse"
+                                style="align-items: center; margin-bottom: 16px; cursor: pointer;">
+                                <div class="stack" style="gap: 8px;">
+                                    <span class="badge"
+                                        style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border: none; width: fit-content;">Training
+                                        Data</span>
+                                    <h2
+                                        style="font-size: 28px; font-weight: 800; margin: 0; color: var(--color-primary);">
+                                        <i class="fa-solid fa-ranking-star"
+                                            style="color: #8B5CF6; margin-right: 8px;"></i>
+                                        Model's
+                                        Benchmarks.
+                                    </h2>
+                                    <p style="color: var(--color-secondary); margin: 0; font-size: 14px;">Historical
+                                        comparable
+                                        titles (Comps) utilized by our ML Engine to anchor the current prediction.</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down collapse-icon"
+                                    style="color: var(--color-secondary); font-size: 20px;"></i>
+                            </div>
+
+                            <div class="collapsible-grid" id="comps-collapse">
+                                <div class="collapsible-inner">
+                                    <div style="padding: 16px 0;">
+                                        <div id="comps-grid" class="grid grid-4" style="gap: 20px;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section"
+                        style="padding: 60px 0; background-color: var(--bg-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+                        <div class="container stack" style="gap: 32px;">
+
+                            <div class="row-between" style="align-items: flex-end;">
+                                <div class="stack" style="gap: 8px;">
+                                    <span class="badge"
+                                        style="background: rgba(255, 159, 28, 0.1); color: var(--color-warning); border: none; width: fit-content;">Live
+                                        Buzz
+                                    </span>
+                                    <h2
+                                        style="font-size: 28px; font-weight: 800; margin: 0; color: var(--color-primary);">
+                                        <i class="fa-solid fa-arrow-trend-up"
+                                            style="color: var(--color-success); margin-right: 8px;"></i>
+                                        Trending Searches
+                                    </h2>
+                                    <p style="color: var(--color-secondary); margin: 0; font-size: 14px;">Trending Movie
+                                        Predicitons currently generating high query volume across the network .</p>
+                                </div>
+                            </div>
+
+                            <div id="trending-grid" class="grid grid-4" style="gap: 20px;">
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="padding: 24px 0; background-color: var(--bg-page); text-align: center;">
+                        <div class="container">
+                            <p
+                                style="font-size: 11px; color: var(--color-secondary); line-height: 1.6; margin: 0 auto; max-width: 1000px; font-family: monospace;">
+                                <i class="fa-solid fa-circle-info" style="margin-right: 4px;"></i> <strong
+                                    style="color: var(--color-danger);">SAFE HARBOR
+                                    STATEMENT:</strong> All forecasts, ROIs, and tracking ranges provided by the
+                                CineScore
+                                engine are reflective of how films are trending or expected to trend ahead of release.
+                                They
+                                represent algorithmic likelihoods, not financial certainties. They are not intended as
+                                final box
+                                office predictions and are subject to continuous revision based on evolving macro-market
+                                conditions, geopolitical factors, and real-time sentiment shifts factored into our
+                                machine
+                                learning models.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+    </main>
+
+
+    <div class="form" id="loginModal" onsubmit="event.preventDefault(); unlockDashboard(false);">
+        <div class="form-content">
+            <span class="close">&times;</span>
+            <form id="loginForm" action="">
+                <H1>Welcome Back</H1>
+
+                <label for="Email">Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="Password">Password</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <div style="text-align: center; margin-top: -5px; margin-bottom: 10px;">
+                    <a href="#" class="small"
+                        style="color: var(--color-tertiary); font-weight: 500; transition: color 0.2s ease;"
+                        onmouseover="this.style.color='var(--color-accent)'"
+                        onmouseout="this.style.color='var(--color-tertiary)'">Forgot password?</a>
+                </div>
+
+                <button class="small nav-button-primary" type="submit">Log In</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide" onclick="unlockDashboard(false)">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+            </form>
+            <p class="text-block">Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a></p>
+        </div>
+    </div>
+
+    <div class="form" id="signupModal" onsubmit="event.preventDefault(); unlockDashboard(true);">
+        <div class="form-content">
+            <H1>Welcome to CineScore</H1>
+            <span class="close">&times;</span>
+            <form id="signupForm" action="">
+                <label for="email">Email:</label>
+                <input type="email" placeholder="Enter your email" required>
+                <label for="password">Password:</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="small nav-button-primary" type="submit">Submit</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide" onclick="unlockDashboard(true)">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+                <p class="text-block">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+
+                <p class="text-block" style="font-size: 11px; margin-top: 8px;">By signing up, you agree to our <a
+                        href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="form" id="resetModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+            <form id="resetForm" novalidate>
+                <H1>Reset Password</H1>
+                <p class="text-block" style="text-align: center; margin-bottom: 20px;">Enter your new credentials below.
+                </p>
+
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter new password" autocomplete="new-password"
+                    required>
+
+                <label for="confirm-password">Re-enter New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password"
+                    autocomplete="new-password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="small nav-button-primary" type="submit" style="width: 100%; color:#FFFFFF;">Update
+                    Password</button>
+
+                <p class="text-block" style="text-align: center; margin-top: 24px;">
+                    Remembered it? <a href="#" id="back-to-login">Back to Log In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="customAlertModal"
+        style="display: none; z-index: 10000; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="modal-content stack"
+            style="background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: swipeIn 0.3s ease;">
+            <div id="alert-icon-container" style="font-size: 40px; margin-bottom: 12px;"></div>
+            <h2 id="alert-title" style="margin: 0; font-size: 20px; color: var(--color-primary);"></h2>
+            <p id="alert-message"
+                style="color: var(--color-secondary); font-size: 14px; line-height: 1.5; margin-bottom: 24px;"></p>
+            <div id="alert-actions" class="row" style="gap: 12px; justify-content: center;"></div>
+        </div>
+    </div>
+
+    <footer class="footer-section parallax-footer">
+        <div class="container">
+
+            <div class="grid grid-4 footer-grid">
+
+                <div class="stack">
+                    <a href="#" class="navlogo">
+                        <img id="footer-logo" src="Assets/CineScore-Light.png" alt="Cine.Metrics" class="logo">
+                    </a>
+                    <p class="small" style="margin-top: 12px; color: var(--color-secondary);">
+                        Predicting Cinematic Success.
+                    </p>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="#" class="disabled-link">Pricing</a></li>
+                        <li><a href="#" class="disabled-link">API Access</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="#" class="disabled-link">Careers</a></li>
+                        <li><a href="#" class="disabled-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="#" class="disabled-link">Privacy Policy</a></li>
+                        <li><a href="#" class="disabled-link">Terms of Service</a></li>
+                        <li><a href="About.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row-between footer-bottom">
+                <span class="meta">Ã‚Â© 2026 CineScore. All rights reserved.
+                </span>
+
+
+                <span style="font-size: 13px; color: var(--color-tertiary); line-height: 1;">
+                    Made with <i class="fa-solid fa-heart" style="color: var(--color-danger);"></i> in India by
+                    <strong>Omi</strong>
+                </span>
+
+                <div class="row">
+                    <a href="YOUR_PORTFOLIO_LINK" target="_blank" class="footer-social-link" aria-label="Portfolio">
+                        <i class="fa-solid fa-globe" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="mailto:your.email@example.com" class="footer-social-link" aria-label="Email">
+                        <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="GitHub">
+                        <i class="fa-brands fa-github" style="font-size: 20px;"></i>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="ai-bot-trigger" class="ai-assistant-fab">
+        <i class="fa-solid fa-user-astronaut"></i>
+    </div>
+
+    <div id="splash-loader" class="splash-loader">
+        <div class="loader-content">
+            <div class="speedometer-container">
+                <div class="speedometer-track"></div>
+                <div class="speedometer-inner-track"></div>
+                <div class="speedometer-needle"></div>
+                <div class="speedometer-center-dot"></div>
+            </div>
+            <h2 class="loader-text">Analyzing Box Office Data...</h2>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+            <h2 style="margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-link" style="font-size: 16px; color: var(--color-accent);"></i> Quick Links
+            </h2>
+            <button class="close" id="drawer-close-btn"
+                style="position: static; width: 40px; height: 40px; border-radius: 50%; background: rgba(128, 128, 128, 0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; line-height: 0; border: none; cursor: pointer; color: var(--color-primary); transition: background 0.2s ease;">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">The
+                Private Club</span>
+            <a href="Hub.html#overview" class="drawer-link"><i class="fa-solid fa-bullseye"></i> Your
+                Predictions</a>
+            <a href="Hub.html#watchlist" class="drawer-link"><i class="fa-solid fa-bookmark"></i> My
+                Watchlist</a>
+            <a href="Hub.html#legacy" class="drawer-link"><i class="fa-solid fa-trophy"></i> Legacy & Rank</a>
+
+            <hr style="margin: 24px 0; border-color: var(--color-tertiary);">
+
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">Public
+                Pages</span>
+            <a href="index.html" class="drawer-link"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="Prediction.html" class="drawer-link"><i class="fa-solid fa-bolt"></i> Make Prediction</a>
+            <a href="Features.html" class="drawer-link"><i class="fa-solid fa-gears"></i> Features</a>
+            <a href="About-Us.html" class="drawer-link"><i class="fa-solid fa-user-group"></i> About Us</a>
+        </div>
+    </div>
+
+    <div class="form" id="onboardingModal" style="display: none; z-index: 10000;">
+        <div class="form-content stack" style="text-align: center;">
+            <h1 style="margin-bottom: 8px;">Welcome to the Crew</h1>
+            <p class="text-block" style="margin-bottom: 24px;">Let's set up your director profile.</p>
+            <form id="onboardingForm" novalidate
+                onsubmit="event.preventDefault(); this.parentElement.parentElement.style.display='none';">
+                <div style="text-align: left;">
+                    <label>First Name</label>
+                    <input type="text" id="ob-fname" placeholder="E.g. Christopher" required>
+                    <label>Last Name</label>
+                    <input type="text" id="ob-lname" placeholder="E.g. Nolan" required>
+                    <label>Director Handle</label>
+                    <input type="text" id="ob-handle" placeholder="@username" required>
+                </div>
+                <button type="submit" class="hero-btn"
+                    style="width: 100%; margin-top: 16px; background: var(--color-accent) !important; color: #FFFFFF !important; border: none !important; opacity: 1 !important; font-weight: 700 !important;">Complete
+                    Profile <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="mockData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

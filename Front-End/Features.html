@@ -1,0 +1,966 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features & Technology - CineScore</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Favicon.png">
+
+    <link rel="stylesheet" href="Base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="global-page-loader" class="global-loader">
+        
+        <div class="loader-frame clapperboard-loader" id="frame-1" style="display: none;">
+            <div class="clapper-stick"></div>
+            <div class="clapper-bottom"></div>
+        </div>
+
+        <div class="loader-frame film-strip-loader" id="frame-2" style="display: none;">
+            <i class="fa-solid fa-play film-play-icon"></i>
+        </div>
+
+        <h2 id="cinematic-loader-text" class="loader-text-cinematic"></h2>
+    </div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="row-between">
+
+                    <a href="#" class="navlogo">
+                        <img id="nav-logo" class="logo" src="Assets/CineScore-Light.png" alt="CineScore">
+                    </a>
+
+                    <ul class="nav-links row">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Prediction.html">Predictions</a></li>
+                        <li><a href="Features.html" class="active">Features</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+
+                    <div class="row" style="gap: 16px;">
+                        <div class="row auth-group" id="auth-buttons">
+                            <div>
+                                <a href="#" class="nav-link-login" id="nav-login-btn">Log In</a>
+                                <button class="small nav-button-primary" id="nav-signup-btn">Sign Up</button>
+                            </div>
+                        </div>
+
+                        <div class="user-menu-wrapper row" id="user-menu-wrapper"
+                            style="gap: 12px; align-items: center; justify-content: center;">
+
+                            <button id="nav-upgrade-btn" class="small nav-button-primary" style="margin-right: 4px;"
+                                onclick="triggerPaywallExplanation()">Upgrade to Pro</button>
+
+                            <div class="avatar-container"
+                                style="position: relative; display: flex; align-items: center;">
+                                <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" alt="User"
+                                    class="user-avatar" id="user-avatar-btn"
+                                    style="flex-shrink: 0; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
+
+                                <div class="avatar-hover-card">
+                                    <p
+                                        style="font-size: 10px; color: var(--color-tertiary); text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px; font-weight: 700;">
+                                        CineScore Account</p>
+                                    <h4 class="profile-name-display"
+                                        style="margin: 0; font-size: 15px; color: var(--color-primary);">Omi Sir</h4>
+                                    <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--color-secondary);">
+                                        omi@cinescore.com</p>
+
+                                    <div id="hover-pro-badge"
+                                        style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                                        <span
+                                            style="color: var(--color-warning); font-size: 11px; font-weight: 800; letter-spacing: 0.5px;"><i
+                                                class="fa-solid fa-crown"></i> PRO MEMBER</span>
+                                    </div>
+                                </div>
+
+                                <ul class="avatar-dropdown" id="avatar-dropdown"
+                                    style="width: 280px; padding: 24px 20px;">
+                                    <li class="stack"
+                                        style="gap: 4px; margin-bottom: 16px; text-align: center; align-items: center;">
+
+                                        <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" class="user-avatar"
+                                            style="width: 64px; height: 64px; margin-bottom: 8px;">
+
+                                        <h3 style="margin: 0; line-height: 1; font-size: 18px;"
+                                            class="profile-name-display">Omi Sir</h3>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 4px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Handle:</span>
+                                            <span class="small profile-handle-display"
+                                                style="color: var(--color-primary); font-weight: 700;">@omisir</span>
+                                        </div>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 2px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Rank:</span>
+                                            <span class="meta"
+                                                style="color: var(--color-accent) !important; font-weight: 800;"><i
+                                                    class="fa-solid fa-star" style="font-size: 10px;"></i>
+                                                Studio Head</span>
+                                        </div>
+                                    </li>
+
+                                    <hr style="margin: 16px 0; border-color: var(--color-border);">
+                                    <li><a href="Hub.html#account"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                            Profile</a></li>
+                                    <li><a href="#" id="logout-btn" style="color: var(--color-danger);"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button id="theme-toggle" class="cinematic-toggle" aria-label="Toggle Theme">
+                            <div class="cinematic-thumb">
+                                <i class="fa-solid fa-play icon-play"></i>
+                                <i class="fa-solid fa-stop icon-pause"></i>
+                            </div>
+                        </button>
+
+                        <button class="icon-btn" id="drawer-toggle-btn"
+                            style="background: var(--color-primary); border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; color: var(--bg-page); cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="parallax-wrapper">
+
+        <section class="section text-center" style="position: relative; padding-top: 110px; padding-bottom: 110px;
+        border-bottom: 1px solid var(--color-border); overflow: hidden; min-height: 50vh; display: flex; align-items:
+        center; justify-content: center;">
+
+            <div class="cinematic-slider"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                <img src="Assets/Analytics-Hero-1.jpg" alt="Neural Network Blue">
+                <img src="Assets/Analytics-Hero-2.jpg" alt="Neural Stream">
+                <img src="Assets/Analytics-Hero-3.jpg" alt="Neural Nodes">
+                <img src="Assets/Analytics-Hero-4.jpg" class="active" alt="Neural Brain">
+            </div>
+
+            <div class="hero-ambient-overlay"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div class="container stack" style="align-items: center; position: relative; z-index: 2;">
+                <span class="badge"
+                    style="background: var(--bg-page); color: var(--color-accent); margin-bottom: 16px; border: 1px solid rgba(0, 85, 255, 0.2);">Behind
+                    the Scenes <i class="fa-solid fa-user-tie"></i></span>
+                <h1
+                    style=" text-align: center; font-size: 64px; font-weight: 900; line-height: 1.2; letter-spacing: -1px; color: var(--color-primary);">
+                    Bridging Cinema with <br><span class="text-accent">Data Science.</span></h1>
+                <p class="text-block"
+                    style="text-align: center; font-size: 18px; color: var(--color-secondary); max-width: 800px; line-height: 1.6;">
+                    <i>
+                        CineScore strips away Hollywood gut-feelings and replaces them with cold, hard data. Explore the
+                        neural pathways of our predictive engine. By analyzing decades of historical box office
+                        performance,sentiment velocity, we transform the unpredictable art of filmmaking
+                        into a precise, calculated science.</i>
+
+                </p>
+            </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-bottom: 80px;">
+            <div class="container">
+
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <h2
+                        style="margin: 0; color: var(--color-secondary); text-transform: uppercase; font-size: 16px; letter-spacing: 2px;">
+                        The Life-cycle of a CineScore Prediction
+
+                    </h2>
+                    <p
+                        style="margin: 8px auto 0 auto; color: var(--color-tertiary); font-size: var(--fs-small); max-width: 400px;">
+                        <i class="fa-solid fa-chevron-down" style="color: var(--color-accent);"></i> Sequential Data
+                        Flow
+                    </p>
+                </div>
+
+                <div class="row" style="gap: 16px; align-items: stretch;">
+
+                    <div class="card stack"
+                        style="flex: 1; padding: 24px; text-align: center; align-items: center; justify-content: center; border-top: 3px solid var(--color-secondary);">
+                        <div
+                            style="width: 56px; height: 56px; border-radius: 12px; background: rgba(148, 163, 184, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-spoon" style="font-size: 24px; color: var(--color-accent);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px;">1. Data Ingestion</h3>
+                        <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.5;">APIs pull
+                            real-time ticket presales, search query volume, and historical budget data into the
+                            mainframe.</p>
+                    </div>
+
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; width: 40px; flex-shrink: 0; opacity: 0.8;">
+                        <i class="fa-solid fa-right-long"
+                            style="font-size: 42px; color: var(--color-accent-hover);"></i>
+                    </div>
+
+                    <div class="card stack"
+                        style="flex: 1; padding: 24px; text-align: center; align-items: center; justify-content: center; border-top: 3px solid var(--color-warning);">
+                        <div
+                            style="width: 56px; height: 56px; border-radius: 12px; background: rgba(255, 159, 28, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-head-side-virus"
+                                style="font-size: 24px; color: var(--color-warning);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px;">2. NLP Sentiment</h3>
+                        <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.5;">Neural
+                            networks read thousands of tweets and reviews to calculate an aggregate emotional trajectory
+                            score.</p>
+                    </div>
+
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; width: 40px; flex-shrink: 0; opacity: 0.8;">
+                        <i class="fa-solid fa-right-long" style="font-size: 42px; color: var(--color-warning);"></i>
+                    </div>
+
+                    <div class="card stack"
+                        style="flex: 1; padding: 24px; text-align: center; align-items: center; justify-content: center; border-top: 3px solid #8B5CF6;">
+                        <div
+                            style="width: 56px; height: 56px; border-radius: 12px; background: rgba(139, 92, 246, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-clock-rotate-left" style="font-size: 24px; color: #8B5CF6;"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px;">3. Historical Analysis</h3>
+                        <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.5;">Algorithms
+                            benchmark the current film against 100 years of historical movie trends.</p>
+                    </div>
+
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; width: 40px; flex-shrink: 0; opacity: 0.8;">
+                        <i class="fa-solid fa-right-long" style="font-size: 42px; color: #8B5CF6;"></i>
+                    </div>
+
+                    <div class="card stack"
+                        style="flex: 1; padding: 24px; text-align: center; align-items: center; justify-content: center; border-top: 3px solid var(--color-accent);">
+                        <div
+                            style="width: 56px; height: 56px; border-radius: 12px; background: rgba(0, 85, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-robot" style="font-size: 24px; color: var(--color-success);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px;">4. The Verdict</h3>
+                        <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.5;">The ML
+                            model synthezises all vectors to output a profitability threshold, expected IMDb score, and
+                            global gross.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section"
+            style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(0, 85, 255, 0.05)); padding: 80px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 64px;">
+
+                    <div class="cinematic-slider"
+                        style="width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid var(--color-border); aspect-ratio: 4/3; display: block;">
+
+                        <img src="Assets/Analytics-Art-1.jpg" class="active" alt="Camera Room">
+                        <img src="Assets/Analytics-Art-2.jpg" alt="Camera Room">
+                        <img src="Assets/Analytics-Art-3.jpg" alt="Camera Room">
+                        <img src="Assets/Analytics-Art-4.jpg" alt="Cinema Screen">
+                        <img src="Assets/Analytics-Art-5.jpg" alt="Cinema Screen">
+                        <img src="Assets/Analytics-Art-6.jpg" alt="Cinema Screen">
+                        <img src="Assets/Analytics-Art-7.jpg" alt="Cinema Screen">
+                        <img src="Assets/Analytics-Art-8.jpg" alt="Cinema Screen">
+
+                    </div>
+
+
+                    <div class="stack" style="gap: 16px;">
+                        <span class="badge"
+                            style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border: none; width: fit-content;">Digital
+                            Premiere</span>
+                        <h1
+                            style="font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.2; margin: 0; letter-spacing: -0.5px; color: var(--color-primary);">
+                            Translating Art Into <br>Mathematical Logic.</h1>
+                        <p style="font-size: 16px; color: var(--color-secondary); line-height: 1.6; margin: 0;">
+                            Hollywood is a factory of dreams, but our algorithms look at the cold, mechanical reality.
+                            We convert the narrative, performance, and legacy of a creative work into a multi-vector
+                            vector-space, calculating its probability of commercial and critical velocity.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section"
+            style="background: var(--bg-card); border-top: 1px solid var(--color-border); padding: 80px 0;">
+            <div class="container stack">
+
+                <div class="section-header text-center" style="margin-bottom: 48px;">
+                    <p class="badge" style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">The
+                        Prediction Engine</p>
+                    <h1 style="font-size: 36px; margin: 8px 0;">Powered by Modern ML Techstack</h1>
+                    <p class="text-block" style="margin: 0 auto; max-width: 700px; color: var(--color-secondary);">
+                        CineScore bridges the gap between cinematic art and data science. Our architecture relies on a
+                        multi-layered, production-grade technology stack to deliver precision forecasting.
+                    </p>
+                </div>
+
+                <div class="grid grid-3" style="gap: 24px;">
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background:rgba(244, 63, 94, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-gears"
+                                style="font-size: 20px; color: #F43F5E;"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Machine Learning</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">Powered
+                            by <strong>Scikit-Learn</strong>, our core regression algorithms analyze 50+ variables to
+                            predict box office trajectories with high statistical confidence.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background: rgba(0, 200, 83, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-head-side-virus" style="font-size: 20px; color: var(--color-success);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">NLP Sentiment Analysis</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">Natural
+                            Language Processing models scrape and decode emotional intent from Twitter, Reddit, and
+                            critic reviews to quantify pre-release hype.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background: rgba(139, 92, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 20px; color: #8B5CF6;"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Generative AI (LLMs)</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">
+                            Integration with modern Large Language Models (like ChatGPT API) powers the CineBot
+                            assistant, providing contextual breakdowns of script summaries.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background: rgba(255, 159, 28, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-brands fa-python" style="font-size: 20px; color: var(--color-warning);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Python Web Scraping</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">
+                            Automated web scrapers deployed to extract real-time ticket pre-sales, trailer view
+                            velocities, and shifting release calendars.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background: rgba(0, 85, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-brands fa-kaggle" style="font-size: 20px; color: var(--color-accent);"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Historical Training Data</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">Our
+                            neural weights are calibrated against massive, curated historical datasets sourced from
+                            Kaggle, covering 30+ years of box office financials.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--bg-page);">
+                        <div
+                            style="width: 48px; height: 48px; background: rgba(100, 116, 139, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <i class="fa-solid fa-plug" style="font-size: 20px; color: #64748B;"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 18px;">Free Database APIs</h3>
+                        <p style="margin: 0; font-size: 13px; color: var(--color-secondary); line-height: 1.6;">Seamless
+                            ingestion pipelines connected to TMDB and OMDB APIs for flawless, standardized retrieval of
+                            cast, crew, and poster metadata.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--bg-page); padding: 80px 0;">
+            <div class="container">
+                <div class="grid grid-35-65" style="align-items: center; gap: 64px;">
+                    <div class="stack" style="gap: 24px;">
+                        <span class="badge"
+                            style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border: none; width: fit-content;">Neural
+                            Processing</span>
+                        <h2
+                            style="font-size: 32px; font-weight: 800; line-height: 1.1; margin: 0; color: var(--color-primary);">
+                            Dynamic Variable <br>Weighting.</h2>
+                        <p style="color: var(--color-secondary); line-height: 1.6; margin: 0;">Not all data is created
+                            equal. A viral TikTok trend carries a different financial weight than a universally praised
+                            test screening. </p>
+                        <p style="color: var(--color-secondary); line-height: 1.6; margin: 0;">Our core Machine Learning
+                            model uses dynamic coefficient adjustment. If a film is a highly-anticipated sequel, "Star
+                            Power" is weighed less heavily than "Brand Loyalty." If it is an original indie, "Critical
+                            Consensus" overrides all other metrics.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="background: #0D1117; border: 1px solid #30363D; border-radius: 12px; padding: 24px; overflow: hidden; position: relative;">
+                        <div class="row"
+                            style="gap: 8px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #30363D;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F56;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #FFBD2E;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #27C93F;"></div>
+                            <span
+                                style="margin-left: 12px; color: #8B949E; font-family: monospace; font-size: 12px;">cinescore-ml-engine
+                                ~ bash</span>
+                        </div>
+
+                        <div
+                            style="font-family: 'Courier New', Courier, monospace; font-size: 13px; line-height: 1.7; color: #E6EDF3;">
+                            <div class="row" style="gap: 8px;"><span style="color: #79C0FF;">const</span> <span
+                                    style="color: #D2A8FF;">calculateVerdict</span> <span
+                                    style="color: #FF7B72;">=</span> (<span style="color: #FFA657;">movieData</span>)
+                                <span style="color: #FF7B72;">=></span> {
+                            </div>
+                            <div style="padding-left: 24px; color: #8B949E;">// Initialize base prediction via comps
+                            </div>
+                            <div style="padding-left: 24px;"><span style="color: #79C0FF;">let</span> baseGross <span
+                                    style="color: #FF7B72;">=</span> model.<span
+                                    style="color: #D2A8FF;">fetchHistoricalBaseline</span>(movieData.genre);</div>
+                            <br>
+                            <div style="padding-left: 24px; color: #8B949E;">// Apply dynamic weight adjustments</div>
+                            <div style="padding-left: 24px;">baseGross <span style="color: #FF7B72;">*=</span>
+                                model.<span
+                                    style="color: #D2A8FF;">applySentimentMultiplier</span>(movieData.socialVelocity);
+                            </div>
+                            <div style="padding-left: 24px;">baseGross <span style="color: #FF7B72;">-=</span>
+                                model.<span
+                                    style="color: #D2A8FF;">calculateFranchiseFatigue</span>(movieData.prequelDropoff);
+                            </div>
+                            <br>
+                            <div style="padding-left: 24px;"><span style="color: #FF7B72;">return</span> {</div>
+                            <div style="padding-left: 48px;">verdict: <span style="color: #A5D6FF;">"Projected
+                                    Mega-Hit"</span>,</div>
+                            <div style="padding-left: 48px;">estRevenue: baseGross <span
+                                    style="color: #FF7B72;">*</span> <span style="color: #79C0FF;">1.12</span> <span
+                                    style="color: #8B949E;">// Margin of Error Buffer</span></div>
+                            <div style="padding-left: 24px;">};</div>
+                            <div>}</div>
+                            <br>
+                            <div class="row" style="gap: 8px;"><span style="color: #27C93F;">></span> <span
+                                    style="color: #8B949E;">Executing prediction sequence... [SUCCESS]</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section" style="padding: 80px 0; border-bottom: 1px solid var(--color-border);">
+            <div class="container">
+                <div class="grid grid-65-35" style="align-items: center; gap: 64px;">
+
+                    <div class="grid grid-2" style="gap: 20px;">
+                        <div class="card stack"
+                            style="padding: 24px; gap: 12px; border: 1px solid var(--color-border);">
+                            <i class="fa-solid fa-calendar-days"
+                                style="font-size: 20px; color: var(--color-accent);"></i>
+                            <h4 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                                Seasonality</h4>
+                            <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.4;">A July
+                                blockbuster behaves completely differently than a January horror dump. We adjust for
+                                historical calendar health.</p>
+                        </div>
+                        <div class="card stack"
+                            style="padding: 24px; gap: 12px; border: 1px solid var(--color-border);">
+                            <i class="fa-solid fa-people-arrows"
+                                style="font-size: 20px; color: var(--color-warning);"></i>
+                            <h4 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                                Cannibalization</h4>
+                            <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.4;">Two
+                                four-quadrant action films releasing on the same weekend will mathematically destroy
+                                each other's legs.</p>
+                        </div>
+                        <div class="card stack"
+                            style="padding: 24px; gap: 12px; border: 1px solid var(--color-border);">
+                            <i class="fa-solid fa-earth-americas"
+                                style="font-size: 20px; color: var(--color-success);"></i>
+                            <h4 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                                Geopolitical Reality</h4>
+                            <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.4;">Foreign
+                                exchange volatility and strict regional censorship (e.g., China) are aggressively
+                                factored into global totals.</p>
+                        </div>
+                        <div class="card stack"
+                            style="padding: 24px; gap: 12px; border: 1px solid var(--color-border);">
+                            <i class="fa-solid fa-ticket" style="font-size: 20px; color: #F5C518;"></i>
+                            <h4 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                                Premium Formats</h4>
+                            <p class="small" style="margin: 0; color: var(--color-secondary); line-height: 1.4;">IMAX
+                                and Dolby 3D exclusivity contracts artificially inflate opening weekend gross margins by
+                                up to 22%.</p>
+                        </div>
+                    </div>
+
+                    <div class="stack" style="gap: 24px;">
+                        <span class="badge"
+                            style="background: rgba(255, 159, 28, 0.1); color: var(--color-warning); border: none; width: fit-content;">Macro
+                            Context</span>
+                        <h2
+                            style="font-size: 32px; font-weight: 800; line-height: 1.1; margin: 0; color: var(--color-primary);">
+                            No Movie Exists <br>in a Vacuum.</h2>
+                        <p style="color: var(--color-secondary); line-height: 1.6; margin: 0;">Traditional analysts look
+                            at a movie's budget and director. CineScore looks at the entire macroscopic landscape.</p>
+                        <p style="color: var(--color-secondary); line-height: 1.6; margin: 0;">A fantastic film released
+                            on the wrong weekend will bomb. A mediocre film with a clear 3-week runway will soar. Our ML
+                            engine constantly scans the competitive release schedule to determine true market viability.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--bg-page); padding: 80px 0;">
+            <div class="container stack">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-size: 32px; font-weight: 800; color: var(--color-primary); margin: 0 0 16px 0;">
+                        Methodology & Transparency</h2>
+                    <p style="color: var(--color-secondary); font-size: 16px; margin: 0;">We believe in open-box
+                        analytics. Here is how we handle the unpredictability of Hollywood.</p>
+                </div>
+
+                <div class="grid grid-2" style="gap: 24px; align-items: start;">
+
+                    <div class="stack" style="gap: 16px;">
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-1" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">Why do prediction numbers
+                                        change over time?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-1" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        CineScore models are live and dynamic. A prediction made 6 months out is based
+                                        entirely on historical comps. As we approach release, the model ingests
+                                        real-time trailer views, presale velocity, and embargo-lift critical reviews.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-3" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">What happens if a movie is
+                                        delayed?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-3" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        A delay triggers an immediate recalculation. The model resets the competitive
+                                        landscape (Macro Mechanics) and applies a "Production Trouble" penalty weight to
+                                        the critical projection.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-5" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">How often is the ML model
+                                        updated?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-5" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        The core architecture undergoes major optimization quarterly. However,
+                                        individual movie coefficients are updated live, every single day, as new
+                                        performance data is ingested.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="stack" style="gap: 16px;">
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-2" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">How do you calculate the
+                                        "Margin of Error"?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-2" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        The +/- percentage is derived by calculating the historical volatility of the
+                                        film's genre and the standard deviation of its comparable releases. A standard
+                                        MCU sequel has a tight margin, while an original sci-fi epic might have a wider
+                                        25% margin.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-4" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">How is marketing budget
+                                        factored into ROI?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-4" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        While exact marketing spend is rarely public, CineScore estimates a film's
+                                        Prints & Advertising (P&A) budget based on its production cost, genre
+                                        benchmarks, and marketing-to-sentiment ratio to find the true break-even point.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack" style="padding: 0 24px;">
+                            <div class="collapse-trigger" data-target="faq-6" style="padding: 24px 0;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 15px; font-weight: 700;">How are international
+                                        markets calculated?</h3>
+                                    <i class="fa-solid fa-chevron-down collapse-icon collapsed"
+                                        style="color: var(--color-secondary); font-size: 14px;"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-6" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 0 0 24px 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        Global projections are not flat multipliers. We maintain independent trajectory
+                                        models for Domestic, International, and China-specific releases, aggressively
+                                        factoring in exchange rate volatility, local holidays, and censorship laws.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section"
+            style="padding: 80px 0; background-color: var(--bg-card); border-top: 1px solid var(--color-border);">
+            <div class="container">
+                <div class="grid grid-2" style="align-items: center; gap: 48px;">
+
+                    <div class="stack neo-brutalist"
+                        style="gap: 24px; padding: 34px; border-radius: 16px; background: var(--bg-card); border: 1px solid rgba(0, 85, 255, 0.2); box-shadow: 0 10px 40px rgba(0, 85, 255, 0.08);">
+                        <h2
+                            style="font-size: 36px; font-weight: 800; line-height: 1.1; margin: 0; color: var(--color-primary);">
+                            Ready to Test <br><span style="color: var(--color-accent);">The Model?</span></h2>
+                        <p style="font-size: 16px; color: var(--color-secondary); line-height: 1.6; margin: 0;">Stop
+                            guessing. Start calculating. Put our neural network to the test with an upcoming release.
+                        </p>
+                        <div style="padding-left: 48px; padding-right: 48px;">
+                            <a href="index.html" class="hero-btn"
+                                style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">Test
+                                a Prediction <i class="fa-solid fa-bolt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="cinematic-slider"
+                        style="width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 85, 255, 0.15); border: 1px solid rgba(0, 85, 255, 0.3); aspect-ratio: 16/9; display: block;">
+                        <img src="Assets/Analytics-Footer-1.jpg" class="active" alt="Enthusiastic Audience">
+                        <img src="Assets/Analytics-Footer-2.jpg" alt="Enthusiastic Audience">
+                        <img src="Assets/Analytics-Footer-3.jpg" alt="Enthusiastic Audience">
+                        <img src="Assets/Analytics-Footer-4.jpg" alt="Enthusiastic Audience">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="form" id="loginModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+
+            <form id="loginForm" novalidate>
+                <H1>Welcome Back</H1>
+                <label for="Email">Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="Password">Password</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <div style="text-align: center; margin-top: -5px; margin-bottom: 10px;">
+                    <a href="#" class="small"
+                        style="color: var(--color-tertiary); font-weight: 500; transition: color 0.2s ease;"
+                        onmouseover="this.style.color='var(--color-accent)'"
+                        onmouseout="this.style.color='var(--color-tertiary)'">Forgot password?</a>
+                </div>
+
+                <button class="nav-button-primary" type="submit">Log In</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+            </form>
+            <p class="text-block">Don't have an account? <a href="#" id="switch-to-signup">Create an Account</a></p>
+        </div>
+    </div>
+
+    <div class="form" id="signupModal">
+        <div class="form-content">
+            <H1>Welcome to CineScore</H1>
+            <span class="close">&times;</span>
+            <form id="signupForm" novalidate="">
+
+                <label for="email">Email:</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="nav-button-primary" type="submit">Submit</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+                <p class="text-block">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+
+                <p class="text-block" style="font-size: 11px; margin-top: 8px;">By signing up, you agree to our <a
+                        href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="form" id="resetModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+            <form id="resetForm" novalidate>
+                <H1>Reset Password</H1>
+                <p class="text-block" style="text-align: center; margin-bottom: 20px;">Enter your new credentials below.
+                </p>
+
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter new password" autocomplete="new-password"
+                    required>
+
+                <label for="confirm-password">Re-enter New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password"
+                    autocomplete="new-password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="small nav-button-primary" type="submit" style="width: 100%;">Update Password</button>
+
+                <p class="text-block" style="text-align: center; margin-top: 24px;">
+                    Remembered it? <a href="#" id="back-to-login">Back to Log In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="customAlertModal"
+        style="display: none; z-index: 10000; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="modal-content stack"
+            style="background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: swipeIn 0.3s ease;">
+            <div id="alert-icon-container" style="font-size: 40px; margin-bottom: 12px;"></div>
+            <h2 id="alert-title" style="margin: 0; font-size: 20px; color: var(--color-primary);"></h2>
+            <p id="alert-message"
+                style="color: var(--color-secondary); font-size: 14px; line-height: 1.5; margin-bottom: 24px;"></p>
+            <div id="alert-actions" class="row" style="gap: 12px; justify-content: center;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section parallax-footer">
+        <div class="container">
+
+            <div class="grid grid-4 footer-grid">
+
+                <div class="stack">
+                    <a href="#" class="navlogo">
+                        <img id="footer-logo" src="Assets/CineScore-Light.png" alt="Cine.Metrics" class="logo">
+                    </a>
+                    <p class="small" style="margin-top: 12px; color: var(--color-secondary);">
+                        Predicting Cinematic Success.
+                    </p>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="#" class="disabled-link">Pricing</a></li>
+                        <li><a href="#" class="disabled-link">API Access</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="#" class="disabled-link">Careers</a></li>
+                        <li><a href="#" class="disabled-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="#" class="disabled-link">Privacy Policy</a></li>
+                        <li><a href="#" class="disabled-link">Terms of Service</a></li>
+                        <li><a href="About.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row-between footer-bottom">
+                <span class="meta">Â© 2026 CineScore. All rights reserved.
+                </span>
+
+
+                <span style="font-size: 13px; color: var(--color-tertiary); line-height: 1;">
+                    Made with <i class="fa-solid fa-heart" style="color: var(--color-danger);"></i> in India by
+                    <strong>Omi</strong>
+                </span>
+
+                <div class="row">
+                    <a href="YOUR_PORTFOLIO_LINK" target="_blank" class="footer-social-link" aria-label="Portfolio">
+                        <i class="fa-solid fa-globe" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="mailto:your.email@example.com" class="footer-social-link" aria-label="Email">
+                        <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="GitHub">
+                        <i class="fa-brands fa-github" style="font-size: 20px;"></i>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="ai-bot-trigger" class="ai-assistant-fab">
+        <i class="fa-solid fa-user-astronaut"></i>
+    </div>
+
+    <div id="splash-loader" class="splash-loader">
+        <div class="loader-content">
+            <div class="speedometer-container">
+                <div class="speedometer-track"></div>
+                <div class="speedometer-inner-track"></div>
+                <div class="speedometer-needle"></div>
+                <div class="speedometer-center-dot"></div>
+            </div>
+            <h2 class="loader-text">Analyzing Box Office Data...</h2>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+            <h2 style="margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-link" style="font-size: 16px; color: var(--color-accent);"></i> Quick Links
+            </h2>
+            <button class="close" id="drawer-close-btn"
+                style="position: static; width: 40px; height: 40px; border-radius: 50%; background: rgba(128, 128, 128, 0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; line-height: 0; border: none; cursor: pointer; color: var(--color-primary); transition: background 0.2s ease;">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">The
+                Private Club</span>
+            <a href="Hub.html#overview-section" class="drawer-link"><i class="fa-solid fa-bullseye"></i> Your
+                Predictions</a>
+            <a href="Hub.html#watchlist-section" class="drawer-link"><i class="fa-solid fa-bookmark"></i> My
+                Watchlist</a>
+            <a href="Hub.html#legacy-section" class="drawer-link"><i class="fa-solid fa-trophy"></i> Legacy & Rank</a>
+
+            <hr style="margin: 24px 0; border-color: var(--color-tertiary);">
+
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">Public
+                Pages</span>
+            <a href="index.html" class="drawer-link"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="Prediction.html" class="drawer-link"><i class="fa-solid fa-bolt"></i> Make Prediction</a>
+            <a href="Features.html" class="drawer-link active"><i class="fa-solid fa-gears"></i> Features</a>
+            <a href="About-Us.html" class="drawer-link"><i class="fa-solid fa-user-group"></i> About Us</a>
+        </div>
+    </div>
+
+    <div class="form" id="onboardingModal" style="display: none; z-index: 10000;">
+        <div class="form-content stack" style="text-align: center;">
+            <h1 style="margin-bottom: 8px;">Welcome to the Crew</h1>
+            <p class="text-block" style="margin-bottom: 24px;">Let's set up your director profile.</p>
+            <form id="onboardingForm" novalidate>
+                <div style="text-align: left;">
+                    <label>First Name</label>
+                    <input type="text" id="ob-fname" placeholder="E.g. Christopher" required>
+                    <label>Last Name</label>
+                    <input type="text" id="ob-lname" placeholder="E.g. Nolan" required>
+                    <label>Director Handle</label>
+                    <input type="text" id="ob-handle" placeholder="@username" required>
+                </div>
+                <button type="submit" class="hero-btn"
+                    style="width: 100%; margin-top: 16px; background: var(--color-accent) !important; color: #FFFFFF !important; border: none !important; opacity: 1 !important; font-weight: 700 !important;">Complete
+                    Profile <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="mockData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+

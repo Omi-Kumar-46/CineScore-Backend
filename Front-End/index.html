@@ -1,0 +1,888 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - CineScore</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Favicon.png">
+    <link rel="stylesheet" href="Base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div id="global-page-loader" class="global-loader">
+
+        <div class="loader-frame clapperboard-loader" id="frame-1" style="display: none;">
+            <div class="clapper-stick"></div>
+            <div class="clapper-bottom"></div>
+        </div>
+
+        <div class="loader-frame film-strip-loader" id="frame-2" style="display: none;">
+            <i class="fa-solid fa-play film-play-icon"></i>
+        </div>
+
+        <h2 id="cinematic-loader-text" class="loader-text-cinematic"></h2>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="row-between">
+
+                    <a href="#" class="navlogo">
+                        <img id="nav-logo" class="logo" src="Assets/CineScore-Light.png" alt="CineScore">
+                    </a>
+
+                    <ul class="nav-links row">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="Prediction.html">Predictions</a></li>
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+
+                    <div class="row" style="gap: 16px;">
+                        <div class="row auth-group" id="auth-buttons">
+                            <div>
+                                <a href="#" class="nav-link-login" id="nav-login-btn">Log In</a>
+                                <button class="small nav-button-primary" id="nav-signup-btn">Sign Up</button>
+                            </div>
+                        </div>
+
+                        <div class="user-menu-wrapper row" id="user-menu-wrapper"
+                            style="gap: 12px; align-items: center; justify-content: center;">
+
+                            <button id="nav-upgrade-btn" class="small nav-button-primary" style="margin-right: 4px;"
+                                onclick="triggerPaywallExplanation()">Upgrade to Pro</button>
+
+                            <div class="avatar-container"
+                                style="position: relative; display: flex; align-items: center;">
+                                <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" alt="User"
+                                    class="user-avatar" id="user-avatar-btn"
+                                    style="flex-shrink: 0; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
+
+                                <div class="avatar-hover-card">
+                                    <p
+                                        style="font-size: 10px; color: var(--color-tertiary); text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px; font-weight: 700;">
+                                        CineScore Account</p>
+                                    <h4 class="profile-name-display"
+                                        style="margin: 0; font-size: 15px; color: var(--color-primary);">Omi Sir</h4>
+                                    <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--color-secondary);">
+                                        omi@cinescore.com</p>
+
+                                    <div id="hover-pro-badge"
+                                        style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                                        <span
+                                            style="color: var(--color-warning); font-size: 11px; font-weight: 800; letter-spacing: 0.5px;"><i
+                                                class="fa-solid fa-crown"></i> PRO MEMBER</span>
+                                    </div>
+                                </div>
+
+                                <ul class="avatar-dropdown" id="avatar-dropdown"
+                                    style="width: 280px; padding: 24px 20px;">
+                                    <li class="stack"
+                                        style="gap: 4px; margin-bottom: 16px; text-align: center; align-items: center;">
+
+                                        <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" class="user-avatar"
+                                            style="width: 64px; height: 64px; margin-bottom: 8px;">
+
+                                        <h3 style="margin: 0; line-height: 1; font-size: 18px;"
+                                            class="profile-name-display">Omi Sir</h3>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 4px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Handle:</span>
+                                            <span class="small profile-handle-display"
+                                                style="color: var(--color-primary); font-weight: 700;">@omisir</span>
+                                        </div>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 2px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Rank:</span>
+                                            <span class="meta"
+                                                style="color: var(--color-accent) !important; font-weight: 800;"><i
+                                                    class="fa-solid fa-star" style="font-size: 10px;"></i>
+                                                Studio Head</span>
+                                        </div>
+                                    </li>
+
+                                    <hr style="margin: 16px 0; border-color: var(--color-border);">
+                                    <li><a href="Hub.html#account"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                            Profile</a></li>
+                                    <li><a href="#" id="logout-btn" style="color: var(--color-danger);"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button id="theme-toggle" class="cinematic-toggle" aria-label="Toggle Theme">
+                            <div class="cinematic-thumb">
+                                <i class="fa-solid fa-play icon-play"></i>
+                                <i class="fa-solid fa-stop icon-pause"></i>
+                            </div>
+                        </button>
+
+                        <button class="icon-btn" id="drawer-toggle-btn"
+                            style="background: var(--color-primary); border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; color: var(--bg-page); cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content and Body -->
+    <main class="parallax-wrapper">
+
+        <!-- Hero Section -->
+        <section class="hero-center section">
+            <div class="container stack align-center">
+
+                <div class="hero-text stack">
+                    <span class="badge" style="margin: 0 auto;">BETA v6.0 <i class="fa-solid fa-code-fork"></i></span>
+
+                    <h1 class="text-center"><b>Blockbuster or Bore?</b> <br> <span class="text-accent"><b>Know the
+                                Score</b></span>
+                    </h1>
+
+                    <p class="text-block" style="color: var(--color-secondary); font-weight: 800;">
+                        <i>Predicting Cinematic Success before the cameras even roll.
+                            AI-powered forecasting for the film industry. Analyze cast chemistry, budget impact, and
+                            hype in one click. <b>No More Guesswork.</b></i>
+
+                    </p>
+                </div>
+
+                <div class="hero-search-wrapper">
+                    <div class="hero-search-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="hero-search"
+                            placeholder="Search Here (e.g. Avengers:Doomsday)..." autocomplete="off" style="color: var(--color-primary); font-weight: 600px;">
+                        <i class="fa-solid fa-xmark" id="hero-search-clear"
+                            style="display: none; color: #FFF; cursor: pointer; font-size: 18px; margin-right: 16px; transition: color 0.2s;"
+                            onmouseover="this.style.color='var(--color-accent)'"
+                            onmouseout="this.style.color='#FFFFFF'"></i>
+                        <button id="hero-predict-btn" class="hero-btn"> Predict</button>
+                    </div>
+                    <ul id="search-dropdown" class="search-dropdown-menu"></ul>
+                </div>
+            </div>
+        </section>
+
+        <div style="position: relative; z-index: 2; background: var(--bg-page);">
+
+            <section class="ticker-container">
+
+                <div class="ticker-fixed-label">Live Hype Meter</div>
+
+               <div class="ticker-row">
+                    <div class="ticker-wrapper" id="live-hype-track">
+                        </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+
+            <section class="section" id="featured-predictions">
+                <div class="container stack">
+
+                    <div class="section-header text-center">
+                        <h1>Featured Predictions</h1>
+                        <p class="text-block" style="margin: 0 auto;">
+                            High-confidence forecasts for major upcoming releases. Ranked by live audience
+                            sentiment.
+                        </p>
+                    </div>
+
+                    <div class="featured-grid">
+
+                        <div class="featured-rank-item">
+                            <div class="rank-mega-number">1</div>
+                            <div class="featured-movie-card">
+                                <div class="poster-vertical-wrap">
+                                    <img src="https://legadodamarvel.com.br/en/wp-content/uploads/2026/04/Spider-Man-Brand-New-Day-poster-legadodamarvel-819x1024.webp" alt="Spider-man-4">
+                                </div>
+                                <div class="movie-details-wrap">
+                                    <h3 class="movie-title-featured">Spider-man: Brand New Day</h3>
+                                    <p class="meta">Sony / Marvel</p>
+                                    <div class="genre-pill">Superhero</div>
+                                    <div class="genre-pill">Adventure</div>
+
+                                    <div class="featured-score-gauge">
+                                        <svg class="score-gauge-svg" viewBox="0 0 44 44">
+                                            <circle class="gauge-circle-bg" cx="22" cy="22" r="19"></circle>
+                                            <circle class="gauge-circle-fill" cx="22" cy="22" r="19"
+                                                style="stroke-dasharray: 119.4; stroke-dashoffset: 10; stroke: var(--color-accent);">
+                                            </circle>
+                                        </svg>
+                                        <span class="gauge-text">98%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="featured-rank-item">
+                            <div class="rank-mega-number">2</div>
+                            <div class="featured-movie-card">
+                                <div class="poster-vertical-wrap">
+                                    <img src="https://www.movieposters.com/cdn/shop/files/avengers-doomsday_2lkvs30c.jpg?v=1768329841&width=1680"
+                                        alt="Avengers:Doomsday">
+                                </div>
+                                <div class="movie-details-wrap">
+                                    <h3 class="movie-title-featured">Avengers: Doomsday</h3>
+                                    <p class="meta">Marvel Studios</p>
+                                    <div class="genre-pill">Superhero</div>
+                                    <div class="genre-pill">Action</div>
+
+                                    <div class="featured-score-gauge">
+                                        <svg class="score-gauge-svg" viewBox="0 0 44 44">
+                                            <circle class="gauge-circle-bg" cx="22" cy="22" r="19"></circle>
+                                            <circle class="gauge-circle-fill" cx="22" cy="22" r="19"
+                                                style="stroke-dasharray: 119.4; stroke-dashoffset: 16; stroke: var(--color-accent);">
+                                            </circle>
+                                        </svg>
+                                        <span class="gauge-text">92%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="featured-rank-item">
+                            <div class="rank-mega-number">3</div>
+                            <div class="featured-movie-card">
+                                <div class="poster-vertical-wrap">
+                                    <img src="https://cdn.cinematerial.com/p/297x/bw5f0vwv/dune-part-three-movie-poster-md.jpg?v=1775526461"
+                                        alt="Dune Part 3">
+                                </div>
+                                <div class="movie-details-wrap">
+                                    <h3 class="movie-title-featured">Dune: Part Three</h3>
+                                    <p class="meta">Warner Bros.</p>
+                                    <div class="genre-pill">Sci-Fi</div>
+                                    <div class="genre-pill">Fantasy</div>
+
+                                    <div class="featured-score-gauge">
+                                        <svg class="score-gauge-svg" viewBox="0 0 44 44">
+                                            <circle class="gauge-circle-bg" cx="22" cy="22" r="19"></circle>
+                                            <circle class="gauge-circle-fill" cx="22" cy="22" r="19"
+                                                style="stroke-dasharray: 119.4; stroke-dashoffset: 20; stroke: var(--color-accent);">
+                                            </circle>
+                                        </svg>
+                                        <span class="gauge-text">90%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="container">
+                <hr>
+            </div>
+
+            <section class="section">
+                <div class="container stack">
+
+                    <div class="section-header">
+                        <h1>Why Trust our Predictive Model?</h1>
+                        <p class="text-block">
+                            We analyze thousands of data pointsâ€”from cast star power to social sentimentâ€”to deliver
+                            the
+                            industry's most accurate forecasts.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-3">
+
+                        <div class="card stack" style="box-shadow: 0 0 5px var(--color-tertiary)">
+                            <div class="icon-box"> <i class="fa-solid fa-gears  card-icon"></i> </div>
+                            <h2>ML Prediction Engine</h2>
+                            <p>Our regression models are trained on 50+ years of box office history to predict
+                                opening
+                                weekend revenue with high precision.</p>
+                        </div>
+
+                        <div class="card stack" style="box-shadow: 0 0 5px var(--color-tertiary)">
+                            <div class="icon-box"> <i class="fa-regular fa-comments card-icon"></i></div>
+                            <h2>Sentiment Analysis</h2>
+                            <p>We scrape Twitter, Reddit, and IMDb to quantify "hype" and audience reception before
+                                a
+                                single
+                                ticket is sold.</p>
+                        </div>
+                        <div class="card stack" style="box-shadow: 0 0 5px var(--color-tertiary)">
+                            <div class="icon-box"> <i class="fa-regular fa-hourglass card-icon"></i> </div>
+                            <h2>Real-Time Tracking</h2>
+                            <p>Live dashboard updates that adjust predictions as new trailers drop and marketing
+                                campaigns
+                                launch.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <div class="container">
+                <hr>
+            </div>
+
+            <!-- Sample Analysis -->
+
+            <section class="section" id="sample-analysis" style="padding-top: 40px; padding-bottom: 20px;">
+                <div class="container stack">
+
+                    <div class="section-header text-center" style="margin-bottom: var(--space-1);">
+                        <p class="meta text-accent"
+                            style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
+                            Decoding Output</p>
+                        <h1>Sample Output</h1>
+                    </div>
+
+                    <div class="analysis-container">
+
+                        <div class="analysis-unit">
+                            <div class="analysis-visual">
+                                <div class="result-card card-accent stack"
+                                    style="width: 100%; max-width: 400px; margin: 0;">
+                                    <span class="result-label"><i class="fa-solid fa-bolt"></i> Performance
+                                        Verdict</span>
+                                    <h1 class="result-value">Blockbuster</h1>
+                                    <p class="result-meta"><i class="fa-solid fa-arrow-trend-up"></i> Projected
+                                        Massive
+                                        ROI
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="analysis-content">
+                                <h2>1. Performance Verdict</h2>
+                                <p>
+                                    A definitive categorization of the film's financial and cultural destiny. We
+                                    classify
+                                    outcomes ranging from "Box Office Bomb" to "Generational Masterpiece" based on
+                                    historical trajectory models.
+                                </p>
+                                <p class="small"><b>Variables:</b> Sentiment velocity, Cast ROI, Genre saturation.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-unit">
+                            <div class="analysis-visual">
+                                <div class="result-card card-success stack"
+                                    style="width: 100%; max-width: 400px; margin: 0;">
+                                    <span class="result-label"><i class="fa-solid fa-coins"></i> Financial
+                                        Projection</span>
+                                    <h1 class="result-value">$847<span style="font-size: 24px;">M</span></h1>
+                                    <p class="result-meta"><i class="fa-solid fa-circle-info"></i> +/- 12% margin of
+                                        error
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="analysis-content">
+                                <h2>2. Financial Projection</h2>
+                                <p>
+                                    A direct, data-driven forecast of the film's global Box Office run. Our
+                                    regression
+                                    models simulate opening weekend momentum and long-term "legs" across
+                                    international
+                                    markets.
+                                </p>
+                                <p class="small"><b>Data:</b> Historical opening weekend comparisons, Trailer view
+                                    conversions.</p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-unit">
+                            <div class="analysis-visual">
+                                <div class="result-card stack"
+                                    style="width: 100%; max-width: 400px; margin: 0; background-color: #F5C518; border-color: #F5C518;">
+                                    <span class="result-label" style="color: #000000; font-weight: 800;"><i
+                                            class="fa-brands fa-imdb"></i> Predicted IMDb Rating</span>
+                                    <h1 class="result-value" style="color: #000000;">8.2 <span
+                                            style="font-size: 24px; opacity: 0.7;">/10</span></h1>
+                                    <p class="result-meta" style="color: #222222; font-weight: 600;"><i
+                                            class="fa-solid fa-check"></i> Strong Critical Consensus</p>
+                                </div>
+                            </div>
+                            <div class="analysis-content">
+                                <h2>3. Critical Impact (IMDb)</h2>
+                                <p>
+                                    Beyond pure revenue, we predict the critical and audience consensus. A high
+                                    rating
+                                    often
+                                    correlates with strong "legs" at the box office, meaning the movie will continue
+                                    to
+                                    earn
+                                    money weeks after release.
+                                </p>
+                                <p class="small"><b>Source:</b> NLP analysis of early fan reactions and critic
+                                    discourse.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <div class="container">
+                <hr>
+            </div>
+
+            <!-- FAQ's Section -->
+            <section class="section">
+                <div class="container stack">
+
+                    <div class="section-header text-center">
+                        <h1>Frequently Asked Questions</h1>
+                        <p class="text-block" style="margin: 0 auto;">
+                            Everything you need to know about our prediction engine.
+                        </p>
+                    </div>
+
+                    <div class="faq-container stack" style="gap: 16px; max-width: 800px; margin: 0 auto; width: 100%;">
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-1" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">How accurate are the
+                                        predictions?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-1" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        Our neural network operates at an 87% historical accuracy rate for domestic
+                                        opening weekends. The model is trained on over two decades of box office data,
+                                        continuously refining its weights based on real-time market shifts.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-2" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">What metrics do you
+                                        analyze?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-2" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        We ingest thousands of data points including presale velocity, historical
+                                        franchise decay, actor bankability, social sentiment velocity, and
+                                        macro-economic factors.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-3" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Do I need to connect my
+                                        studio's API?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-3" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        No. CineScore automatically aggregates public data across the internet. However,
+                                        direct studio API integration is available for enterprise clients looking to
+                                        track proprietary pre-release screening data.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-4" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">How frequently is data
+                                        updated?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-4" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        The hype-meter and sentiment trackers update in real-time. Core box office
+                                        projections run major algorithmic optimization sweeps daily at 00:00 UTC.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-5" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Can I use this for indie
+                                        or limited releases?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-5" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        Currently, the V1.0 architecture is highly optimized for wide theatrical
+                                        releases (2,000+ screens). We are actively training a specialized neural net for
+                                        limited and indie distribution models.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stack"
+                            style="padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--bg-card);">
+                            <div class="collapse-trigger" data-target="faq-home-6" style="cursor: pointer;">
+                                <div class="row-between" style="align-items: center;">
+                                    <h3 style="margin: 0; font-size: 16px; font-weight: 700;">How do I access the
+                                        Director's Hub?</h3>
+                                    <i class="fa-solid fa-plus collapse-icon collapsed"></i>
+                                </div>
+                            </div>
+                            <div class="collapsible-grid collapsed" id="faq-home-6" style="width: 100%;">
+                                <div class="collapsible-inner" style="width: 100%;">
+                                    <div
+                                        style="padding: 12px 0 0 0; color: var(--color-secondary); line-height: 1.6; font-size: 14px;">
+                                        The Director's Hub is a private dashboard requiring an authenticated account.
+                                        You can create a free Beta account using the Sign Up button to start actively
+                                        tracking up to 6 releases.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div class="container">
+                <hr>
+            </div>
+
+            <section class="footer-signup-section" style="background: var(--bg-page); padding: 80px 0;">
+                <div class="container stack">
+                    <div class="grid grid-2" style="align-items: stretch; gap: 32px; text-align: left;">
+
+                        <div class="stack neo-brutalist"
+                            style="gap: 16px; padding: 48px; background: var(--bg-card); border-radius: 24px; border: 1px solid var(--color-border); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <h2 style="font-size: var(--fs-h1); font-weight: 700; margin: 0; line-height: 1.1;">Ready to
+                                Eliminate Guesswork?</h2>
+                            <p style="margin: 0; color: var(--color-secondary); line-height: 1.6;">
+                                Join 5,000+ film professionals and enthusiasts getting AI-powered box office forecasts
+                                every week.
+                            </p>
+
+                            <form action="#" class="signup-form-pill" style="margin-top: 8px; width: 100%;">
+                                <input type="email" class="signup-input" id="pre-footer-email"
+                                    placeholder="Enter your email address..." required style="flex: 1;">
+                                <button type="button" class="signup-btn" id="pre-footer-signup-btn">
+                                    Get Started <i class="fa-solid fa-chevron-right"
+                                        style="margin-left: 8px; font-size: 12px;"></i>
+                                </button>
+                            </form>
+
+                            <p class="meta" style="margin: 0; text-align: center; color: #CBCBCB;">*Free Beta Access. No
+                                credit card required.</p>
+                        </div>
+
+                        <div class="cinematic-slider"
+                            style="border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid var(--color-border); height: 100%; min-height: 300px; display: block;">
+                            <img src="Assets/Pre-footer-Signup-1.avif" class="active" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-2.jpg" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-3.jpg" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-4.avif" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-7.jpg" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-5.avif" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-6.jpg" alt="Red Cinema Seats">
+                            <img src="Assets/Pre-footer-Signup-8.jpg" alt="Red Cinema Seats">
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <div class="form" id="loginModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+
+            <form id="loginForm" novalidate>
+                <H1>Welcome Back</H1>
+                <label for="Email">Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="Password">Password</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <div style="text-align: center; margin-top: -5px; margin-bottom: 10px;">
+                    <a href="#" class="small"
+                        style="color: var(--color-tertiary); font-weight: 500; transition: color 0.2s ease;"
+                        onmouseover="this.style.color='var(--color-accent)'"
+                        onmouseout="this.style.color='var(--color-tertiary)'">Forgot password?</a>
+                </div>
+
+                <button class="nav-button-primary" type="submit">Log In</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+            </form>
+            <p class="text-block">Don't have an account? <a href="#" id="switch-to-signup">Create an Account</a></p>
+        </div>
+    </div>
+
+    <div class="form" id="signupModal">
+        <div class="form-content">
+            <H1>Welcome to CineScore</H1>
+            <span class="close">&times;</span>
+            <form id="signupForm" novalidate="">
+
+                <label for="email">Email:</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="nav-button-primary" type="submit">Submit</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+                <p class="text-block">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+
+                <p class="text-block" style="font-size: 11px; margin-top: 8px;">By signing up, you agree to our <a
+                        href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="form" id="resetModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+            <form id="resetForm" novalidate>
+                <H1>Reset Password</H1>
+                <p class="text-block" style="text-align: center; margin-bottom: 20px;">Enter your new credentials below.
+                </p>
+
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter new password" autocomplete="new-password"
+                    required>
+
+                <label for="confirm-password">Re-enter New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password"
+                    autocomplete="new-password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="small nav-button-primary" type="submit"
+                    style="width: 100%; color:#FFFFFF !important;">Update Password</button>
+
+                <p class="text-block" style="text-align: center; margin-top: 24px;">
+                    Remembered it? <a href="#" id="back-to-login">Back to Log In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="customAlertModal"
+        style="display: none; z-index: 10000; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="modal-content stack"
+            style="background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: swipeIn 0.3s ease;">
+            <div id="alert-icon-container" style="font-size: 40px; margin-bottom: 12px;"></div>
+            <h2 id="alert-title" style="margin: 0; font-size: 20px; color: var(--color-primary);"></h2>
+            <p id="alert-message"
+                style="color: var(--color-secondary); font-size: 14px; line-height: 1.5; margin-bottom: 24px;"></p>
+            <div id="alert-actions" class="row" style="gap: 12px; justify-content: center;"></div>
+        </div>
+    </div>
+
+    <footer class="footer-section parallax-footer">
+        <div class="container">
+
+            <div class="grid grid-4 footer-grid">
+
+                <div class="stack">
+                    <a href="#" class="navlogo">
+                        <img id="footer-logo" src="Assets/CineScore-Light.png" alt="CineScore" class="logo">
+                    </a>
+                    <p class="small" style="margin-top: 12px; color: var(--color-secondary);">
+                        Predicting Cinematic Success.
+                    </p>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="#" class="disabled-link">Pricing</a></li>
+                        <li><a href="#" class="disabled-link">API Access</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="#" class="disabled-link">Careers</a></li>
+                        <li><a href="#" class="disabled-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="#" class="disabled-link">Privacy Policy</a></li>
+                        <li><a href="#" class="disabled-link">Terms of Service</a></li>
+                        <li><a href="About.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row-between footer-bottom">
+                <span class="meta">Â© 2026 CineScore. All rights reserved.
+                </span>
+
+
+                <span style="font-size: 13px; color: var(--color-tertiary); line-height: 1;">
+                    Made with <i class="fa-solid fa-heart" style="color: var(--color-danger);"></i> in India by
+                    <strong>Omi</strong>
+                </span>
+
+                <div class="row">
+                    <a href="YOUR_PORTFOLIO_LINK" target="_blank" class="footer-social-link" aria-label="Portfolio">
+                        <i class="fa-solid fa-globe" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="mailto:your.email@example.com" class="footer-social-link" aria-label="Email">
+                        <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="GitHub">
+                        <i class="fa-brands fa-github" style="font-size: 20px;"></i>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="ai-bot-trigger" class="ai-assistant-fab">
+        <i class="fa-solid fa-user-astronaut"></i>
+    </div>
+
+    <div id="splash-loader" class="splash-loader">
+        <div class="loader-content">
+            <div class="speedometer-container">
+                <div class="speedometer-track"></div>
+                <div class="speedometer-inner-track"></div>
+                <div class="speedometer-needle"></div>
+                <div class="speedometer-center-dot"></div>
+            </div>
+            <h2 class="loader-text">Analyzing Box Office Data...</h2>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+            <h2 style="margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-link" style="font-size: 16px; color: var(--color-accent);"></i> Quick Links
+            </h2>
+            <button class="close" id="drawer-close-btn"
+                style="position: static; width: 40px; height: 40px; border-radius: 50%; background: rgba(128, 128, 128, 0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; line-height: 0; border: none; cursor: pointer; color: var(--color-primary); transition: background 0.2s ease;">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">The
+                Private Club</span>
+            <a href="Hub.html#overview" class="drawer-link"><i class="fa-solid fa-bullseye"></i> Your
+                Predictions</a>
+            <a href="Hub.html#watchlist" class="drawer-link"><i class="fa-solid fa-bookmark"></i> My
+                Watchlist</a>
+            <a href="Hub.html#legacy" class="drawer-link"><i class="fa-solid fa-trophy"></i> Legacy & Rank</a>
+
+            <hr style="margin: 24px 0; border-color: var(--color-tertiary);">
+
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">Public
+                Pages</span>
+            <a href="index.html" class="drawer-link"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="Prediction.html" class="drawer-link"><i class="fa-solid fa-bolt"></i> Make Prediction</a>
+            <a href="Features.html" class="drawer-link"><i class="fa-solid fa-gears"></i> Features</a>
+            <a href="About-Us.html" class="drawer-link"><i class="fa-solid fa-user-group"></i> About Us</a>
+        </div>
+    </div>
+
+    <div class="form" id="onboardingModal" style="display: none; z-index: 10000;">
+        <div class="form-content stack" style="text-align: center;">
+            <h1 style="margin-bottom: 8px;">Welcome to the Crew</h1>
+            <p class="text-block" style="margin-bottom: 24px;">Let's set up your director profile.</p>
+            <form id="onboardingForm" novalidate>
+                <div style="text-align: left;">
+                    <label>First Name</label>
+                    <input type="text" id="ob-fname" placeholder="E.g. Christopher" required>
+                    <label>Last Name</label>
+                    <input type="text" id="ob-lname" placeholder="E.g. Nolan" required>
+                    <label>Director Handle</label>
+                    <input type="text" id="ob-handle" placeholder="@username" required>
+                </div>
+                <button type="submit" class="hero-btn"
+                    style="width: 100%; margin-top: 16px; background: var(--color-accent) !important; color: #FFFFFF !important; border: none !important; opacity: 1 !important; font-weight: 700 !important;">Complete
+                    Profile <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="mockData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+

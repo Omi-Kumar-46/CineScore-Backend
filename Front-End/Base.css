@@ -1,0 +1,6175 @@
+/* ============================================================
+   CINE.METRICS — BASE CSS (FINAL)
+   ------------------------------------------------------------
+   Purpose:
+   - Unified typography system
+   - Consistent spacing & layout
+   - iOS-like calm UI
+   - Shared across ALL pages
+   ------------------------------------------------------------
+   RULES FOR TEAM:
+   ❌ Do NOT invent new font sizes
+   ❌ Do NOT invent new spacing values
+   ❌ Do NOT add random colors
+   ✅ Use classes defined here
+   ============================================================ */
+
+
+/* ============================================================
+   1. FONT IMPORT
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+
+/* ============================================================
+   2. ROOT VARIABLES (DESIGN TOKENS)
+   ============================================================ */
+
+:root {
+  /* ----------------------------
+     TYPOGRAPHY
+     ---------------------------- */
+  --font-primary: 'Inter', sans-serif;
+
+  /* Font sizes */
+  --fs-h1: 42px;
+  /* Hero heading */
+  --fs-h2: 28px;
+  /* Section heading */
+  --fs-h3: 20px;
+  /* Card title */
+  --fs-body: 16px;
+  /* Normal text */
+  --fs-small: 14px;
+  --fs-meta: 12px;
+
+  /* Line heights */
+  --lh-h1: 1.2;
+  --lh-h2: 1.3;
+  --lh-h3: 1.4;
+  --lh-body: 1.6;
+
+  /* ----------------------------
+     SPACING SYSTEM (8pt scale)
+     ---------------------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 72px;
+
+  /* ----------------------------
+     BORDER RADIUS (iOS feel)
+     ---------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* ----------------------------
+     COLOR SYSTEM (LOCKED)
+     Electric Blue
+     ---------------------------- */
+
+  /* --- LIGHT MODE- Electric Navy (Default) --- */
+  /* Backgrounds */
+  --bg-page: #FFFFFF;
+  --bg-card: #F3F6F9;
+
+
+  /* Typography */
+  --color-primary: #0B132B;
+  --color-secondary: #495867;
+  --color-tertiary: #94A3B8;
+
+  /* Interactive / Brand */
+  --color-accent: #0055FF;
+  --color-accent-hover: #0044CC;
+  --color-border: #CBCBCB;
+
+  /* Prediction Feedback */
+  --color-success: #00C853;
+  --color-warning: #FF9F1C;
+  --color-danger: #D50000;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(11, 19, 43, 0.05);
+  --shadow-md: 0 4px 12px rgba(11, 19, 43, 0.08);
+}
+
+/* --- DARK MODE - Deep Ocean --- */
+[data-theme="dark"] {
+  --bg-page: #0D1B2A;
+  --bg-card: #1B263B;
+
+  /* Typography */
+  --color-primary: #E0E1DD;
+  --color-secondary: #778DA9;
+  --color-tertiary: #415A77;
+
+  /* Interactive / Brand */
+  --color-accent: #337AFF;
+  --color-accent-hover: #0055FF;
+  --color-border: #2D3748;
+
+  /* Prediction Feedback (Neon Versions) */
+  --color-success: #00E676;
+  --color-warning: #FFB74D;
+  --color-danger: #FF5252;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   3. BASIC RESET
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   4. BODY DEFAULTS
+   ============================================================ */
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-primary);
+  background-color: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.parallax-wrapper {
+  animation: cinematicFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cinematicFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   5. TYPOGRAPHY
+   ============================================================ */
+
+h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  font-weight: 500;
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 500;
+}
+
+p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-secondary);
+}
+
+/* Smaller text helpers */
+.small {
+  font-size: var(--fs-small);
+  color: var(--color-secondary);
+  opacity: 0.8;
+}
+
+.meta {
+  font-size: var(--fs-meta);
+  color: var(--color-tertiary);
+  opacity: 0.6;
+}
+
+
+/* ============================================================
+   6. TEXT WIDTH CONTROL
+   (Prevents ugly full-width paragraphs)
+   ============================================================ */
+
+.text-block {
+  max-width: 60ch;
+}
+
+/* ============================================================
+   7. LAYOUT SYSTEM
+   ============================================================ */
+
+/* Section Vertical spacing */
+.section {
+  padding: var(--space-5) 0;
+}
+
+/* Centered container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-2);
+}
+
+/* Vertical stack */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Horizontal row for Grouping */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Space-between row for Distribution of elements left right and center, think two parts of same row */
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* Grid system */
+.grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* Responsive card grid */
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+
+/* ============================================================
+   8. CARD SYSTEM (Global Neo-Brutalism)
+   ============================================================ */
+
+.card {
+  background-color: var(--bg-card);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- LIGHT MODE: Bold Ink Strokes --- */
+[data-theme="light"] .card {
+  border: 2px solid rgba(0, 0, 0, 0.5) !important;
+  /* Thick dark border */
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+  /* Hard offset shadow */
+}
+
+[data-theme="light"] .card:hover {
+  border-color: var(--color-accent-hover) !important;
+  /* Snaps to sharp blue */
+  box-shadow: 4px 10px 24px rgba(0, 85, 255, 0.15) !important;
+  transform: translateY(-4px) scale(1.02) !important;
+}
+
+/* --- DARK MODE: Neon Blueprint --- */
+[data-theme="dark"] .card {
+  border: 1.5px solid var(--color-tertiary) !important;
+  /* Crisp, visible white/grey line */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: var(--color-accent-hover) !important;
+  /* Neon Blue Edge */
+  box-shadow: 0 8px 30px rgba(0, 85, 255, 0.2) !important;
+  /* Neon Blue Glow */
+  transform: translateY(-4px) scale(1.02) !important;
+}
+
+
+/* ============================================================
+   9. BUTTONS
+   ============================================================ */
+
+button {
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+
+/* ============================================================
+   10. INPUTS (Search bars, forms)
+   ============================================================ */
+
+input {
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+
+/* ============================================================
+   11. LINKS
+   ============================================================ */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 2. Universal Smooth Transitions for all interactive elements */
+a,
+button,
+input,
+.toggle-cont,
+.cinematic-toggle,
+.icon-btn {
+  transition: all 0.2s ease;
+}
+
+
+/* ============================================================
+   FEATURE: SECTION SCROLLER (SCROLL SNAP)
+   ============================================================ */
+
+html {
+  /* smooth gliding between sections */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 50px;
+}
+
+/* Apply the snap point to every major block */
+section,
+header,
+footer,
+.hero-center {
+  scroll-snap-align: start;
+  /* Snaps the top of the section to top of screen */
+  scroll-margin-top: 100px;
+  /* Adjust if you have a fixed header overlaying content */
+}
+
+
+/* ============================================================
+   COMPONENT: NAVIGATION BAR
+   ============================================================ */
+.navbar {
+  /* 1. Your Original Background & Spacing */
+  background-color: var(--color-primary);
+  padding: var(--space-2) 0;
+  margin: 0;
+
+  /* 2. The Fixed Layout */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  /* The Curves & Shadow */
+  box-shadow: 0 0 10px var(--color-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease !important;
+
+}
+
+/* --- Layout Protections --- */
+.navlogo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-shrink: 0;
+  /* Prevents squishing */
+}
+
+.logo {
+  height: var(--fs-h1);
+  /* Your original height */
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  /* Required to place links side-by-side */
+  align-items: center;
+  list-style: none;
+  gap: var(--space-4);
+  /* Your original gap */
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Your Original Link Styles --- */
+.nav-links a {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--bg-page);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+  /* Prevents text stacking */
+}
+
+.nav-links a:hover {
+  color: var(--color-warning);
+  opacity: 1;
+}
+
+.nav-links a.active {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* --- Your Original Login/Primary Buttons --- */
+.nav-link-login {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--bg-page);
+  margin-right: var(--space-2);
+  border: 1px solid var(--color-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  opacity: 0.8;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--bg-page);
+  white-space: nowrap !important;
+  /* Prevents squishing */
+}
+
+.nav-link-login:hover {
+  opacity: 1;
+  color: var(--color-warning);
+}
+
+.nav-button-primary {
+  font-weight: 500;
+  transition: transform 0.1s ease;
+  flex-shrink: 0;
+  color: #FFFFFF !important;
+}
+
+.nav-button-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+  color: #FFFFFF;
+}
+
+/* ============================================================
+   COMPONENT: CINEMATIC THEME TOGGLE (Play/Pause)
+   ============================================================ */
+.cinematic-toggle {
+  width: 64px;
+  height: 32px;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Light Mode: Dark Nav -> White Track */
+[data-theme="light"] .cinematic-toggle {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode: Light Nav -> Dark Track */
+[data-theme="dark"] .cinematic-toggle {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.3);
+}
+
+
+/* The Sliding Thumb */
+.cinematic-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Light Mode (Lights ON / Paused) -> Play Icon & Accent Blue */
+[data-theme="light"] .cinematic-thumb {
+  background: var(--color-accent);
+  transform: translateX(0);
+}
+
+/* Dark Mode (Lights OFF / Playing) -> Pause Icon & Warning Orange */
+[data-theme="dark"] .cinematic-thumb {
+  background: var(--color-accent);
+  transform: translateX(32px);
+  /* Slides to the right */
+}
+
+/* FontAwesome Icons inside the thumb */
+.cinematic-thumb i {
+  color: #FFFFFF;
+  font-size: 10px;
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+[data-theme="dark"] .cinematic-thumb i {
+  color: #FFFFFF;
+}
+
+/* Cross-fade Animations */
+[data-theme="light"] .icon-play {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-theme="light"] .icon-pause {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+[data-theme="dark"] .icon-play {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+[data-theme="dark"] .icon-pause {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ============================================================
+   MODAL OVERLAY (The Glassy Background)
+   ============================================================ */
+.form {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Deep dark overlay */
+  backdrop-filter: blur(8px);
+  /* The premium glassy blur */
+
+  /* Flexbox perfectly centers the modal box vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   MODAL BOX (The Form Container)
+   ============================================================ */
+.form-content {
+  position: relative;
+  background-color: var(--bg-card);
+  padding: var(--space-4, 40px);
+  /* Fallback to 40px if variable is missing */
+  border-radius: var(--radius-lg, 16px);
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  animation: swipeIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* The 'X' Button */
+.close {
+  position: absolute;
+  top: var(--space-2, 20px);
+  right: var(--space-3, 24px);
+  font-size: 24px;
+  color: var(--te, #94A3B8);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: var(--color-accent);
+}
+
+/* Form Typography */
+.form-content h1 {
+  text-align: center;
+  margin-bottom: var(--space-3, 24px);
+  font-size: var(--fs-h2, 28px);
+}
+
+.form-content label {
+  display: block;
+  font-size: var(--fs-small, 14px);
+  font-weight: 600;
+  margin-bottom: var(--space-1, 8px);
+  color: var(--color-primary);
+}
+
+.form-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+.form-content p a {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.form-content p a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.form-content .error {
+  color: var(--color-danger);
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.form-content .success {
+  color: var(--color-success);
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.form-content .loading {
+  color: var(--color-secondary);
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.form-content .loading::after {
+  content: '...';
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+/* ============================================================
+   SOCIAL LOGIN & DIVIDERS
+   ============================================================ */
+.divider-or {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--color-tertiary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.divider-or::before,
+.divider-or::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.divider-or::before {
+  margin-right: 12px;
+}
+
+.divider-or::after {
+  margin-left: 12px;
+}
+
+.social-btn-wide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.social-btn-wide:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-border);
+}
+
+/* Make the Google Button pop in Light Mode */
+[data-theme="light"] .social-btn-wide {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* Slightly darker gray border */
+  background-color: var(--bg-page);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  /* Tiny drop shadow */
+  color: var(--color-primary);
+}
+
+/* Light mode hover adjustment */
+[data-theme="light"] .social-btn-wide:hover {
+  background-color: var(--bg-card);
+  border-color: var(--color-secondary);
+}
+
+/* ============================================================
+   FORM INPUTS (Sleek & Interactive)
+   ============================================================ */
+.form-content input[type="text"],
+.form-content input[type="password"],
+.form-content input[type="email"]
+
+/* Added email type just in case! */
+  {
+  width: 100%;
+  padding: var(--space-2, 14px) var(--space-3, 16px);
+  margin-bottom: var(--space-3, 20px);
+  border: 1.5px solid var(--border-color, #CBD5E1);
+  border-radius: var(--radius-sm, 8px);
+  background-color: var(--bg-page);
+  color: var(--color-primary);
+  font-size: var(--fs-base, 15px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* When the user clicks inside the input */
+.form-content input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  /* Note: Box-shadow with opacity is tricky with hex variables, 
+     so keeping the explicit rgba glow is a standard industry workaround */
+  box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.15);
+}
+
+/* Make the submit button full width */
+.form-content button[type="submit"] {
+  width: 100%;
+  padding: var(--space-2, 14px);
+  font-size: var(--fs-base, 16px);
+  margin-top: var(--space-1, 10px);
+}
+
+/* ============================================================
+   DARK MODE OVERRIDES: MODAL & FORMS (Midnight Theme)
+   ============================================================ */
+
+/* 1. Modal Card: The solid blackish-blue from your palette */
+[data-theme="dark"] .form-content {
+  background-color: #0B192C;
+  /* Rich blackish-blue */
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+  /* Deep shadow */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Ultra-subtle edge */
+}
+
+/* 2. Form Inputs: Matching the dark page background */
+[data-theme="dark"] .form-content input[type="text"],
+[data-theme="dark"] .form-content input[type="password"],
+[data-theme="dark"] .form-content input[type="email"] {
+  background-color: var(--bg-page);
+  /* Matches your dark background perfectly */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Crisp, faint border */
+  color: #FFFFFF;
+}
+
+/* Fix Placeholder text contrast */
+[data-theme="dark"] .form-content input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* 3. Input Focus State */
+[data-theme="dark"] .form-content input:focus {
+  border-color: var(--color-accent);
+  /* Your electric blue */
+  box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.25);
+}
+
+/* 4. The 'X' Close Button & Text colors */
+[data-theme="dark"] .close {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .close:hover {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .form-content label,
+[data-theme="dark"] .form-content h1 {
+  color: #FFFFFF;
+  /* Ensures text pops against the blackish-blue */
+}
+
+/* ============================================================
+   MODAL SWIPE ANIMATION
+   ============================================================ */
+@keyframes swipeIn {
+  from {
+    transform: translateX(40px);
+    /* Starts slightly to the right */
+    opacity: 0;
+    /* Starts invisible */
+  }
+
+  to {
+    transform: translateX(0);
+    /* Slides into its perfect center position */
+    opacity: 1;
+    /* Fully visible */
+  }
+}
+
+/* ============================================================
+   COMPONENT: FOOTER
+   ============================================================ */
+
+.footer-section {
+  background-color: var(--color-primary);
+  border-top-left-radius: 48px;
+  border-top-right-radius: 48px;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  padding: 120px 0 60px 0;
+  color: var(--bg-page);
+  margin-top: auto;
+}
+
+/* Custom Grid for Footer */
+.grid-4 {
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer Headings & Links */
+.footer-heading {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--bg-card);
+  margin-bottom: var(--space-1);
+}
+
+.footer-links {
+  list-style: none;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  font-size: var(--fs-small);
+  color: var(--color-secondary);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--color-warning);
+}
+
+/* ============================================================
+   FOOTER POLISH & AI ASSISTANT
+   ============================================================ */
+
+/* Footer Social Icons - Amber Hover */
+.footer-social-link {
+  transition: color 0.3s ease, transform 0.3s ease;
+  color: var(--color-secondary);
+}
+
+.footer-social-link:hover {
+  color: var(--color-warning) !important;
+  transform: translateY(-2px);
+}
+
+/* Unbuilt Footer Links */
+.disabled-link {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+/* Disclaimer Text */
+.footer-disclaimer {
+  font-size: 10px;
+  color: var(--color-tertiary);
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Floating AI Assistant Bot */
+.ai-assistant-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--color-accent), #0B132B) !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  box-shadow: 0 10px 25px rgba(0, 85, 255, 0.4);
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
+}
+
+.ai-assistant-fab:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 85, 255, 0.6);
+}
+
+/* AI Sparkle Animation */
+.ai-assistant-fab i {
+  animation: pulseGlow 2s infinite alternate;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+
+  100% {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+  }
+}
+
+
+
+/* ============================================================
+   Logo & Slogan
+   ============================================================ */
+.grid-4 .stack:first-child {
+  justify-content: flex-start !important;
+}
+
+.footer-section .navlogo {
+  height: auto !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+  /* Perfect gap below the logo */
+}
+
+.footer-section .logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+.footer-section .stack {
+  margin-top: 0 !important;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Bottom Copyright Row
+   ============================================================ */
+.footer-bottom {
+  margin-top: 64px !important;
+  /* Pushes the entire bottom row far away */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Forces the copyright text to be solid and bright, ignoring the span/muted opacity */
+.footer-bottom {
+  color: var(--color-tertiary) !important;
+  opacity: 1 !important;
+  font-size: var(--fs-meta);
+}
+
+/* ============================================================
+   COMPONENT: HERO (CENTERED SEARCH)
+   ============================================================ */
+.hero-center {
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  /* Safety for layering */
+
+  /* LAYERED BACKGROUND: */
+  background:
+    linear-gradient(rgba(72%, 79%, 89%, 0.7) 0%, rgba(211, 211, 211, 0.9) 90%),
+    url('Assets/Hero-Banner-3.webp');
+
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: bottom;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- DARK MODE SUPPORT --- */
+/* When in dark mode, we darken the image instead of whitening it */
+[data-theme="dark"] .hero-center {
+  background:
+    linear-gradient(rgba(13, 27, 42, 0.70) 0%, rgba(13, 27, 42, 0.90) 90%),
+    /* Deep Sea Navy Overlay */
+    url('Assets/Hero-Banner-3.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* Centers the stack items (Text, Badge, Search) */
+.align-center {
+  align-items: center;
+}
+
+/* Making Hero-Text Way Bigger */
+.hero-text h1 {
+  /* Bump from 42px to 64px for Desktop */
+  font-size: 64px;
+  line-height: 1.1;
+  /* Tighter line height prevents gaps */
+  letter-spacing: -2px;
+  /* "Kerning" - squeezes letters slightly for a premium look */
+  font-weight: 700;
+  /* Bold */
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+}
+
+/* 2. Highlight "Before Release" */
+.text-accent {
+  color: var(--color-accent);
+  /* Your Electric Blue */
+  font-weight: 800;
+
+  /* OPTIONAL PRO TIP: Adds a subtle gradient to the text itself (like the wireframe) */
+  /* Remove these 3 lines if you want plain solid blue */
+  background: linear-gradient(to right, var(--color-accent), #4cc9f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.06);
+  /* stroke width + color */
+  color: transparent;
+  display: inline-block;
+}
+
+/* ============================================================
+   HERO SEARCH BAR (Smart Expanding Animation & Optimized)
+   ============================================================ */
+
+/* The Container: Now just a flex wrapper, no longer the pill itself */
+.search-container {
+  background-color: var(--bg-card);
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+  padding: 8px;
+  display: flex;
+  margin-top: var(--space-4);
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  gap: 12px;
+  /* The Magic: Smooth, spring-like expansion */
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+/* When the user clicks the input, the whole container grows */
+.search-container:focus-within {
+  box-shadow: 0 12px 32px rgba(0, 85, 255, 0.25);
+  max-width: 700px;
+}
+
+/* The Input Field: Now holds its own pill shape and styling */
+.hero-input {
+  flex: 1;
+  background-color: var(--bg-page);
+  color: var(--color-primary);
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  outline: none;
+  box-shadow: 0 4px 32px rgba(0, 85, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+[data-theme="light"] .hero-input {
+  border: 0.1px solid rgba(0, 0, 0, 0.3);
+}
+
+
+.hero-input:focus {
+  border-color: var(--color-accent-hover);
+  box-shadow: 0 12px 40px rgba(0, 85, 255, 0.25);
+  /* Glow intensifies */
+}
+
+/* The "Predict" Button */
+.hero-btn {
+  background-color: var(--color-accent);
+  /* Original deep blue */
+  color: #FFFFFF !important;
+  cursor: pointer;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  /* Original subtle lift */
+  background-color: var(--color-accent-hover);
+  /* Original hover color */
+  box-shadow: 0 6px 20px rgba(0, 85, 255, 0.4);
+  /* Added glow to match the new vibe */
+}
+
+/* The Badge (Untouched, kept exactly as you had it) */
+.badge {
+  display: inline-block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent);
+  background-color: var(--bg-card);
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--color-secondary);
+  width: fit-content;
+}
+
+/* ============================================================
+   COMPONENT: DIVIDER
+   ============================================================ */
+
+/* 1. Global Divider (For all normal pages) */
+hr {
+  border: 0;
+  border-bottom: 2px solid #293745;
+  opacity: 0.2;
+  width: 100%;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. The Special Widget Divider (Only for Predictions page) */
+.widget-divider {
+  border: 0;
+  border-bottom: 2px solid var(--color-secondary);
+  opacity: 0.2;
+  margin: var(--space-4) 0;
+  width: 100%;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ============================================================
+   COMPONENT: FEATURES SECTION
+   ============================================================ */
+
+/* Center the Section Title */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-4) auto;
+  /* Centers the block + adds bottom spacing */
+}
+
+/* Make sure the text inside the header is centered too */
+.section-header p {
+  margin: var(--space-2) auto 0 auto;
+}
+
+/* Icon Container - The "Apple/iOS" style circle */
+.icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-accent);
+  /* Deep Blue circle */
+  color: var(--bg-page);
+  /* White icon */
+  border-radius: var(--radius-md);
+  /* Soft rounded square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: var(--space-1);
+}
+
+.card-icon {
+  color: var(--bg-card);
+  opacity: 0.8;
+}
+
+/* ============================================================
+   COMPONENT: RESULTS PREVIEW CARDS
+   ============================================================ */
+
+.result-card {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  /* Default Shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* --- CARD VARIANTS (Using Your Palette) --- */
+
+/* 1. Success Card (Emerald) */
+.card-success {
+  background: linear-gradient(135deg, var(--color-success) 0%, #00A844 100%);
+}
+
+/* 2. Warning/Revenue Card (Orange) */
+.card-warning {
+  background: linear-gradient(135deg, var(--color-warning) 0%, #E68A00 100%);
+}
+
+/* 3. Accent/Rating Card (Electric Blue) */
+.card-accent {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+}
+
+/* --- TYPOGRAPHY INSIDE CARDS --- */
+
+.result-label {
+  font-size: var(--fs-small);
+  opacity: 0.9;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-value {
+  font-size: 48px;
+  /* Big Impact Numbers */
+  font-weight: 700;
+  margin: var(--space-1) 0;
+  line-height: 1;
+}
+
+.result-meta {
+  font-size: var(--fs-small);
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================
+   NEW FEATURE: ALTERNATING SAMPLE ANALYSIS
+   ============================================================ */
+
+.analysis-container {
+  padding: var(--space-5) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  max-width: 1040px;
+  margin: 0 auto;
+  /* Large gap between 'units' for clear separation */
+}
+
+.analysis-unit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+/* Force cards to perfectly match the width of the text blocks */
+.analysis-visual .result-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+/* Row 2: Alternating order */
+.analysis-unit:nth-child(even) .analysis-visual {
+  order: 2;
+}
+
+.analysis-unit:nth-child(even) .analysis-content {
+  order: 1;
+}
+
+.analysis-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.analysis-content {
+  flex: 1.2;
+  /* Text gets a bit more room than the card */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Respecting Hierarchy & Proximity */
+.analysis-content h2 {
+  font-size: var(--fs-h2);
+  color: var(--color-primary);
+}
+
+.analysis-content p {
+  font-size: var(--fs-body);
+  color: var(--color-secondary);
+  line-height: 1.6;
+  max-width: 500px;
+  /* Better readability */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+
+  .analysis-unit {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .analysis-unit:nth-child(even) .analysis-visual,
+  .analysis-unit:nth-child(even) .analysis-content {
+    order: unset;
+    /* Resets order on mobile so visual is always on top */
+
+    .analysis-content p {
+      margin: 0 auto;
+    }
+  }
+}
+
+/* ============================================================
+   COMPONENT: FAQ SECTION (Native Details/Summary)
+   ============================================================ */
+
+/* The Wrapper for each question */
+.faq-item {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 4px var(--color-tertiary);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .faq-item {
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+/* Hover effect for the whole block */
+.faq-item:hover {
+  border-color: var(--color-accent-hover);
+}
+
+/* The Clickable Question Area */
+.faq-question {
+  list-style: none;
+  /* Hides default triangle (Chrome/Safari) */
+  cursor: pointer;
+  padding: 20px 24px;
+  font-weight: 600;
+  font-size: 18px;
+  /* Slightly larger text */
+  color: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  /* Pushes icon to the right */
+  align-items: center;
+}
+
+/* Hides default triangle (Firefox/Other) */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+/* The Answer Area */
+.faq-answer {
+  padding: 0 24px 24px 24px;
+  /* Padding bottom/sides only */
+  color: var(--color-secondary);
+  line-height: 1.6;
+  border-top: 1px solid transparent;
+}
+
+/* --- THE ICON ANIMATION (+) to (-) --- */
+
+.faq-icon {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-accent);
+  /* Electric Blue */
+  transition: transform 0.3s ease;
+}
+
+/* When the details tag is [open], rotate the icon */
+details[open] .faq-icon {
+  transform: rotate(45deg);
+  color: var(--color-warning);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  /* Turns + into x */
+}
+
+/* Optional: Slight background change when open */
+details[open] {
+  background-color: var(--bg-card);
+  box-shadow: 0 0 8px var(--color-tertiary);
+}
+
+/* ============================================================
+   FINAL COMPONENT: PRE-FOOTER SIGNUP (Netflix Style)
+   ============================================================ */
+
+.footer-signup-section {
+  padding: var(--space-5) 0;
+  text-align: center;
+  background-color: var(--bg-card);
+  /* Clean separation from sections above */
+}
+
+.signup-container-glass {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  background: var(--bg-page);
+  /* iOS-like calm card */
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 4px var(--color-tertiary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-theme="light"] .signup-container-glass {
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+/* ============================================================
+   PRE-FOOTER SIGNUP FORM (Pill-in-Pill Design)
+   ============================================================ */
+
+/* 1. The Outer Pill (Protective Shell) */
+.signup-form-pill {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-card);
+  padding: 8px;
+  /* Creates the gap between outer shell and inner elements */
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 650px;
+  margin: 32px auto 0 auto;
+  gap: 12px;
+  /* Spacing between the inner input and the button */
+}
+
+[data-theme="light"] .signup-form-pill {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+
+/* 2. The Inner Input Pill */
+.signup-input {
+  flex: 1;
+  background-color: var(--bg-page);
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-primary);
+  border: 2px solid var(--color-border);
+  /* Distinct inner pill border */
+  border-radius: 100px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .signup-input {
+  border: 0.2px solid rgba(0, 0, 0, 0.2);
+}
+
+
+/* THE FIX: Only the input glows, not the entire container */
+.signup-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 24px rgba(0, 85, 255, 0.25);
+}
+
+/* 3. The Button */
+.signup-btn {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  /* Prevents text from breaking */
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 6px 20px rgba(0, 85, 255, 0.4);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .signup-container-glass {
+  background: rgba(27, 38, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================
+   RESPONSIVE: MOBILE OPTIMIZATIONS
+   ============================================================ */
+
+/* TABLET & MOBILE (Max Width: 768px) */
+@media (max-width: 768px) {
+
+  /* 1. Typography Scaling (Prevent huge text on small screens) */
+  :root {
+    --fs-h1: 32px;
+    /* Scale down from 42px */
+    --fs-h2: 24px;
+    /* Scale down from 28px */
+  }
+
+  /* 2. Navbar: Clean up the Header */
+  .nav-links {
+    display: none;
+    /* Hides the "Home, Predictions..." text links on mobile to save space */
+  }
+
+  .navbar .container {
+    padding: 0 var(--space-2);
+    /* Ensure edges don't touch screen */
+  }
+
+  /* 3. Hero Section: Tighten up whitespace */
+  .hero-center {
+    padding: 60px 0;
+    /* Reduce from 100px */
+  }
+
+  .hero-text h1 {
+    margin-bottom: var(--space-1);
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+  }
+
+  /* 4. Search Bar: Stack vertically on phones */
+  .search-container {
+    flex-direction: column;
+    /* Stack Input on top of Button */
+    height: auto;
+    /* Remove fixed height if any */
+    padding: var(--space-2);
+    /* Add internal breathing room */
+    border-radius: var(--radius-lg);
+    /* Change Pill shape to Rounded Rect */
+    gap: var(--space-2);
+    /* Space between input and button */
+    box-shadow: 0 0 20px var(--color-secondary);
+  }
+
+  .hero-input {
+    width: 100%;
+    text-align: center;
+    /* Center text for better mobile feel */
+    padding: 12px 0;
+    /* Larger touch target */
+    border-bottom: 1px solid var(--color-border);
+    /* Separator line */
+  }
+
+  .hero-btn {
+    width: 100%;
+    /* Full width button */
+    padding: 14px 0;
+  }
+
+  /* 5. General Section Padding */
+  .section {
+    padding: var(--space-4) 0;
+    /* Reduce vertical spacing */
+  }
+
+  /* 6. Footer: Stack to single column on very small screens */
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+}
+
+/* SMALL MOBILE (Max Width: 480px) */
+@media (max-width: 480px) {
+
+  /* Stack the "Login / Sign Up" buttons if they get too squeezed */
+  .navbar .row {
+    gap: var(--space-1);
+  }
+
+  .nav-link-login {
+    display: none;
+    /* Optional: Hide Login link on tiny screens, keep only Sign Up */
+  }
+}
+
+/* ============================================================
+   PREDICTION DASHBOARD: UNIFIED MASTER PANEL (PHASE 1-4)
+   ============================================================ */
+
+/* 1. The Unified Master Card */
+.pred-dash-root {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+  background: var(--bg-card);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 12px var(--color-tertiary);
+}
+
+[data-theme="dark"] .pred-dash-root {
+  background: rgba(13, 27, 42, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 2. Column 1: Poster */
+.pred-poster-col {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pred-poster-frame {
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 12px 48px var(--color-tertiary);
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+[data-theme="dark"] .pred-poster-frame {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3)
+}
+
+.pred-poster-frame:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.pred-poster-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pred-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.pred-poster-frame:hover .pred-play-overlay {
+  opacity: 1;
+}
+
+.pred-play-circle {
+  width: 50px;
+  height: 50px;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 15px rgba(0, 85, 255, 0.5);
+}
+
+.pred-watchlist-btn {
+  width: 100%;
+  padding: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  min-height: 50px;
+  flex-shrink: 0;
+}
+
+/* 3. Column 2: Middle Info Shell */
+.pred-info-col {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 24px;
+}
+
+/* Tactile Action Buttons */
+.pred-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.pred-action-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  color: var(--color-accent);
+  background: rgba(0, 85, 255, 0.05);
+}
+
+[data-theme="dark"] .pred-action-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pred-action-btn:active {
+  transform: scale(0.95);
+  background: rgba(0, 85, 255, 0.1);
+}
+
+.pred-action-btn.voted-up {
+  color: var(--color-success);
+  background: rgba(0, 200, 83, 0.1);
+}
+
+.pred-action-btn.voted-up i {
+  font-weight: 900;
+}
+
+.pred-action-btn.voted-down {
+  color: var(--color-danger);
+  background: rgba(213, 0, 0, 0.1);
+}
+
+.pred-action-btn.voted-down i {
+  font-weight: 900;
+}
+
+/* 5. The "Shared" Active State */
+.pred-action-btn.shared-active {
+  color: var(--color-warning);
+  background: rgba(0, 85, 255, 0.15);
+  transform: scale(0.95);
+  /* Satisfying click snap */
+}
+
+.pred-action-btn.shared-active i {
+  font-weight: 900;
+}
+
+/* 4. Column 3: AI Sidebar & Cards */
+.pred-sidebar-col {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+}
+
+
+.pred-credibility-stamp {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: 24px;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  cursor: default;
+}
+
+.pred-credibility-stamp:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .pred-credibility-stamp {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="dark"] .pred-credibility-stamp:hover {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+}
+
+
+.ai-gauge-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.ai-gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ai-gauge-bg {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.05);
+  stroke-width: 6;
+}
+
+[data-theme="dark"] .ai-gauge-bg {
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+.ai-gauge-fill {
+  fill: none;
+  stroke: var(--color-success);
+  stroke-width: 8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(0, 200, 83, 0.4));
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.ai-gauge-value {
+  position: absolute;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--color-primary);
+  display: flex;
+  align-items: baseline;
+}
+
+.ai-stamp-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.ai-certified-badge {
+  color: var(--color-success);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pred-stat-card {
+  flex: none;
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-page);
+  border-radius: var(--radius-md);
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+
+.pred-stat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .pred-stat-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .pred-stat-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.02);
+}
+
+
+.sentiment-track {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, var(--color-danger), var(--color-warning), var(--color-success));
+  border-radius: 10px;
+  position: relative;
+  margin-top: 12px;
+}
+
+.sentiment-pointer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(87% - 8px);
+  width: 16px;
+  height: 16px;
+  background: #FFFFFF;
+  border: 2px solid var(--color-success);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: left 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 5. Phase 4 Metric Cards (Bottom 3) */
+.metric-card-wrapper {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
+
+.metric-card-wrapper:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 32px var(--color-tertiary);
+}
+
+[data-theme="dark"] .metric-card-wrapper {
+  background: var(--bg-card);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .metric-card-wrapper:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--color-accent-hover);
+}
+
+.watermark-icon {
+  position: absolute;
+  right: -20px;
+  bottom: 3px;
+  font-size: 120px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.metric-card-wrapper:hover .watermark-icon {
+  transform: scale(1.1) rotate(-5deg);
+  opacity: 0.3;
+}
+
+[data-theme="dark"] .watermark-icon {
+  opacity: 0.05;
+}
+
+[data-theme="dark"] .metric-card-wrapper:hover .watermark-icon {
+  opacity: 0.08;
+}
+
+.metric-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 6. Market Projection Toggle */
+.scenario-toggle {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+[data-theme="dark"] .scenario-toggle {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scenario-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  width: 98px;
+  border-radius: 8px;
+  background: rgba(0, 200, 83, 0.15);
+  border: 1px solid rgba(0, 200, 83, 0.2);
+  box-shadow: var(--shadow-sm);
+  z-index: -1;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.scenario-btn {
+  padding: 8px 20px;
+  border: none;
+  background: transparent !important;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-secondary);
+  transition: color 0.4s ease;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.scenario-btn.active.bull {
+  color: var(--color-success);
+}
+
+.scenario-btn.active.bear {
+  color: var(--color-danger);
+}
+
+/* ============================================================
+   DIAGNOSTIC DASHBOARD & CHARTS
+   ============================================================ */
+.chart-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 4px 12px var(--color-tertiary);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .chart-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .chart-card {
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px var(--color-tertiary);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.chart-subtitle {
+  font-size: 12px;
+  color: var(--color-tertiary);
+  font-weight: 600;
+}
+
+.chart-container {
+  position: relative;
+  height: 280px;
+  /* Fixed height for 2x2 grid charts */
+  width: 100%;
+}
+
+.dashboard-wide {
+  grid-column: 1 / -1;
+  /* Spans the full width of the grid */
+}
+
+.dashboard-wide .chart-container {
+  height: 400px;
+  /* Taller height for the massive revenue chart */
+}
+
+/* ============================================================
+   SECONDARY SEARCH WIDGET (Predictions Page)
+   ============================================================ */
+.search-widget-section {
+  padding-top: var(--space-4);
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.search-widget-card {
+  background: var(--bg-card);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  box-shadow: 0 0 8px var(--color-tertiary);
+}
+
+[data-theme="light"] .search-widget-card {
+  border: 2px solid rgba(0, 0, 0, 0.6)
+}
+
+.search-widget-card h2 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 28px;
+}
+
+.search-widget-card p {
+  margin: 0;
+  color: var(--color-secondary);
+}
+
+.search-widget-input-group {
+  gap: 12px;
+  width: 100%;
+}
+
+.search-widget-input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-page);
+  color: var(--color-primary);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] .search-widget-input {
+  border: 1px solid rgba(0, 0, 0, 0.5)
+}
+
+
+.search-widget-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.15);
+}
+
+.search-widget-btn {
+  padding: 14px 32px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   PAGE: HOW IT WORKS
+   ============================================================ */
+
+.step-card {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--space-4);
+  box-shadow: var(--shadow-md);
+  /* Extra space for the big number */
+}
+
+/* The Big Background Number (01, 02, 03) */
+.step-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 100px;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.15;
+  /* Barely visible watermark effect */
+  line-height: 1;
+  pointer-events: none;
+  /* User can't click or highlight it */
+}
+
+/* Make the icon pop at the bottom of the card */
+.step-icon {
+  font-size: 32px;
+  color: var(--color-accent);
+  margin-top: auto;
+  /* Pushes icon to the bottom of the card */
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .step-number {
+  color: #FFFFFF;
+  opacity: 0.03;
+  /* Even more subtle in dark mode */
+}
+
+/* ============================================================
+   PAGE: HOW IT WORKS - TECH STACK
+   ============================================================ */
+
+/* Auto-fitting grid specifically for smaller tech cards */
+.grid-tech {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.tech-card {
+  padding: var(--space-4) var(--space-2);
+  background-color: var(--bg-page);
+  /* Makes it pop against the grey section bg */
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.tech-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.tech-icon {
+  font-size: 48px;
+  margin-bottom: var(--space-1);
+  transition: transform 0.3s ease;
+}
+
+/* Spin/Scale the icon slightly on hover for a premium feel */
+.tech-card:hover .tech-icon {
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   PAGE: ABOUT US (TEAM CARDS)
+   ============================================================ */
+
+/* 2-Column Grid for exactly two creators */
+.grid-2 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
+  /* Centers the grid on the page */
+}
+
+/* Force stack on mobile */
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-card {
+  padding: var(--space-4);
+  text-align: center;
+}
+
+/* Profile Image Styling */
+.profile-img-wrapper {
+  margin-bottom: var(--space-2);
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  /* Perfect circle */
+  object-fit: cover;
+  /* Ensures image doesn't stretch */
+  border: 4px solid var(--color-border);
+  padding: 4px;
+  /* Creates a gap between image and border */
+  background-color: var(--bg-page);
+  transition: border-color 0.3s ease;
+}
+
+.team-card:hover .profile-img {
+  border-color: var(--color-accent);
+  /* Lights up the border on hover */
+}
+
+/* Social Icons Row */
+.social-links-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  width: 100%;
+}
+
+.social-icon {
+  font-size: 24px;
+  color: var(--color-secondary);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+  color: var(--color-accent);
+  transform: translateY(-3px);
+  /* Slight lift */
+}
+
+/* ============================================================
+   LIVE SEARCH DROPDOWN (CineScore Premium)
+   ============================================================ */
+.search-dropdown-menu {
+  position: absolute;
+  top: 110%;
+  /* Sits just below the search bar */
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-card, #FFFFFF);
+  border-radius: var(--radius-sm, 12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 8px;
+  margin: 0;
+  z-index: 100;
+  display: none;
+  /* Hidden until user types */
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* Dark Mode Midnight Blue Integration */
+[data-theme="dark"] .search-dropdown-menu {
+  background-color: #0B192C;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Individual Movie Card */
+.search-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 16px;
+}
+
+/* ============================================================
+   UNIVERSAL SEARCH DROPDOWN PHYSICS (Home & Hub)
+   ============================================================ */
+
+/* 1. Base State (THE FIX: Inset shadow creates a 0px layout shift!) */
+.search-item {
+  box-shadow: inset 0px 0 0 transparent;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+/* 2. Light Mode Background & Blue Highlight Line */
+.search-item:hover,
+.search-item.active-search-item {
+  background: rgba(0, 85, 255, 0.25);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+  /* Draws the line INSIDE the box */
+  cursor: pointer;
+}
+
+/* 3. Dark Mode Background */
+html[data-theme="dark"] .search-item:hover,
+html[data-theme="dark"] .search-item.active-search-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 4. The Highlight Physics */
+.search-item:hover .search-title,
+.search-item.active-search-item .search-title,
+.search-item:hover strong,
+.search-item.active-search-item strong,
+.search-item:hover .search-right-icon,
+.search-item.active-search-item .search-right-icon {
+  color: var(--color-accent) !important;
+  opacity: 1 !important;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* The Square Poster */
+.search-poster {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  background-color: #334155;
+}
+
+/* Text Container */
+.search-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.search-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.search-meta {
+  font-size: 13px;
+  color: var(--color-tertiary, #94A3B8);
+  margin: 0;
+}
+
+/* Button Loading State */
+.btn-loading {
+  opacity: 0.7;
+  cursor: not-allowed !important;
+}
+
+/* ============================================================
+   FULL-SCREEN SPLASH LOADER (CineScore Logo Edition)
+   ============================================================ */
+.splash-loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(11, 25, 44, 0.65);
+  /* Glassy Midnight Blue */
+  backdrop-filter: blur(12px);
+  /* Apple-style blur */
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+/* The Half-Circle Container */
+.speedometer-container {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  /* Exactly half width */
+  margin: 0 auto 30px auto;
+}
+
+
+.speedometer-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 160px;
+  height: 80px;
+  border-radius: 100px 100px 0 0;
+  /* Half-circle shape */
+
+
+  /* Sweeps from dark blue to your bright electric blue */
+  background: conic-gradient(from 270deg at 50% 100%,
+      var(--color-accent) 0deg,
+      var(--color-accent-hover) 180deg);
+
+  /* Magic Trick: Cuts out the center to turn the background into a 12px stroke */
+  -webkit-mask-image: radial-gradient(circle at 50% 100%, transparent 68px, black 69px);
+  mask-image: radial-gradient(circle at 50% 100%, transparent 68px, black 69px);
+}
+
+/* 2. The Inner Grey Arc (Matching the Logo) */
+.speedometer-inner-track {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 55px;
+  border-radius: 110px 110px 0 0;
+  border: 6px solid var(--color-tertiary, #94A3B8);
+  border-bottom: none;
+  /* Keeps it a half-circle */
+  box-sizing: border-box;
+}
+
+/* 3. The Moving Orange Needle (Matching the Logo) */
+.speedometer-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 65px;
+  background-color: var(--color-warning, #FFB703);
+  /* CineScore Orange */
+  border-radius: 4px;
+  transform-origin: bottom center;
+
+  /* Set to 3 seconds for a smooth, noticeable sweep */
+  animation: moveNeedle 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 4. The Orange Pivot */
+.speedometer-center-dot {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-warning, #FFB703);
+  /* CineScore Orange */
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+/* Keyframes: Sweeps from Red (Left) to Green (Right) */
+@keyframes moveNeedle {
+  0% {
+    transform: translateX(-50%) rotate(-90deg);
+  }
+
+  /* Starts flat left */
+  10% {
+    transform: translateX(-50%) rotate(-85deg);
+  }
+
+  /* Engine rev hesitation */
+  100% {
+    transform: translateX(-50%) rotate(70deg);
+  }
+
+  /* Lands in the green zone */
+}
+
+.loader-text {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 16px;
+  animation: pulseText 1s infinite alternate;
+}
+
+@keyframes pulseText {
+  from {
+    opacity: 0.6;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+/* ============================================================
+   PREMIUM HARDWARE STRIP (Replit Style)
+   ============================================================ */
+
+.ticker-container {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(15px);
+  border: none;
+
+  /* Glowing Borders */
+  box-shadow:
+    inset 0 1px 10px rgba(0, 85, 255, 0.1),
+    inset 0 -1px 10px rgba(0, 85, 255, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .ticker-container {
+  box-shadow: inset 0 1px 0 rgba(0, 85, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 85, 255, 0.3),
+    0 0 15px rgba(0, 85, 255, 0.2),
+    inset 0 0 10px rgba(0, 85, 255, 0.1) !important;
+}
+
+[data-theme="light"] .ticker-container {
+  border: none !important;
+  /* Simulate the borders with inset shadows so it doesn't add height */
+  box-shadow: inset 0 1px 0 rgba(17, 24, 39, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    2px 2px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+.ticker-fixed-label {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  backdrop-filter: blur(10px);
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 20;
+}
+
+[data-theme="light"] .ticker-fixed-label {
+  border-right: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .ticker-fixed-label {
+  border-right: 1px solid var(--color-border);
+}
+
+.ticker-row {
+  display: flex;
+  flex-grow: 1;
+  padding-left: 160px;
+}
+
+.ticker-wrapper {
+  display: flex;
+  width: max-content;
+  padding-left: 160px;
+  /* Fixed spacing to prevent overlap with label */
+  animation: slideLeft 30s linear infinite;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 40px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .ticker-item {
+  color: var(--color-primary);
+}
+
+/* Neon Tags matching your image examples */
+.hype-tag {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.neon-green {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.neon-orange {
+  background: rgba(245, 158, 11, 0.2);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.neon-red {
+  background: rgba(244, 63, 94, 0.2);
+  color: #F43F5E;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   NEW FEATURE: FEATURED PREDICTIONS (Netflix Ranking style)
+   ============================================================ */
+.featured-grid {
+  display: flex;
+  /* Switched to flex for better width control */
+  justify-content: center;
+  gap: 50px;
+  /* Space for rank numbers to peak through */
+  max-width: 1200px;
+  margin: 40px auto;
+  /* Top: 0, Right: 20px, Bottom: 0, Left: 60px */
+  padding-left: -45px;
+  padding-right: 0px;
+}
+
+.featured-rank-item {
+  position: relative;
+  width: 320px;
+  /* Fixed width for consistency */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 12px 42px rgba(0, 0, 0, 0.1);
+}
+
+/* 1. Ranking Numbers - Fixed Position & Hover Glow */
+.rank-mega-number {
+  position: absolute;
+  left: -45px;
+  bottom: -40px;
+  font-size: 140px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: var(--bg-card);
+  -webkit-text-stroke: 4px var(--color-primary);
+  text-shadow: 6px 6px 20px rgba(0, 0, 0, 0.8);
+  opacity: 0.3;
+  z-index: 20;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. Hover Scaling Fix: Number and Card respond together */
+.featured-rank-item:hover .rank-mega-number {
+  opacity: 0.8;
+  -webkit-text-stroke-color: var(--color-accent-hover);
+  filter: drop-shadow(0 0 15px rgba(0, 85, 255, 0.4));
+}
+
+/* 3. Mobile Scaling for Mega Numbers */
+@media (max-width: 768px) {
+  .rank-mega-number {
+    font-size: 90px;
+    left: -25px;
+    bottom: -20px;
+    -webkit-text-stroke: 2px var(--color-primary);
+  }
+}
+
+.featured-movie-card {
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 4px var(--color-tertiary);
+  padding: var(--space-2);
+  width: 100%;
+  z-index: 5;
+  /* Card sits above number */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+[data-theme="light"] .featured-movie-card {
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+/* Scale on Hover - FIXED */
+.featured-rank-item:hover .featured-movie-card {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--color-accent);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Poster & Metadata */
+.poster-vertical-wrap {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.poster-vertical-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-details-wrap {
+  position: relative;
+  padding: 10px 5px;
+}
+
+.movie-title-featured {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  padding-right: 65px;
+  /* Room for gauge */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.genre-pill {
+  display: inline-flex;
+  padding: 3px 10px;
+  background: rgba(0, 85, 255, 0.08);
+  border: 1px solid rgba(0, 85, 255, 0.2);
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: 8px;
+}
+
+/* 4. Electric Blue Gauge (Empty Center) */
+.featured-score-gauge {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 3;
+}
+
+.gauge-circle-fill {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.gauge-text {
+  position: absolute;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+/* Responsive Fix */
+@media (max-width: 900px) {
+  .featured-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .rank-mega-number {
+    font-size: 100px;
+    left: -20px;
+    bottom: -20px;
+  }
+}
+
+/* ============================================================
+   USER AVATAR & DROPDOWN MENU (STRICT JS-CONTROLLED)
+   ============================================================ */
+.user-menu-wrapper {
+  padding-bottom: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.user-avatar:hover {
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+
+}
+
+/* Base state for BOTH modals: Hidden by default */
+.avatar-hover-card,
+.avatar-dropdown {
+  position: absolute;
+  top: 55px;
+  /* Adjusted to fit perfectly under the avatar */
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1000;
+}
+
+/* THE FIX: Restore beautiful padding and width to the Hover Card */
+.avatar-hover-card {
+  padding: 16px !important;
+  min-width: 220px;
+  text-align: left;
+}
+
+/* THE FIX: Destructive Red Hover for the Log Out Button */
+.avatar-dropdown li a#logout-btn {
+  color: var(--color-danger) !important;
+}
+
+.avatar-dropdown li a#logout-btn:hover {
+  background: rgba(213, 0, 0, 0.1) !important;
+  /* Soft Red Background */
+  color: var(--color-danger) !important;
+}
+
+[data-theme="dark"] .avatar-dropdown,
+[data-theme="dark"] .avatar-hover-card {
+  background: rgba(13, 27, 42, 0.95);
+  backdrop-filter: blur(12px);
+}
+
+/* THE JS TRIGGER CLASSES (No CSS :hover logic allowed!) */
+.avatar-hover-card.show-hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-menu-wrapper.active .avatar-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* The Killswitch: If click menu is open, force-hide hover card */
+.user-menu-wrapper.active .avatar-hover-card {
+  display: none !important;
+}
+
+/* Dropdown inner styling */
+.avatar-dropdown {
+  list-style: none;
+  padding: 8px;
+}
+
+.avatar-dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+
+.avatar-dropdown li a:hover {
+  background: rgba(0, 85, 255, 0.1);
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   PREMIUM SAMPLE DATA BANNER (Logged Out State)
+   ============================================================ */
+.sample-data-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 159, 28, 0.95);
+  /* Warning Orange */
+  color: #000;
+  text-align: center;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 -4px 20px rgba(255, 159, 28, 0.4);
+}
+
+.sample-data-btn {
+  background: #000;
+  color: #FFF;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sample-data-btn:hover {
+  background: #333;
+}
+
+/* ============================================================
+   DASHBOARD ARCHITECTURE (Refined)
+   ============================================================ */
+.dashboard-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-page);
+  color: var(--color-primary);
+  min-height: 100vh;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- SIDEBAR (Silent Icons) --- */
+.sidebar {
+  background-color: var(--bg-page);
+  border-right: 3px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 260px;
+  transition: width 0.5s ease, align-items 0.5s ease;
+  z-index: 50;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  align-items: center;
+}
+
+/* Sidebar Hamburger Toggle */
+#sidebar-toggle {
+  background: transparent !important;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+
+  /* THE FIX: Fixed dimensions so the hover circle is actually noticeable */
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar.collapsed .sidebar-header {
+  padding-left: 0 !important;
+  justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-logo-wrapper,
+.sidebar.collapsed .link-text {
+  display: none;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: auto 0;
+  /* Pushes them to the exact vertical center */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar.collapsed .sidebar-nav {
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  color: var(--color-secondary);
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  background: transparent !important;
+  /* Removes clunky background */
+
+  transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  width: 100%;
+}
+
+/* Active State (Remains Untouched) */
+.sidebar-link.active {
+  color: var(--color-accent);
+}
+
+.sidebar-link.active i {
+  color: var(--color-accent);
+}
+
+/* Slide effect ONLY when sidebar is open */
+.sidebar:not(.collapsed) .sidebar-link:hover {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   THE HOVER ENGINE (Unified: Links, Hamburger, Avatar)
+   ============================================================ */
+
+/* --- DARK MODE HOVER (Default) --- */
+.sidebar-link:hover,
+#sidebar-toggle:hover,
+#settings-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--color-primary) !important;
+  border-radius: var(--radius-md);
+}
+
+/* Forces nested icons and text to light up White in Dark Mode */
+.sidebar-link:hover i {
+  color: var(--color-warning);
+}
+
+.sidebar-link:hover .link-text,
+#settings-btn:hover .link-text {
+  color: var(--color-primary) !important;
+}
+
+
+/* --- LIGHT MODE HOVER --- */
+[data-theme="light"] .sidebar-link:hover,
+[data-theme="light"] #sidebar-toggle:hover,
+[data-theme="light"] #settings-btn:hover {
+  background-color: rgba(0, 85, 255, 0.2) !important;
+  color: var(--color-accent-hover) !important;
+}
+
+/* Forces nested icons and text to light up Electric Blue in Light Mode */
+[data-theme="light"] .sidebar-link:hover i {
+  color: var(--color-warning);
+}
+
+[data-theme="light"] .sidebar-link:hover .link-text,
+[data-theme="light"] #settings-btn:hover .link-text {
+  color: var(--color-accent-hover) !important;
+}
+
+/* --- AVATAR & GEMINI MENU --- */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  /* FIXED: Perfectly centers the 'O' */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.settings-popup {
+  position: absolute;
+  bottom: 60px;
+  /* Pops UP from the bottom */
+  left: 16px;
+  width: 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  transition: opacity 0.2s, transform 0.2s;
+  transform-origin: bottom left;
+}
+
+.settings-popup.hidden {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  pointer-events: none;
+}
+
+.popup-links {
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.popup-links li a {
+  display: flex;
+  gap: 12px;
+  padding: 10px 16px;
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.popup-links li a:hover {
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* --- MAIN CONTENT & TOOLBAR --- */
+.dashboard-content {
+  flex: 1;
+  padding: 40px 40px 40px 40px;
+  max-width: 1400px;
+}
+
+.stat-card {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.table-search {
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-main);
+  color: var(--color-primary);
+  outline: none;
+  width: 100%;
+}
+
+.table-search:focus {
+  border-color: var(--color-accent);
+}
+
+/* Poster Grid Layout (Forces 3-4 cards max) */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Stops badges from floating away */
+.prediction-image {
+  position: relative;
+  /* CRITICAL FIX */
+  width: 100%;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+/* ============================================================
+   LIGHT MODE DEPTH & UPLIFT (Anti-Whitewash)
+   ============================================================ */
+
+/* 1. Sidebar Edge Shadow */
+body.dashboard-body[data-theme="light"] .sidebar {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.02);
+}
+
+/* 2. Stat Cards & Movie Cards Uplift */
+body.dashboard-body[data-theme="light"] .stat-card,
+body.dashboard-body[data-theme="light"] .poster-card,
+body.dashboard-body[data-theme="light"] .custom-dropdown .dropdown-toggle {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03) !important;
+}
+
+.poster-card {
+  position: relative;
+}
+
+.card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.card-menu-btn {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.8);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.card-menu-btn:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+/* Enhance the hover state so they 'lift' off the page */
+body.dashboard-body[data-theme="light"] .stat-card:hover,
+body.dashboard-body[data-theme="light"] .poster-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 85, 255, 0.08) !important;
+  border-color: rgba(0, 85, 255, 0.2) !important;
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   DASHBOARD POLISH (Search, Filters, Layout)
+   ============================================================ */
+
+/* Global Search Bar */
+.top-search {
+  width: 100%;
+  padding: 12px 40px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  background: var(--bg-card);
+  color: var(--color-primary);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .top-search {
+  border: 1px solid rgba(0, 0, 0, 0.6)
+}
+
+
+.top-search:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 85, 255, 0.15);
+}
+
+/* Polished Custom Select Dropdowns */
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 10px 36px 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  background: var(--bg-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 16px center;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.custom-select:hover {
+  border-color: var(--color-secondary);
+}
+
+.custom-select:focus {
+  border-color: var(--color-accent);
+}
+
+/* Ensure 4 Equal Stat Cards */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   SMOOTH SEARCH ANIMATION & DROPDOWN POLISH
+   ============================================================ */
+
+/* Style the native Dropdown Options to remove the 'chunky' white OS look */
+.custom-select option {
+  background-color: var(--bg-card);
+  color: var(--color-primary);
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Ensure the Cross Icon fades in smoothly instead of snapping */
+#clear-search {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#clear-search.hidden {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+  pointer-events: none;
+  display: block !important;
+  /* Overrides global .hidden to allow animation */
+}
+
+/* The Magic: Smoothly sliding the Watchlist UP */
+#stats-section {
+  transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, margin 0.5s ease;
+  max-height: 520px;
+  opacity: 1;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  /* THE CUT-OFF FIX: Gives 15px of invisible breathing room at the top so cards can hover freely */
+  padding: 15px 5px;
+  margin: -15px -5px;
+}
+
+#content-wrapper.search-active #stats-section {
+  max-height: 0;
+  /* Silently crushes the height to 0 */
+  opacity: 0;
+  /* Fades it out */
+  margin-bottom: -40px;
+  /* Pulls the watchlist upward to fill the gap */
+  pointer-events: none;
+}
+
+/* ============================================================
+   CUSTOM UI DROPDOWNS & THEME TOGGLE FIX
+   ============================================================ */
+
+/* Fix missing border on Theme Toggle */
+.theme-switch {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Custom Dropdown Styling */
+.custom-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  border-color: var(--color-secondary);
+}
+
+.custom-dropdown.active .dropdown-toggle {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 150px;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  z-index: 100;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.dropdown-menu li {
+  padding: 10px 16px;
+  color: var(--color-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu li:hover {
+  background: var(--bg-main);
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   PREMIUM THEME TOGGLE (Hyper-Specific Dashboard Override)
+   ============================================================ */
+
+/* DARK MODE (Default) - Darker Track */
+body.dashboard-body #settings-menu #theme-toggle {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  align-items: center !important;
+  /* Helps vertical alignment */
+}
+
+/* LIGHT MODE - Darker Grey Track */
+body.dashboard-body[data-theme="light"] #settings-menu #theme-toggle {
+  background-color: #E2E8F0 !important;
+  /* Soft premium grey track */
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* --- THE SLIDER THUMB FIX --- */
+body.dashboard-body #settings-menu #theme-toggle .switch-slider {
+  /* FIX: Compensates for the 1px border so it centers perfectly */
+  top: 1px !important;
+  bottom: 2px !important;
+  height: calc(100% - 2px) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark Mode Thumb Color */
+body.dashboard-body[data-theme="dark"] #settings-menu #theme-toggle .switch-slider {
+  background-color: var(--color-primary) !important;
+}
+
+/* Light Mode Thumb Color (Softened from harsh dark to premium secondary/slate) */
+body.dashboard-body[data-theme="light"] #settings-menu #theme-toggle .switch-slider {
+  background-color: var(--color-secondary) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Icon Colors */
+body.dashboard-body[data-theme="dark"] #settings-menu .sun-icon,
+body.dashboard-body[data-theme="dark"] #settings-menu .moon-icon {
+  color: var(--bg-page) !important;
+}
+
+body.dashboard-body[data-theme="light"] #settings-menu .sun-icon,
+body.dashboard-body[data-theme="light"] #settings-menu .moon-icon {
+  color: #FFFFFF !important;
+  /* White icons inside the slate thumb */
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS (Hub Layout)
+   ============================================================ */
+
+/* TABLET VIEW */
+@media (max-width: 992px) {
+
+  /* Stack the topbar elements */
+  .dashboard-topbar {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 20px !important;
+  }
+
+  /* Make search bar take full width */
+  .dashboard-topbar .search-wrapper {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* 4-Column Grid becomes 2-Column */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Movie Posters adjust */
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 24px 16px;
+  }
+
+  /* 2-Column Grid becomes 1-Column */
+  .grid-4,
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack the toolbar actions (Filters & Add Button) */
+  .row-between .row {
+    width: 100%;
+  }
+
+  .custom-dropdown {
+    flex: 1;
+    /* Makes dropdowns share the space evenly */
+  }
+
+  .dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================================
+   GAMIFIED MODAL STYLES
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Light mode specific override for the modal background */
+body.dashboard-body[data-theme="light"] .modal-overlay {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.prediction-arena input[type="number"]:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 85, 255, 0.1);
+}
+
+/* ============================================================
+   MODAL OVERFLOW FIX
+   ============================================================ */
+.modal-content {
+  max-height: 90vh !important;
+  /* Prevents it from being taller than the screen */
+  overflow-y: auto !important;
+  /* Adds a scrollbar INSIDE the modal if needed */
+}
+
+/* Hide scrollbar for a cleaner look but keep functionality */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 10px;
+}
+
+/* ============================================================
+   UX POLISH: INPUTS, SLIDERS & SHADOWS
+   ============================================================ */
+
+/* 1. Kill the Number Input Arrows (Professional Financial Look) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  /* Firefox */
+}
+
+/* 2. Dynamic Fill Range Slider Track */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  /* The Magic: Uses CSS variables (--val and --track-fill) updated by HTML/JS */
+  background: linear-gradient(to right, var(--track-fill, var(--color-accent)) calc(var(--val, 50) * 1%), rgba(148, 163, 184, 0.3) calc(var(--val, 50) * 1%));
+  border-radius: 10px;
+}
+
+[data-theme="dark"] input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--track-fill, var(--color-accent)) calc(var(--val, 50) * 1%), rgba(255, 255, 255, 0.1) calc(var(--val, 50) * 1%));
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--track-fill, var(--color-accent));
+  /* Thumb matches track */
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   UX POLISH: NEO-BRUTALIST LIGHT MODE (APP UI ONLY)
+   ============================================================ */
+
+/* 1. Base State: Bold Strokes on Gamified/Data Cards ONLY */
+[data-theme="light"] .stat-card,
+[data-theme="light"] .poster-card,
+[data-theme="light"] .chart-card,
+[data-theme="light"] .custom-dropdown .dropdown-toggle {
+  background-color: #FFFFFF !important;
+  border: 2px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 2. Hover State: The Blue Snap */
+[data-theme="light"] .stat-card:hover,
+[data-theme="light"] .poster-card:hover,
+[data-theme="light"] .chart-card:hover,
+[data-theme="light"] .custom-dropdown .dropdown-toggle:hover {
+  border-color: rgba(0, 85, 255, 0.7) !important;
+  box-shadow: 2px 2px 0px rgba(17, 24, 39, 0.9) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* ============================================================
+   CUSTOM CONTEXT MENU & 3-DOTS BUTTON
+   ============================================================ */
+
+
+/* 2. The Context Menu (Neo-Brutalist Styling) */
+.context-menu {
+  position: absolute;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.15);
+  width: 200px;
+  z-index: 10000;
+  overflow: hidden;
+  transform-origin: top left;
+  animation: scaleIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.context-menu.hidden {
+  display: none;
+}
+
+[data-theme="dark"] .context-menu {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.context-links {
+  list-style: none;
+  padding: 6px;
+  margin: 0;
+}
+
+.context-links li {
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.1s ease;
+}
+
+.context-links li i {
+  color: var(--color-secondary);
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.context-links li:hover {
+  background: var(--color-accent-hover);
+  color: #FFFFFF;
+}
+
+.context-links li:hover i {
+  color: #FFFFFF;
+}
+
+.ctx-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 4px 0;
+}
+
+.context-links li.ctx-danger:hover {
+  background: var(--color-danger);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================
+UX POLISH: SEARCH HIGHLIGHT & 3-DOTS BUTTON
+============================================================*/
+
+/* 1. The Softer, Premium Keyboard Highlight */
+.search-item.active-search-item {
+  background-color: rgba(0, 85, 255, 0.25) !important;
+  /* Soft blue background */
+  border-left: 1px solid var(--color-accent);
+  /* Sharp left indicator */
+}
+
+/* Make only the title blue on hover, leave the meta text muted */
+.search-item.active-search-item .search-title {
+  color: var(--color-accent-hover) !important;
+}
+
+[data-theme="dark"] .search-item.active-search-item {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 2. Fix the Oval & Move 3-Dots to Bottom Right */
+.card-menu-btn {
+  position: absolute;
+  bottom: 12px;
+  top: auto;
+  right: 12px;
+  padding: 0 !important;
+  /* THE FIX: Overrides the global button padding that made it an oval! */
+  background: transparent;
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* Now it's a perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-menu-btn:hover {
+  background: rgba(211, 211, 211, 0.3);
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================================
+   OMNI-SEARCH, PINS, & SMOOTH PUSH-DOWN FIXES
+   ============================================================ */
+
+/* 1. Smooth Push-Down for Movie Cards */
+#stats-section {
+  /* Hard pixel heights and linear easing prevents the layout jitter */
+  transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin 0.5s ease;
+  max-height: 520px;
+}
+
+/* 2. Omni-Search Add Button */
+.add-draft-btn {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.add-draft-btn:hover {
+  transform: scale(1.1);
+}
+
+/* 3. Draft/Tracking Pill Colors */
+.badge.badge-draft {
+  background: rgba(0, 85, 255, 0.1) !important;
+  color: var(--color-accent) !important;
+  border: 1px solid rgba(0, 85, 255, 0.3) !important;
+}
+
+/* 4. Fix Sort/Status Dropdown Hover Backgrounds */
+.dropdown-menu li:hover {
+  background-color: rgba(0, 85, 255, 0.08);
+  /* Faint blue */
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   THE ULTIMATE LAYOUT & ALIGNMENT FIXES
+   ============================================================ */
+
+/* 1. Avatar Alignment Fix (Forces perfect vertical center) */
+.user-menu-wrapper {
+  padding-bottom: 10px;
+  /* Needed for hover bridge in Hub */
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar .user-menu-wrapper {
+  padding-bottom: 0 !important;
+  /* Strips padding on public pages to align with toggle */
+}
+
+/* 2. The Smooth Slide-Up Fix (Stops the jitter and overlap!) */
+#stats-section {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 520px;
+  opacity: 1;
+  overflow: hidden !important;
+  /* CRITICAL: Actually hides the cards when crushed! */
+  margin-bottom: 0;
+}
+
+#content-wrapper.search-active #stats-section {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  margin-bottom: -40px !important;
+  padding-top: 0 !important;
+  /* CRITICAL: Kills invisible padding */
+  padding-bottom: 0 !important;
+  pointer-events: none;
+}
+
+/* 3. Draft/Tracking Pill Colors (SOLID & UNIGNORABLE) */
+.badge.badge-draft {
+  background: var(--bg-page) !important;
+  color: var(--color-primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ============================================================
+   TABULAR WATCHLIST (YouTube Style - Completely Flat & Seamless)
+   ============================================================ */
+
+.tabular-list-container {
+  background-color: var(--bg-card);
+  border: 2px solid var(--color-border) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* THE FIX: Bring back the bold border for Light Mode neo-brutalism */
+[data-theme="light"] .tabular-list-container {
+  border: 2px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+.tabular-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  background-color: transparent;
+
+  /* BORDERS */
+  border-bottom: 1px solid var(--color-border) !important;
+  border-top: none !important;
+  border-right: none !important;
+  /* THE FIX: An invisible left border holds space so the blue stripe doesn't shift the layout! */
+  border-left: 4px solid transparent;
+
+  border-radius: 0 !important;
+  transition: background-color 0.2s ease, border-left-color 0.2s ease !important;
+  transform: none;
+  box-shadow: none;
+  position: relative;
+}
+
+.tabular-row:last-child {
+  border-bottom: none !important;
+}
+
+/* THE ABSOLUTE BASIC HOVER */
+body.dashboard-body .tabular-row:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  z-index: 10 !important;
+
+  /* THE FIX: The Blue Left Stripe */
+  border-left-color: var(--color-accent) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Light Mode: Stronger Blue Tint */
+html[data-theme="light"] body.dashboard-body .tabular-row:hover {
+  background-color: rgba(0, 85, 255, 0.12) !important;
+}
+
+/* Dark Mode: Stronger White Tint */
+html[data-theme="dark"] body.dashboard-body .tabular-row:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Title text lights up */
+body.dashboard-body .tabular-row:hover .tabular-title {
+  color: var(--color-accent) !important;
+  transition: color 0.2s ease;
+}
+
+/* 1. The Number Index */
+.tabular-index {
+  width: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-align: center;
+}
+
+/* 2. The Squircle Thumbnail */
+.tabular-squircle {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 3. The Data Columns */
+.tabular-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tabular-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.tabular-meta {
+  font-size: 13px;
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabular-stats {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 32px;
+  padding-right: 24px;
+}
+
+.tabular-stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.tabular-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-tertiary);
+  letter-spacing: 0.5px;
+}
+
+.tabular-stat-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Specific Value Colors */
+.tabular-stat-value.accent {
+  color: var(--color-accent);
+}
+
+.tabular-stat-value.success {
+  color: var(--color-success);
+}
+
+.tabular-stat-value.danger {
+  color: var(--color-danger);
+}
+
+/* Sleek Ghost Button specifically for the Tabular Rows */
+.tabular-menu-btn {
+  background: transparent !important;
+  color: var(--color-tertiary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.tabular-menu-btn:hover {
+  background: var(--bg-main) !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-secondary) !important;
+  transform: scale(1.1) !important;
+}
+
+/* ============================================================
+   UX POLISH: DYNAMIC COLORS & BRANDED FLASH ANIMATION
+   ============================================================ */
+
+.conf-high {
+  color: var(--color-success) !important;
+  text-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
+}
+
+.conf-med {
+  color: var(--color-warning) !important;
+}
+
+.conf-low {
+  color: var(--color-danger) !important;
+}
+
+/* 1. Overview Card Flash (Ghost Element Strategy) */
+body.dashboard-body .poster-card.flash-highlight {
+  transform: scale(1.02) !important;
+  z-index: 50 !important;
+  overflow: visible !important;
+  /* THE FIX: Forces the card to let the glowing shadow escape! */
+  animation: cardBgPulse 4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* THE FIX: Keeps the top corners of the movie poster perfectly rounded when overflow becomes visible */
+body.dashboard-body .poster-card>div:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+@keyframes cardBgPulse {
+  0% {
+    background-color: var(--bg-card);
+  }
+
+  10%,
+  85% {
+    background-color: rgba(0, 85, 255, 0.1);
+  }
+
+  100% {
+    background-color: var(--bg-card);
+  }
+}
+
+/* The Ghost Element projects the shadow/border, bypassing the !important blockers! */
+body.dashboard-body .poster-card.flash-highlight::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  /* Pulls outward just enough to cover the thick Neo-brutalist borders */
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+  animation: cardShadowPulse 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardShadowPulse {
+  0% {
+    box-shadow: 0 0 0 transparent;
+    border: 2px solid transparent;
+  }
+
+  10%,
+  85% {
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 10px 40px rgba(0, 85, 255, 0.8);
+    /* Massive Electric Blue volumetric glow */
+  }
+
+  100% {
+    box-shadow: 0 0 0 transparent;
+    border: 2px solid transparent;
+  }
+}
+
+/* 2. Tabular Row Flash */
+body.dashboard-body .tabular-row.flash-highlight {
+  transform: none !important;
+  z-index: 50 !important;
+  animation: rowPulse 4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes rowPulse {
+  0% {
+    background-color: transparent;
+    border-left-color: transparent;
+  }
+
+  10%,
+  85% {
+    background-color: rgba(0, 85, 255, 0.2);
+    border-left-color: var(--color-accent);
+  }
+
+  100% {
+    background-color: transparent;
+    border-left-color: transparent;
+  }
+}
+
+/* FOCUS MODE */
+body.is-flashing .poster-card:not(.flash-highlight),
+body.is-flashing .tabular-row:not(.flash-highlight) {
+  pointer-events: none !important;
+  opacity: 0.4 !important;
+  transition: opacity 0.5s ease;
+}
+
+/* ============================================================
+   BUTTERY SMOOTH OVERVIEW CARD SCALE
+   ============================================================ */
+
+.movie-grid .poster-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease !important;
+}
+
+body.dashboard-body .movie-grid .poster-card:hover {
+  transform: scale(1.03) !important;
+  z-index: 10 !important;
+}
+
+body.dashboard-body[data-theme="light"] .movie-grid .poster-card:hover {
+  box-shadow:
+    0 0 0 2px rgba(0, 85, 255, 0.4),
+    0 15px 35px rgba(0, 85, 255, 0.12) !important;
+  outline: none !important;
+}
+
+body.dashboard-body[data-theme="dark"] .movie-grid .poster-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.6) !important;
+  outline: none !important;
+}
+
+/* ============================================================
+   ACCOUNT SETTINGS POLISH
+   ============================================================ */
+.avatar-upload-wrapper:hover .avatar-overlay {
+  opacity: 1 !important;
+}
+
+.danger-zone button:hover {
+  background: var(--color-danger) !important;
+  color: #FFFFFF !important;
+}
+
+/* ============================================================
+   PARALLAX CARD STACKING & MOBBIN FOOTER REVEAL
+   ============================================================ */
+
+/* 1. The Main Wrapper (The Giant 'Card' containing the whole page) */
+.parallax-wrapper {
+  position: relative;
+  z-index: 2;
+  background-color: var(--bg-page);
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+  overflow: visible;
+  /* THE FIX 1: Toned down shadow for Light Mode + added crisp border */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--color-border);
+  transition: margin-bottom 0.1s ease;
+}
+
+[data-theme="dark"] .parallax-wrapper {
+  /* THE FIX 1: Much softer, elegant shadow for Dark Mode + crisp edge */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Fix: Ensures the bottom-most section respects the wrapper's curves */
+.footer-signup-section {
+  background-color: transparent !important;
+}
+
+/* 2. The Mobbin Footer (Stationary underneath) */
+.parallax-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  border-radius: 0 !important;
+  /* Flat bottom */
+}
+
+/* THE FIX 2: The Magic Backdrop. 
+   This shoots a 100vh block of the footer's background color straight UP the screen behind the wrapper, perfectly masking the body background so the curved corners always look flawless! */
+.parallax-footer::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-primary);
+  /* Matches your footer background */
+  z-index: -1;
+}
+
+/* ============================================================
+   THE ULTIMATE PARALLAX CURVE & DOUBLE-BORDER FIX
+   ============================================================ */
+
+/* 1. HOME & HUB: Force overflow hidden so the corners actually clip! */
+main.parallax-wrapper:not(:has(#prediction-results-view)) {
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+  overflow: hidden !important;
+}
+
+/* 2. PREDICTION PAGE: Make the outer wrapper a complete ghost. 
+      This kills the square background and the double border! */
+main:has(#prediction-results-view) {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* 3. PREDICTION PANELS: Apply the curves, borders, and shadows ONLY to the bottom-most panels */
+#blank-slate-view,
+.content-slider {
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+  overflow: hidden !important;
+  background-color: var(--bg-page) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Dark mode subtle glow adjustment for the bottom line */
+[data-theme="dark"] #blank-slate-view,
+[data-theme="dark"] .content-slider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 3. PREDICTION PANELS: Apply the curves, borders, and shadows ONLY to the bottom-most panels */
+#blank-slate-view,
+.content-slider {
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+  overflow: hidden !important;
+  background-color: var(--bg-page) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+
+  /* THE FIX: Force the container to ALWAYS stretch to the bottom of the screen! */
+  min-height: 200vh !important;
+}
+
+/* ============================================================
+   UX POLISH: THE SIDE DRAWER & ID CARD
+   ============================================================ */
+
+/* The Full-Screen Blur Overlay */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* The Physical Drawer */
+.side-drawer {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 100%;
+  max-width: 340px;
+  height: 100vh;
+  background: var(--bg-card);
+  z-index: 9999;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .side-drawer {
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.side-drawer.active {
+  right: 0;
+}
+
+.drawer-header {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.drawer-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* The Links */
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.drawer-link:hover {
+  background: rgba(0, 85, 255, 0.1);
+  color: var(--color-accent-hover);
+  transform: translateX(4px);
+}
+
+.drawer-link i {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* ============================================================
+   THE LAB: HERO GLASSMORPHISM
+   ============================================================ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+  padding: 32px;
+}
+
+/* Dark Mode Premium Glass */
+[data-theme="dark"] .glass-panel {
+  background: rgba(15, 23, 42, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ============================================================
+   UX POLISH: LIGHT MODE HIGH CONTRAST (ANTI-WHITEWASH)
+   ============================================================ */
+
+/* THE FIX: Forces deep, readable text on white backgrounds in Light Mode */
+[data-theme="light"] .glass-panel,
+[data-theme="light"] .form-content {
+  color: #111827 !important;
+  /* Deep Slate Black */
+}
+
+/* THE FIX: Boosts visibility of secondary text and buttons */
+[data-theme="light"] .pred-action-btn,
+[data-theme="light"] .text-muted,
+[data-theme="light"] .meta,
+[data-theme="light"] .small {
+  color: #374151 !important;
+  /* Dark Charcoal Gray */
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .form-content h1,
+[data-theme="light"] .form-content label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* Ensures primary buttons never look washed out */
+[data-theme="light"] button[type="submit"] {
+  font-weight: 800 !important;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   THE LAB: LIGHT MODE POLISH & GLASS ENFORCEMENT
+   ============================================================ */
+
+/* 1. Strip solid backgrounds from the columns so the glass panel handles the blur! */
+.pred-dash-root.glass-panel .pred-poster-col,
+.pred-dash-root.glass-panel .pred-info-col,
+.pred-dash-root.glass-panel .pred-sidebar-col {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 2. Anti-Whitewash: Deep contrast for buttons in Light Mode */
+[data-theme="light"] .pred-action-btn {
+  color: #E0E1DD !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .pred-action-btn i {
+  color: #E2E8F0;
+}
+
+/* Overrides for active success/danger states in light mode */
+[data-theme="light"] .pred-action-btn[style*="color: var(--color-success)"],
+[data-theme="light"] .pred-action-btn[style*="color: var(--color-success)"] i {
+  color: var(--color-success) !important;
+  /* Deeper green for light mode readability */
+}
+
+[data-theme="light"] .pred-action-btn[style*="color: var(--color-danger)"],
+[data-theme="light"] .pred-action-btn[style*="color: var(--color-danger)"] i {
+  color: var(--color-danger) !important;
+  /* Deeper red for light mode readability */
+}
+
+/* ============================================================
+   THE LAB: HIGH CONTRAST & HOVER POLISH
+   ============================================================ */
+
+/* 2. Fix Genre Pills and Badges on Light Glass (Removes Solid White) */
+[data-theme="light"] .glass-panel .genre-pill,
+[data-theme="light"] .glass-panel .badge {
+  background: rgba(0, 0, 0, 0.3) !important;
+  color: #E0E1DD !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  font-weight: 800 !important;
+}
+
+/* 3. Deepen the Meta Text so it doesn't wash out */
+[data-theme="light"] .glass-panel .meta,
+[data-theme="light"] .glass-panel .small {
+  color: #374151 !important;
+  font-weight: 700 !important;
+}
+
+/* 4. Ensure the dynamic title doesn't wash out */
+[data-theme="light"] .glass-panel h1,
+[data-theme="light"] .glass-panel #dyn-year {
+  color: #000000 !important;
+}
+
+/* ============================================================
+   THE LAB: UX BUG FIXES & LIGHT MODE POLISH
+   ============================================================ */
+
+/* 1. Kill Horizontal Scroll Bug globally */
+body {
+  overflow-x: hidden;
+}
+
+/* 2. Stop Button Size Jitter & Overlap Fix */
+.pred-action-btn {
+  flex: 1;
+  /* THE FIX: Forces all 3 buttons to share the space equally */
+  white-space: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  padding: 12px 8px;
+  /* Tighter padding */
+  font-size: 12px;
+  /* Scales down to fit perfectly */
+  transition: all 0.2s ease;
+}
+
+/* 5. Inline Search Bar Polish for Light Mode */
+.search-bar-inline input::placeholder {
+  color: var(--color-secondary);
+}
+
+[data-theme="light"] .search-bar-inline input {
+  color: #111827 !important;
+}
+
+/* 3. Light Mode Trending Pill Fix (Deep Amber contrast) */
+[data-theme="light"] #dyn-trending-pill {
+  background: rgba(217, 119, 6, 0.1) !important;
+  color: #B45309 !important;
+  /* Deep Amber */
+  border: 1px solid rgba(217, 119, 6, 0.5) !important;
+}
+
+/* 4. Light Mode 'Already Tracking' High Contrast Fix */
+[data-theme="light"] .pred-watchlist-btn.tracked {
+  background: rgba(10, 150, 70, 0.5) !important;
+  color: #0A5C36 !important;
+  /* Deep Emerald Green */
+  border: 2px solid #047857 !important;
+  /* Distinct Border! */
+  font-weight: 800;
+}
+
+/* ============================================================
+   THE LAB: ASYMMETRIC GRIDS & NEO-BRUTALISM
+   ============================================================ */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.grid-65-35 {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-65-35 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Neo-Brutalism Search Bar (Light Mode) */
+[data-theme="light"] .neo-brutalist {
+  border: 2px solid #111827 !important;
+  box-shadow: 4px 4px 0px rgba(17, 24, 39, 0.9) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+[data-theme="light"] .neo-brutalist:focus-within {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(17, 24, 39, 0.9) !important;
+}
+
+/* THE FIX: Stretches the adjustments to fill the 35% column evenly */
+.grid-65-35 .stack {
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* ============================================================
+   THE LAB: SHOWDOWN V2 & PHYSICS LOCKS
+   ============================================================ */
+
+/* 1. Stop Meta Button Jitter (Absolute lock) */
+.action-buttons-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  justify-content: center;
+}
+
+.action-buttons-wrapper .pred-action-btn {
+  flex: 1;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. Slider Bottom Curve Override */
+.content-slider {
+  border-bottom-left-radius: 48px !important;
+  border-bottom-right-radius: 48px !important;
+  /* Allow horizontal overflow so card shadows are not clipped while
+     still preventing vertical bleed when needed */
+  overflow-x: visible;
+  overflow-y: hidden;
+  background: var(--bg-page);
+}
+
+/* 3. Showdown V2 Alternate Alignment Classes */
+.verdict-card {
+  border-left: 4px solid var(--color-success);
+  text-align: left;
+  align-items: flex-start;
+}
+
+/* ============================================================
+   THE LAB: 35-65 GRID & ACTIVE HOVER LOCK
+   ============================================================ */
+
+/* 1. The 35-65 Showdown Split */
+.grid-35-65 {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .grid-35-65 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   THE LAB: FINAL EDGE CASE POLISH
+   ============================================================ */
+
+/* 1. Omni-Search Dropdown Polish */
+#pred-search-dropdown {
+  z-index: 99999 !important;
+  max-height: 250px;
+  /* Limits height exactly to the top of stat cards */
+  overflow-y: auto;
+  background: var(--bg-page) !important;
+  /* Forces solid background */
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. Bulletproof Active Button Hover */
+/* Only buttons WITHOUT the 'active-voted' class get the blue hover */
+[data-theme="light"] .pred-action-btn:not(.active-voted):hover {
+  color: var(--color-accent-hover) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="light"] .pred-action-btn:not(.active-voted):hover i {
+  color: var(--color-accent-hover) !important;
+}
+
+/* Active buttons keep their success/danger colors on hover */
+.pred-action-btn.active-voted:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05) !important;
+}
+
+#dyn-synopsis a:hover {
+  color: var(--color-accent-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* ============================================================
+   THE LAB: LIGHT MODE HERO STATS & POLISH
+   ============================================================ */
+
+/* 1. Darken the Hero Sidebar cards in Light Mode for text readability */
+[data-theme="light"] .pred-sidebar-col .pred-credibility-stamp,
+[data-theme="light"] .pred-sidebar-col .pred-stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .pred-sidebar-col .small,
+[data-theme="light"] .pred-sidebar-col .meta {
+  color: #d1d5db !important;
+}
+
+/* ============================================================
+   THE LAB: COLLAPSIBLE SECTIONS & SEARCH UI
+   ============================================================ */
+
+/* 1. Search Item Right Icon */
+.search-right-icon {
+  color: var(--color-tertiary);
+  /* Base color moved to CSS */
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.search-item:hover .search-right-icon {
+  color: var(--color-accent-hover) !important;
+  transform: translateX(4px);
+}
+
+/* THE FIX: Changed to .active to match your script.js keyboard logic */
+.search-item.active-search-item .search-right-icon {
+  color: var(--color-accent-hover) !important;
+  transform: translateX(4px);
+}
+
+/* 2. Enterprise Collapsible Grid (Standardized Width Lock) */
+.collapse-trigger {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
+}
+
+.collapse-trigger:hover {
+  opacity: 0.8;
+}
+
+.collapse-icon {
+  transition: transform 0.3s ease;
+}
+
+.collapse-icon.collapsed {
+  transform: rotate(-90deg);
+}
+
+.collapsible-grid {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Keeps grid at normal width */
+}
+
+.collapsible-grid.collapsed {
+  grid-template-rows: 0fr;
+}
+
+.collapsible-inner {
+  overflow: hidden;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   CINEMATIC AMBIENT CROSSFADE SLIDER
+   ============================================================ */
+.cinematic-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-card);
+  /* Fallback color */
+}
+
+.cinematic-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  /* Slow, elegant 1.5s fade */
+  z-index: 0;
+}
+
+.cinematic-slider img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* --- AMBIENT HERO OVERLAYS --- */
+/* Light Mode (Cool frosted glass) */
+[data-theme="light"] .hero-ambient-overlay {
+  background: linear-gradient(rgba(72%, 79%, 89%, 0.6) 0%, rgba(211, 211, 211, 0.9) 70%);
+}
+
+/* Dark Mode (Deep slate melt) */
+[data-theme="dark"] .hero-ambient-overlay {
+  background:
+    linear-gradient(rgba(13, 27, 42, 0.70) 0%, rgba(13, 27, 42, 0.90) 90%);
+}
+
+/* ============================================================
+   CINEMATIC POSTER CARDS (Prediction Page)
+   ============================================================ */
+.poster-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 2/3;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-border);
+  background: var(--bg-card);
+}
+
+.poster-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.poster-card:hover img {
+  transform: scale(1.08);
+}
+
+/* The dark glass overlay that slides up/fades in on hover */
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 25, 44, 0.98) 0%, rgba(11, 25, 44, 0.8) 40%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.poster-card:hover .poster-overlay {
+  opacity: 1;
+}
+
+.poster-data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.poster-data-row:last-child {
+  border-bottom: none;
+}
+
+.poster-data-val {
+  font-weight: 700;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+/* ============================================================
+   ABSOLUTE BUTTON COLOR OVERRIDES (Fix for Light Mode Text Hijacking)
+   ============================================================ */
+
+.nav-button-primary,
+.hero-btn,
+#signupBtn,
+.form button[type="submit"],
+[data-theme="light"] .nav-button-primary,
+[data-theme="light"] .hero-btn,
+[data-theme="light"] #signupBtn,
+[data-theme="light"] .form button[type="submit"] {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  /* Catches stubborn Safari/Chrome overrides */
+}
+
+/* Ensure the login button outline version behaves correctly */
+[data-theme="light"] #loginBtn {
+  color: var(--color-primary) !important;
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   HOME PAGE FAQ PLUS/CROSS ANIMATION (SMOOTH SCALE)
+   ============================================================ */
+.faq-container .collapse-icon {
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+  /* We animate transform and color ONLY. Hardware accelerated. */
+  font-size: 20px !important;
+  /* Locks base size so it never recalculates layout */
+  transform-origin: center;
+}
+
+/* 1. OPEN STATE ('x'): Rotated, Scaled Down to 75%, Amber */
+.faq-container .collapse-icon:not(.collapsed) {
+  transform: rotate(45deg) scale(0.75);
+  color: var(--color-warning) !important;
+}
+
+/* 2. CLOSED STATE ('+'): Straight, Full Size (100%), Blue */
+.faq-container .collapse-icon.collapsed {
+  transform: rotate(0deg) scale(1);
+  color: var(--color-accent) !important;
+}
+
+/* ============================================================
+   CONTEXT MENU WARNING HOVER (DARK AMBER & WHITEWASH FIX)
+   ============================================================ */
+#context-menu li#ctx-nominate:hover,
+#context-menu li#ctx-locked-msg:hover {
+  background-color: rgba(180, 83, 9, 0.15) !important;
+  /* Dark Amber Background */
+  color: #d97706 !important;
+  /* Dark Amber Text */
+}
+
+/* THE FIX: Stop the icon from turning white in Light Mode */
+#context-menu li#ctx-nominate:hover i,
+#context-menu li#ctx-locked-msg:hover i {
+  color: #d97706 !important;
+}
+
+#context-menu li#ctx-flex:hover {
+  color: #E0E1DD !important;
+}
+
+/* ============================================================
+   WATCHLIST BUTTON HOVER STATES (INDUSTRY STANDARD)
+   ============================================================ */
+.pred-watchlist-btn .hover-show {
+  display: none;
+}
+
+.pred-watchlist-btn .normal-show {
+  display: inline-block;
+}
+
+/* When tracked and hovered: Turn Red and swap text */
+.pred-watchlist-btn.tracked:hover {
+  background: rgba(213, 0, 0, 0.5) !important;
+  border-color: var(--color-danger) !important;
+  color: var(--color-danger) !important;
+}
+
+.pred-watchlist-btn.tracked:hover .normal-show {
+  display: none;
+}
+
+.pred-watchlist-btn.tracked:hover .hover-show {
+  display: inline-block;
+}
+
+/* ============================================================
+   GLOBAL CINEMATIC PAGE LOADER (Supersized 2-Frame Loop)
+   ============================================================ */
+.global-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-page);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.global-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-frame {
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- FRAME 1: CLAPPERBOARD (Doubled Scale) --- */
+.clapperboard-loader {
+  position: relative;
+  width: 120px;
+  /* Scaled up from 60px */
+  height: 100px;
+  /* Scaled up from 50px */
+  filter: drop-shadow(0 0 30px rgba(0, 85, 255, 0.6));
+}
+
+.clapper-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  /* Scaled */
+  background: var(--color-accent);
+  border: 2px solid var(--color-border);
+  /* Thicker border */
+  border-radius: 8px;
+  /* Smoother corners */
+}
+
+.clapper-stick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  /* Scaled */
+  /* Thicker stripes for the bigger stick */
+  background: repeating-linear-gradient(-45deg, var(--color-accent), var(--color-accent) 16px, #0B132B 16px, #0B132B 32px);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  transform-origin: bottom left;
+  animation: snapStick 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite;
+}
+
+@keyframes snapStick {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(-35deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* --- FRAME 2: FILM STRIP (Doubled Scale + Holes Fixed) --- */
+.film-strip-loader {
+  position: relative;
+  width: 92px;
+  /* Scaled up from 46px */
+  height: 128px;
+  /* Scaled up from 64px */
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-border);
+  /* Thicker border */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 85, 255, 0.6);
+}
+
+/* THE FIX: Using var(--bg-page) to punch transparent-looking holes! */
+.film-strip-loader::before,
+.film-strip-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 12px;
+  /* Wider holes */
+  height: 200%;
+  /* Doubled the spacing of the gradient to match the scale */
+  background-image: repeating-linear-gradient(#0b132b 0px, #0b132b 12px, transparent 12px, transparent 24px);
+  animation: rollFilm 0.4s linear infinite;
+}
+
+.film-strip-loader::before {
+  left: 8px;
+}
+
+/* Pushed inward */
+.film-strip-loader::after {
+  right: 8px;
+}
+
+/* Pushed inward */
+
+.film-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0b132b;
+  font-size: 36px;
+  /* Massive play button */
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 85, 255, 0.8));
+}
+
+@keyframes rollFilm {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-24px);
+  }
+
+  /* Must exactly match the new 24px gradient cycle length! */
+}
+
+/* --- THE TEXT (Scaled) --- */
+.loader-text-cinematic {
+  margin-top: 32px;
+  /* Adds breathing room below massive icons */
+  font-size: 18px;
+  /* Scaled up */
+  color: var(--color-primary);
+  letter-spacing: 6px;
+  /* Wider tracking */
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(0, 85, 255, 0.4);
+  animation: pulseText 1s infinite alternate;
+}
+
+@keyframes pulseText {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   PREDICTION PAGE UI (Blank Slate & Autocomplete)
+   ============================================================ */
+
+/* Massive Cinematic Search */
+/* ============================================================
+   COMPONENT: CINEMORPH SEARCH (Premium Glassmorphism)
+   ============================================================ */
+
+.cinemorph-search-wrapper, .hero-search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 16px !important;
+  z-index: 90;
+  transition: max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* THE MAGIC: Smooth, spring-like expansion */
+.cinemorph-search-wrapper:focus-within, .hero-search-wrapper:focus-within {
+  max-width: 750px;
+}
+
+/* THE MAGIC: Looping Border Glow Wrapper */
+.massive-search-container, .hero-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(10, 20, 35, 0.2); /* Muted Dark */
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  padding: 8px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden; /* Clips the rotating glow */
+}
+
+/* Theme Obedience: Light Mode White-Glass */
+[data-theme="light"] .massive-search-container, 
+[data-theme="light"] .hero-search-container {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* Modern CSS Property for Rotating Gradients */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rotate-border {
+  from { --border-angle: 0deg; }
+  to { --border-angle: 360deg; }
+}
+
+/* Pseudo-element for the Looping Glow - MASK TRICK NO WAVES */
+.massive-search-container::before, .hero-search-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 48px;
+  padding: 2.2px; /* THE FIX: Reverted to precision 2.2px thickness */
+  background: conic-gradient(from var(--border-angle, 0deg) at 50% 50%, transparent 40%, var(--color-accent) 55%, transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.massive-search-container:focus-within::before, .hero-search-container:focus-within::before {
+  opacity: 1 !important;
+  animation: rotate-border 4s linear infinite;
+}
+
+/* Inner Overlay for True Glassmorphism */
+.massive-search-container::after, .hero-search-container::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* Fully covers container */
+  background: rgba(0, 0, 0, 0.4); 
+  border-radius: 48px;
+  z-index: -1;
+  pointer-events: none;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+[data-theme="light"] .massive-search-container::after, 
+[data-theme="light"] .hero-search-container::after {
+  background: rgba(0, 0, 0, 0.4) !important; /* THE FIX: User requested 0,0,0,0.3 */
+}
+
+.massive-search-container:focus-within, .hero-search-container:focus-within {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 85, 255, 0.8) !important;
+  box-shadow: 0 0 40px rgba(0, 85, 255, 0.4), 0 20px 40px rgba(0,0,0,0.5) !important;
+  transform: scale(1.02);
+}
+
+.hero-search-container:focus-within {
+  border-color: rgba(0, 85, 255, 0.6);
+  box-shadow: 0 0 50px rgba(0, 85, 255, 0.3), 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.massive-search-container > *, .hero-search-container > * {
+  position: relative;
+  z-index: 2; /* Stay above the glow/inner overlay */
+}
+
+.massive-search-container i, .hero-search-container i {
+  color: var(--color-secondary);
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+/* Theme Obedience: Darker icons in light mode */
+[data-theme="light"] .massive-search-container i, 
+[data-theme="light"] .hero-search-container i {
+  color: var(--color-primary);
+}
+
+.massive-search-container:focus-within i, .hero-search-container:focus-within i {
+  color: var(--color-accent) !important;
+}
+
+.massive-search-container input, .hero-search-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-size: 18px;
+  padding: 16px;
+  outline: none;
+}
+
+.massive-search-container input:focus, .hero-search-container input:focus {
+  color: #FFFFFF !important;
+}
+
+.massive-search-container input::placeholder, .hero-search-container input::placeholder {
+  color: var(--color-secondary);
+  opacity: 0.7;
+}
+
+.massive-search-container input:focus::placeholder, .hero-search-container input:focus::placeholder {
+  color: #FFFFFF;
+  opacity: 0.4 !important;
+}
+
+/* HUB SPOTLIGHT FOCUS MECHANIC */
+.hub-search-focus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.hub-search-focus-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card-spotlight {
+  z-index: 1000 !important;
+  position: relative !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 0 4px var(--color-accent), 0 0 80px var(--color-accent) !important;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Fallback for components like Flip-Cards which might break on transform */
+.flip-card.card-spotlight .flip-card-inner {
+  box-shadow: 0 0 0 4px var(--color-accent), 0 0 80px var(--color-accent) !important;
+}
+
+/* Tabular Row Spotlight - ACCENT BLUE GLOW & No Scale */
+.tabular-row.card-spotlight {
+  transform: none !important; /* THE FIX: Explicitly prevents scaling on Watchlist rows */
+  border-radius: 8px;
+  background: var(--bg-card) !important;
+  box-shadow: 0 0 0 3px var(--color-accent), 0 0 50px rgba(0, 85, 255, 0.7) !important;
+}
+
+/* SPA VIEW TRANSITIONS - SWIPE ANIMATION */
+#prediction-results-view, #blank-slate-view {
+  /* THE FIX: Smooth out transition to be buttery (1s delay) */
+  transition: all 1.0s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Swipe Left/Fade for Home View */
+#blank-slate-view.view-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+  transform: translateX(-50px) !important;
+}
+
+/* Swipe Right exit for Results View */
+#prediction-results-view.view-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+  transform: translateX(100vw) !important; 
+}
+
+.view-visible {
+  opacity: 1 !important;
+  pointer-events: auto;
+  transform: translateX(0) !important;
+}
+
+/* Autocomplete Menu */
+.autocomplete-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 16px !important;
+  list-style: none;
+  padding: 8px;
+  margin: 0;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.autocomplete-menu.hidden {
+  display: none;
+}
+
+.autocomplete-menu li {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+
+/* ============================================================
+   AUTOCOMPLETE DROPDOWN INTERACTION PHYSICS
+   ============================================================ */
+
+/* 1. Light Mode Background (Soft blue) */
+.autocomplete-menu li:hover,
+.autocomplete-menu li.selected {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 6px;
+  background: rgba(0, 85, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.autocomplete-menu li.selected {
+  border-left: 4px solid var(--color-accent) !important;
+  padding-left: 6px;
+  /* Adjust padding to accommodate the border */
+}
+
+/* 2. THE FIX: Dark Mode Background (Premium translucent grey) */
+/* Notice the SPACE between [data-theme="dark"] and .autocomplete-menu! */
+html[data-theme="dark"] .autocomplete-menu li:hover,
+html[data-theme="dark"] .autocomplete-menu li.selected {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 3. The Highlight Physics (Title & Right Icon) */
+.autocomplete-menu li:hover span:first-of-type,
+.autocomplete-menu li.selected span:first-of-type,
+.autocomplete-menu li:hover i,
+.autocomplete-menu li.selected i {
+  color: var(--color-accent) !important;
+  opacity: 1 !important;
+  /* Snaps the faded icon to full visibility */
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+
+
+/* Trending Posters (Medium Cinema Size) */
+.trending-poster {
+  width: 300px;
+  /* Scaled up from 130px */
+  height: auto;
+  /* Scaled up from 195px to maintain 2:3 ratio */
+  object-fit: cover;
+  border-radius: 12px;
+  /* Slightly softer corners for larger size */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trending-poster:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0, 85, 255, 0.4);
+  border-color: var(--color-accent);
+}
+
+/* Mobile Scaling for Posters */
+@media (max-width: 768px) {
+  .trending-poster {
+    width: 120px;
+    /* Scaled up from 100px */
+    height: 180px;
+    /* Scaled up from 150px */
+  }
+}
+
+/* ============================================================
+   PREDICTION UI: MICRO-INTERACTIONS
+   ============================================================ */
+
+/* The Breathing Search Bar (Center-Anchored) */
+.breathing-search {
+  max-width: 600px;
+  /* Starts short */
+  margin: 0 auto;
+  /* Forces center alignment at all times */
+  transform: translateY(0);
+  /* THE FIX: Slower, more elegant 0.65s transition targeting max-width */
+  transition: max-width 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.breathing-search:focus-within {
+  max-width: 700px;
+  /* Expands smoothly outward from both sides */
+  transform: translateY(-4px);
+  /* Pushed up slightly */
+}
+
+.brething-search:focus-within ::placeholder,
+.brething-search:focus-within input {
+  color: #E0E1DD !important;
+}
+
+/* Premium CTA Button Hovers */
+.interactive-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 85, 255, 0.4);
+}
+
+
+.interactive-outline {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-outline:hover {
+  background: rgba(211, 211, 211, 0.05) !important;
+  transform: translateY(-3px);
+  border-color: #fff !important;
+  color: var(--color-accent) !important;
+}
+
+[data-theme="light"] .interactive-outline:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-3px);
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  color: var(--color-accent-hover) !important;
+}
+
+/* ============================================================
+   PREDICTION PAYWALL & LOADER PHYSICS
+   ============================================================ */
+
+/* 1. The Blur Effect for Unlogged Users */
+.content-blurred {
+  filter: blur(12px) brightness(0.4) grayscale(0.3);
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.5s ease;
+}
+
+/* 2. The Paywall Lock Screen Positioning */
+.paywall-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  /* THE FIX: pointer-events: none allows the user to use their scroll wheel 
+       on the background even while the overlay covers the whole screen! */
+  pointer-events: none;
+}
+
+.paywall-overlay.hidden {
+  display: none !important;
+}
+
+/* Paywall Card Aesthetics */
+.paywall-card {
+  /* THE FIX: Sticky positioning forces the card to glide down the screen as they scroll */
+  position: sticky;
+  top: 20vh;
+  margin: 0 auto;
+  /* Centers the card horizontally */
+
+  /* THE FIX: Re-enables clicks specifically for the card so buttons still work */
+  pointer-events: auto;
+
+  background: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 85, 255, 0.2) inset;
+  animation: floatUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.paywall-icon-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0, 85, 255, 0.1);
+  border: 2px solid var(--color-warning);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0 auto;
+  box-shadow: 0 0 20px rgba(200, 150, 18, 0.4);
+}
+
+.paywall-icon {
+  font-size: 24px;
+  color: var(--color-warning);
+}
+
+.paywall-card h3 {
+  font-size: 24px;
+  color: #FFF;
+  margin-bottom: 12px;
+}
+
+.paywall-card p {
+  color: var(--color-tertiary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* 3. The Gauge Loader Ignition State */
+#splash-loader.active {
+  display: flex !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  visibility: visible !important;
+}
+
+/* THE FIX: Bulletproof Slider Tracks */
+input[type=range].algo-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  /* Fallback empty track */
+  margin: 10px 0;
+}
+
+/* Chrome/Safari/Edge Track */
+input[type=range].algo-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  /* Magic: CSS uses variables injected by JS to paint ONLY the track */
+  background: linear-gradient(to right, var(--track-color, #10B981) var(--fill-percent, 50%), rgba(148, 163, 184, 0.2) var(--fill-percent, 50%));
+}
+
+/* Firefox Track */
+input[type=range].algo-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--track-color, #10B981) var(--fill-percent, 50%), rgba(148, 163, 184, 0.2) var(--fill-percent, 50%));
+}
+
+/* The Thumb */
+input[type=range].algo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFF;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: -5px;
+  /* Centers thumb vertically on the track */
+  position: relative;
+  z-index: 10;
+}
+
+/* ============================================================
+   THE INVISIBLE WALL FIX (Killing Parallax Margins on Short Pages)
+   ============================================================ */
+
+/* ============================================================
+   THE PERFECT PARALLAX BALANCE (Restoring the Footer Gap)
+   ============================================================ */
+
+/* 1. We remove the margin override here so your footer's "window" is restored! */
+/* ============================================================
+   THE INTELLIGENT FLEX CHAIN (Conditional Stretch)
+   ============================================================ */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main.dashboard-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* JavaScript now controls visibility — no display:none !important wars */
+#prediction-results-view {
+  flex: 1;
+  flex-direction: column;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.content-slider {
+  width: 100%;
+  min-height: auto; /* Default: Fits content perfectly for Blank State */
+  transition: all 0.3s ease;
+}
+
+/* ONLY stretches when the Results View is the one being displayed */
+main:has(#prediction-results-view[style*="display: block"]) .content-slider {
+  min-height: calc(100vh - 80px) !important;
+}
+
+main:has(#prediction-results-view:not([style*="display: none"])) .content-slider {
+  flex: 1 !important;
+  min-height: calc(100vh - 80px) !important;
+}
+
+/* ============================================================
+   BLANK STATE PROPORTION FIX (The Final Polish)
+   ============================================================ */
+
+#blank-slate-view {
+  justify-content: flex-start !important;
+  padding-top: 30vh !important;
+  padding-bottom: 64px !important;
+  min-height: auto !important; /* Override the hardcoded inline 100vh */
+}
+
+#blank-slate-sub {
+  margin-bottom: 24px !important;
+}
+
+#state-trending-posters {
+  margin-top: 16px !important;
+}
+
+/* Force the Poster Track to wrap beautifully */
+#blank-slate-trending-track {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 10px !important;
+}
+
+/* THE CARD CONTAINER (Strict boundaries) */
+#blank-slate-trending-track > * {
+  display: block !important;
+  width: 160px !important;
+  height: 240px !important;
+  flex-shrink: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) !important;
+  background: #0B192C !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+/* Desktop sizing — 260x390 as requested */
+@media (min-width: 1024px) {
+  #blank-slate-trending-track > * {
+    width: 240px !important;
+    height: 360px !important;
+  }
+}
+
+/* Hover Effect on the Card Container */
+#blank-slate-trending-track > *:hover {
+  transform: translateY(-8px) scale(1.05) !important;
+  box-shadow: 0 20px 40px rgba(0, 85, 255, 0.4) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* THE IMAGE BEHAVIOR (Liquid Fill) */
+#blank-slate-trending-track > * img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ============================================================
+   HOVER OVERLAY TYPOGRAPHY BUMP
+   ============================================================ */
+#blank-slate-trending-track > * h3,
+#blank-slate-trending-track > * h4,
+#blank-slate-trending-track > * strong {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 6px !important;
+}
+
+#blank-slate-trending-track > * p,
+#blank-slate-trending-track > * span,
+#blank-slate-trending-track > * div {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+#blank-slate-trending-track > * i {
+  font-size: 14px !important;
+}
+
+/* ============================================================
+   BACK BUTTON HOVER POLISH
+   ============================================================ */
+#back-to-lab button:hover {
+  background: rgba(0, 85, 255, 0.2) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 85, 255, 0.3) !important;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS FIX FOR PREDICTION DASHBOARD
+   ============================================================ */
+@media (max-width: 768px) {
+    .pred-dash-root {
+        flex-direction: column !important;
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+
+    .pred-dash-root > .glass-panel {
+        width: 100% !important;
+    }
+
+    .pred-poster-col, .pred-info-col, .pred-sidebar-col {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS FIX FOR PREDICTION DASHBOARD
+   ============================================================ */
+@media (max-width: 768px) {
+    .pred-dash-root {
+        flex-direction: column !important;
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+    
+    .pred-dash-root > .glass-panel {
+        width: 100% !important;
+    }
+
+    .pred-poster-col, .pred-info-col, .pred-sidebar-col {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+}
+
+/* ============================================================
+   LIHO OPTIMIZATIONS: MOBILE RESPONSIVENESS & SPARKLINES
+   ============================================================ */
+
+/* Mobile Stacking for Dashboards */
+@media (max-width: 768px) {
+  .pred-dash-root {
+    flex-direction: column !important;
+    padding: 16px !important;
+  }
+  
+  .glass-panel .row, 
+  .glass-panel .row-between {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+  
+  .metric-card-wrapper {
+    flex: 1 1 100% !important;
+  }
+}
+
+/* Sparkline Animation Geometry */
+.sparkline-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawSparkline 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes drawSparkline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

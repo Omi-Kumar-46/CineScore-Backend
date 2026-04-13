@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CineScore</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Favicon.png">
+
+    <link rel="stylesheet" href="Base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <style>
+        /* PAGE SPECIFIC STYLES: Social Hovers (Inverted Colorism) */
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: transparent;
+            font-size: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .social-btn.linkedin {
+            color: #0077b5;
+            border: 2px solid #0077b5;
+        }
+
+        .social-btn.linkedin:hover {
+            background: #0077b5;
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 119, 181, 0.3);
+            transform: scale(1.1);
+        }
+
+        .social-btn.github {
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .social-btn.github:hover {
+            background: var(--color-primary);
+            color: var(--bg-card);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
+        }
+
+        .social-btn.website {
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+
+        .social-btn.website:hover {
+            background: var(--color-accent);
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 85, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .social-btn.insta {
+            color: #e1306c;
+            border: 2px solid #e1306c;
+        }
+
+        .social-btn.insta:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(220, 39, 67, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Email Hover */
+        .social-btn.email {
+            color: #ea4335;
+            border: 2px solid #ea4335;
+        }
+
+        .social-btn.email:hover {
+            background: #ea4335;
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(234, 67, 53, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Responsive fixes for Horizontal Cards */
+        @media (max-width: 768px) {
+            .horizontal-card {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+
+            .horizontal-card.reverse .text-content {
+                order: 2;
+                /* Forces text under image on mobile */
+                text-align: center !important;
+                align-items: center !important;
+            }
+
+            .horizontal-card.reverse .img-content {
+                order: 1;
+                /* Forces image on top on mobile */
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="global-page-loader" class="global-loader">
+
+        <div class="loader-frame clapperboard-loader" id="frame-1" style="display: none;">
+            <div class="clapper-stick"></div>
+            <div class="clapper-bottom"></div>
+        </div>
+
+        <div class="loader-frame film-strip-loader" id="frame-2" style="display: none;">
+            <i class="fa-solid fa-play film-play-icon"></i>
+        </div>
+
+        <h2 id="cinematic-loader-text" class="loader-text-cinematic"></h2>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="row-between">
+
+                    <a href="#" class="navlogo">
+                        <img id="nav-logo" class="logo" src="Assets/CineScore-Light.png" alt="CineScore">
+                    </a>
+
+                    <ul class="nav-links row">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Prediction.html">Predictions</a></li>
+                        <li><a href="Prediction.html">Features</a></li>
+                        <li><a href="About-Us.html" class="active">About Us</a></li>
+                    </ul>
+
+                    <div class="row" style="gap: 16px;">
+                        <div class="row auth-group" id="auth-buttons">
+                            <div>
+                                <a href="#" class="nav-link-login" id="nav-login-btn">Log In</a>
+                                <button class="small nav-button-primary" id="nav-signup-btn">Sign Up</button>
+                            </div>
+                        </div>
+
+                        <div class="user-menu-wrapper row" id="user-menu-wrapper"
+                            style="gap: 12px; align-items: center; justify-content: center;">
+
+                            <button id="nav-upgrade-btn" class="small nav-button-primary" style="margin-right: 4px;"
+                                onclick="triggerPaywallExplanation()">Upgrade to Pro</button>
+
+                            <div class="avatar-container"
+                                style="position: relative; display: flex; align-items: center;">
+                                <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" alt="User"
+                                    class="user-avatar" id="user-avatar-btn"
+                                    style="flex-shrink: 0; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">
+
+                                <div class="avatar-hover-card">
+                                    <p
+                                        style="font-size: 10px; color: var(--color-tertiary); text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px; font-weight: 700;">
+                                        CineScore Account</p>
+                                    <h4 class="profile-name-display"
+                                        style="margin: 0; font-size: 15px; color: var(--color-primary);">Omi Sir</h4>
+                                    <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--color-secondary);">
+                                        omi@cinescore.com</p>
+
+                                    <div id="hover-pro-badge"
+                                        style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                                        <span
+                                            style="color: var(--color-warning); font-size: 11px; font-weight: 800; letter-spacing: 0.5px;"><i
+                                                class="fa-solid fa-crown"></i> PRO MEMBER</span>
+                                    </div>
+                                </div>
+
+                                <ul class="avatar-dropdown" id="avatar-dropdown"
+                                    style="width: 280px; padding: 24px 20px;">
+                                    <li class="stack"
+                                        style="gap: 4px; margin-bottom: 16px; text-align: center; align-items: center;">
+
+                                        <img src="https://placehold.co/100x100/0055FF/FFFFFF?text=O" class="user-avatar"
+                                            style="width: 64px; height: 64px; margin-bottom: 8px;">
+
+                                        <h3 style="margin: 0; line-height: 1; font-size: 18px;"
+                                            class="profile-name-display">Omi Sir</h3>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 4px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Handle:</span>
+                                            <span class="small profile-handle-display"
+                                                style="color: var(--color-primary); font-weight: 700;">@omisir</span>
+                                        </div>
+
+                                        <div class="row" style="gap: 6px; justify-content: center; margin-top: 2px;">
+                                            <span class="small"
+                                                style="font-size: 10px; text-transform: uppercase; font-weight: 800;">Rank:</span>
+                                            <span class="meta"
+                                                style="color: var(--color-accent) !important; font-weight: 800;"><i
+                                                    class="fa-solid fa-star" style="font-size: 10px;"></i>
+                                                Studio Head</span>
+                                        </div>
+                                    </li>
+
+                                    <hr style="margin: 16px 0; border-color: var(--color-border);">
+                                    <li><a href="Hub.html#account"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                            Profile</a></li>
+                                    <li><a href="#" id="logout-btn" style="color: var(--color-danger);"><i
+                                                class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button id="theme-toggle" class="cinematic-toggle" aria-label="Toggle Theme">
+                            <div class="cinematic-thumb">
+                                <i class="fa-solid fa-play icon-play"></i>
+                                <i class="fa-solid fa-stop icon-pause"></i>
+                            </div>
+                        </button>
+
+                        <button class="icon-btn" id="drawer-toggle-btn"
+                            style="background: var(--color-primary); border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; color: var(--bg-page); cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="parallax-wrapper">
+
+        <section class="section"
+            style="position: relative; padding-top: 110px; padding-bottom: 110px; border-bottom: 1px dashed var(--color-border); overflow: hidden; min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+
+            <div class="cinematic-slider"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                <img src="Assets/About-Us-Hero-1.jpg" class="active" alt="Wide Cinema">
+                <img src="Assets/About-Us-Hero-2.jpg" alt="Film Grain">
+                <img src="Assets/About-Us-Hero-3.jpg" alt="Cinematic Overlay">
+                <img src="Assets/About-Us-Hero-4.jpg" alt="Projector Light">
+            </div>
+
+            <div class="hero-ambient-overlay"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div class="container stack" style="align-items: center; position: relative; z-index: 2;">
+                <span class="badge"
+                    style="background: var(--bg-page); color: var(--color-accent); border: 1px solid rgba(255,255,255,0.2); margin-bottom: 16px;">The
+                    Origin Story <i class="fa-solid fa-spider"></i></span>
+                <h1
+                    style="text-align: center; font-size: 64px; font-weight: 900; line-height: 1.2; margin-bottom: 24px; letter-spacing: -1.5px; color: var(--color-primary);">
+                    Where <span class="text-accent">Cinematic </span> Passion<br> meets <span
+                        class="text-accent">Predictive</span> Precision</h1>
+                <p class="text-block"
+                    style="text-align: center; font-size: 18px; color: var(--color-secondary); max-width: 800px; line-height: 1.6; margin: 0;">
+                    <i>CineScore isn't a corporate product. It is a passion project engineered to bridge the scattered
+                        market of global cinema with the absolute precision of data science. We harness the power of
+                        machine learning to decode patterns in audience behavior, franchise performance, and cultural
+                        trends to provide unparalleled foresight into the future of Cinema</i>
+                </p>
+            </div>
+        </section>
+
+        <section class="section" style="padding: 80px 0;">
+            <div class="container">
+
+                <h1
+                    style="font-size: 32px; font-weight: 800; margin: 0 0 40px 0; color: var(--color-primary); text-align: center;">
+                    The CineScore Ethos</h1>
+
+                <div class="grid grid-3" style="gap: 24px; align-items: stretch;">
+
+                    <div class="card stack"
+                        style="padding: 40px 32px; gap: 16px; border-top: 4px solid var(--color-success);">
+                        <h3
+                            style="font-size: 13px; color: var(--color-success); text-transform: uppercase; letter-spacing: 2px; margin: 0;">
+                            <i class="fa-solid fa-users" style="margin-right: 8px;"></i> Our Identity
+                        </h3>
+                        <h2
+                            style="font-size: 24px; font-weight: 800; line-height: 1.2; margin: 0; color: var(--color-primary);">
+                            Who We Are</h2>
+                        <p style="color: var(--color-secondary); line-height: 1.6; font-size: 14px; margin: 0;">Welcome
+                            to CineScore, where we merge the art of cinema with the rigid science of analytics. Our team
+                            comprises industry-obsessed developers and data architects who possess a profound
+                            understanding of the entertainment sector. We pioneer quantitative analysis for the modern
+                            theatrical landscape.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 40px 32px; gap: 16px; border-top: 4px solid var(--color-tertiary);">
+                        <h3
+                            style="font-size: 13px; color: var(--color-danger); text-transform: uppercase; letter-spacing: 2px; margin: 0;">
+                            <i class="fa-solid fa-bullseye" style="margin-right: 8px;"></i> Pursuit of Excellence
+                        </h3>
+                        <h2
+                            style="font-size: 24px; font-weight: 800; line-height: 1.2; margin: 0; color: var(--color-primary);">
+                            What We Do</h2>
+                        <p style="color: var(--color-secondary); line-height: 1.6; font-size: 14px; margin: 0;">We exist
+                            to eliminate the guesswork from the film industry. By aggregating vast datasets—from social
+                            sentiment velocities to historical franchise decay rates—we translate the unpredictable art
+                            of storytelling into calculated financial projections. We empower creators with Wall
+                            Street-level analytics.</p>
+                    </div>
+
+                    <div class="card stack"
+                        style="padding: 40px 32px; gap: 16px; border-top: 4px solid var(--color-accent);">
+                        <h3
+                            style="font-size: 13px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 2px; margin: 0;">
+                            <i class="fa-solid fa-handshake" style="margin-right: 8px;"></i> Mission Statement
+                        </h3>
+                        <h2
+                            style="font-size: 24px; font-weight: 800; line-height: 1.2; margin: 0; color: var(--color-primary);">
+                            The Commitment</h2>
+                        <p style="color: var(--color-secondary); line-height: 1.6; font-size: 14px; margin: 0;">
+                            Transparency over hype. Architecture over aesthetics. We are committed to building an elite,
+                            enterprise-grade machine learning platform that scales without relying on bloated libraries.
+                            CineScore provides actionable intelligence that empowers our users to make informed
+                            decisions in an ever-evolving market.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <hr>
+        </div>
+
+        <section id="studio-heads-section" class="section"
+            style="position: relative; padding: 80px 0; border-bottom: 1px solid var(--color-border); overflow: hidden;">
+
+            <div class="cinematic-slider"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; border-bottom-left-radius:48px !important; border-bottom-right-radius: 48px!important; background-position: center; background-size: cover">
+                    <img class="active" style="background-position: top" src="Assets/About-Us-Members-4.jpg"
+                        alt="Background">
+
+                    <div class="hero-ambient-overlay"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;">
+                    </div>
+
+                </div>
+
+
+            <!-- Content (above background) -->
+            <div class="container stack" style="gap: 40px; position: relative; z-index: 3;">
+
+
+                <div style="text-align: center;">
+                    <h2 style="font-size: 32px; font-weight: 800; color: var(--color-primary); margin: 0 0 16px 0;">The
+                        Studio Heads</h2>
+                    <p style="color: var(--color-secondary); font-size: 16px; margin: 0;">❤ of a Cinephile.
+                        🧠 of the developers.</p>
+                </div>
+
+                <div class="stack" style="gap: 32px;">
+
+                    <div class="card row horizontal-card"
+                        style="padding: 48px; border: 1px solid var(--color-border); gap: 48px; align-items: center; flex-wrap: wrap; background: var(--bg-card);">
+                        <div class="img-content"
+                            style="width: 300px; height: 300px; border-radius: 50%; border: 3px solid var(--color-accent); overflow: hidden; flex-shrink: 0; margin: 0 auto; box-shadow: 0 15px 35px rgba(0, 85, 255, 0.15);">
+                            <img src="Assets/Omi-Placeholder-1.jpg" alt="Omi"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="stack text-content" style="gap: 16px; flex: 1; min-width: 300px;">
+                            <div>
+                                <h2 style="font-size: 28px; font-weight: 800; margin: 0; color: var(--color-primary);">
+                                    Omi
+                                    Kumar
+                                </h2>
+                                <h4
+                                    style="font-size: 13px; color: var(--color-accent); margin: 4px 0 0 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                    Founder &amp; Head of Studio • Lead Developer • ML Engineer </h4>
+                            </div>
+                            <p style="color: var(--color-secondary); line-height: 1.7; font-size: 15px; margin: 0;">
+                                I bridge the gap between two deeply scattered worlds: the boundless magic of global
+                                cinema and the ruthless logic of data science. I deeply believe in the power of
+                                storytelling and meaningful experiences. On the other hand,
+                                I am also an unabashed nerd, a die-hard cinephile, and a melophile obsessed with
+                                curating a perfect, hand-picked 1,500-track
+                                playlist.
+
+                            </p>
+                            <p style="color: var(--color-secondary); line-height: 1.7; font-size: 15px; margin: 0;">
+                                CineScore is my technical manifesto. I value elite productivity, discipline,
+                                consistency, organization, and
+                                Working with Systems over flashy shortcuts. I architected this enterprise-grade SaaS
+                                interface pixel-by-pixel, relying on raw logic and relentless dedication.
+                            </p>
+
+                            <div class="stack" style="gap: 8px; margin-top: 16px;">
+                                <h5
+                                    style="margin: 0; color: var(--color-tertiary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
+                                    Get in touch</h5>
+                                <div class="row" style="gap: 12px;">
+                                    <a href="mailto:youremail@example.com" class="social-btn email" title="Email"><i
+                                            class="fa-solid fa-envelope"></i></a>
+                                    <a href="#" class="social-btn linkedin" title="LinkedIn"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-btn website" title="Website"><i
+                                            class="fa-solid fa-globe"></i></a>
+                                    <a href="#" class="social-btn github" title="GitHub"><i
+                                            class="fa-brands fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card row horizontal-card reverse"
+                        style="padding: 48px; border: 1px solid var(--color-border); gap: 48px; align-items: center; flex-wrap: wrap; background: var(--bg-card);">
+                        <div class="stack text-content"
+                            style="gap: 16px; flex: 1; min-width: 300px; text-align: right; align-items: flex-end;">
+                            <div style="text-align: right;">
+                                <h2 style="font-size: 28px; font-weight: 800; margin: 0; color: var(--color-primary);">
+                                    Richa
+                                    Kumari</h2>
+                                <h4
+                                    style="font-size: 13px; color: var(--color-success); margin: 4px 0 0 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                    Founding Member &amp; Head of Operations • Co-Developer • ML Engineer </h4>
+                            </div>
+                            <p style="color: var(--color-secondary); line-height: 1.7; font-size: 15px; margin: 0;">
+                                Building an enterprise-level predictive model demands absolute perfectionism—a standard
+                                that causes most college teams to walk away. When the scale of CineScore became
+                                intimidating and everyone else left, she stayed.
+                            </p>
+                            <p style="color: var(--color-secondary); line-height: 1.7; font-size: 15px; margin: 0;">
+                                As the core execution specialist, she is the loyal anchor in the trenches. She ensures
+                                that the foundational data pipelines hold strong and executes the overarching
+                                architectural blueprints, proving that unwavering dedication is critical.
+                            </p>
+
+                            <div class="stack" style="gap: 8px; margin-top: 16px;">
+                                <h5
+                                    style="margin: 0; color: var(--color-tertiary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
+                                    Get in touch</h5>
+                                <div class="row" style="gap: 12px;">
+                                    <a href="mailto:youremail@example.com" class="social-btn email" title="Email"><i
+                                            class="fa-solid fa-envelope"></i></a>
+                                    <a href="#" class="social-btn insta" title="Instagram"><i
+                                            class="fa-brands fa-instagram"></i></a>
+                                    <a href="#" class="social-btn linkedin" title="LinkedIn"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-btn website" title="Website"><i
+                                            class="fa-solid fa-globe"></i></a>
+                                    <a href="#" class="social-btn github" title="GitHub"><i
+                                            class="fa-brands fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img-content"
+                            style="width: 250px; height: 250px; border-radius: 50%; border: 3px solid var(--color-success); overflow: hidden; flex-shrink: 0; margin: 0 auto; box-shadow: 0 15px 35px rgba(16, 185, 129, 0.1);">
+                            <img src="Assets/Richa-Placeholder-4.jpg" alt="Core Contributor"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            </section>
+
+            <section class="section" style="padding: 80px 0; background-color: var(--bg-page);">
+                <div class="container">
+                    <div class="grid grid-2" style="gap: 64px; align-items: stretch;">
+
+                        <div class="stack" style="gap: 24px;">
+                            <span class="badge"
+                                style="background: rgba(0, 85, 255, 0.1); color: var(--color-accent); width: fit-content; border: none;">Tech
+                                Used</span>
+                            <h3
+                                style="font-size: 32px; font-weight: 800; margin: 0; color: var(--color-primary); line-height: 1.1;">
+                                Built for Speed <br> Engineered for Scale</h3>
+
+                            <p class="text-block" style="color: var(--color-secondary); margin: 0;">
+                                No bloated JavaScript frameworks. No heavy animation libraries. CineScore's frontend is
+                                a
+                                masterclass ensuring
+                                zero-latency renders and a cinematic user experience.
+                            </p>
+
+                            <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-html5" style="font-size: 24px; color: #E34F26;"></i>
+                                    <span class="small" style="font-weight: 700;">HTML/CSS</span>
+                                </div>
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-js" style="font-size: 24px; color: #F7DF1E;"></i>
+                                    <span class="small" style="font-weight: 700;">Vanilla JS</span>
+                                </div>
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-python" style="font-size: 24px; color: #3776AB;"></i>
+                                    <span class="small" style="font-weight: 700;">Python</span>
+                                </div>
+
+
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-openai"
+                                        style="font-size: 18px; color: var(--color-primary);"></i>
+                                    <span class="small" style="font-weight: 700;">LLMs & GenAI</span>
+                                </div>
+
+
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-solid fa-circle-nodes"
+                                        style="font-size: 18px; color: var(--color-success);"></i>
+                                    <span class="small" style="font-weight: 700;">SciKit Learn</span>
+                                </div>
+
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-solid fa-server" style="font-size: 24px; color: #8B5;"></i>
+                                    <span class="small" style="font-weight: 700;">REST APIs</span>
+                                </div>
+
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-solid fa-database" style="font-size: 24px; color: #337AFF;"></i>
+                                    <span class="small" style="font-weight: 700;">PostgreSQL</span>
+                                </div>
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-aws" style="font-size: 24px; color: #FF9900;"></i>
+                                    <span class="small" style="font-weight: 700;">AWS</span>
+                                </div>
+
+                                <div class="card stack"
+                                    style="padding: 16px 12px; align-items: center; text-align: center; gap: 8px;">
+                                    <i class="fa-brands fa-kaggle" style="font-size: 24px; color: #337AFF;"></i>
+                                    <span class="small" style="font-weight: 700;">Kaggle Datasets</span>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="stack neo-brutalist"
+                            style="gap: 24px; justify-content: center; padding: 48px; background: var(--bg-card); border-radius: 24px; border: 1px solid var(--color-border); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                            <span class="badge"
+                                style="background: rgba(255, 159, 28, 0.1); color: var(--color-warning); width: fit-content; border: none;">Connect</span>
+                            <h2 style="font-size: 32px; font-weight: 800; margin: 0; color: var(--color-primary);">
+                                Follow Us.
+                            </h2>
+                            <p style="color: var(--color-secondary); line-height: 1.6; margin: 0;">Want to stay updated
+                                with
+                                our latest news and insights? Want to discuss data structures, algorithmic prediction,
+                                or
+                                debate the greatest
+                                films ever made? Let's talk.</p>
+
+                            <div class="row" style="gap: 16px; margin-top: 8px;">
+                                <a href="#" class="social-btn linkedin" title="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-btn github" title="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="#" class="social-btn website" title="Personal Portfolio">
+                                    <i class="fa-solid fa-globe"></i>
+                                </a>
+                                <a href="#" class="social-btn insta" title="Instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="section"
+                style="padding: 80px 0; background-color: var(--bg-card); border-top: 1px solid var(--color-border);">
+                <div class="container">
+                    <div class="grid grid-2" style="align-items: center; gap: 64px;">
+
+                        <div class="cinematic-slider"
+                            style="width: 100%; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--color-border); aspect-ratio: 4/5;">
+                            <img src="Assets/About-Us-Footer-1.jpg" class="active" alt="Contact Us Theater">
+                            <img src="Assets/About-Us-Footer-8.jpg" alt="Data Network">
+                            <img src="Assets/About-Us-Footer-3.jpg" alt="Film Grain">
+                            <img src="Assets/About-Us-Footer-4.jpg" alt="Projector Light">
+                        </div>
+
+                        <div class="stack" style="gap: 32px;">
+                            <div class="stack" style="gap: 8px;">
+                                <span class="badge"
+                                    style="background: rgba(0, 85, 255, 0.1); color: var(--color-accent); width: fit-content; border: none;">Inquiries</span>
+                                <h2
+                                    style="font-size: 40px; font-weight: 900; line-height: 1.1; margin: 0; color: var(--color-primary);">
+                                    Let's Connect.</h2>
+                                <p style="font-size: 16px; color: var(--color-secondary); line-height: 1.6; margin: 0;">
+                                    Have
+                                    a question about our methodology? Want API access to our prediction models? Feel
+                                    free to
+                                    reach out to us through contact form below. Drop your details below and we will get
+                                    back
+                                    to you.</p>
+
+                            </div>
+
+                            <form class="stack" style="gap: 16px;">
+                                <div class="grid grid-2" style="gap: 16px;">
+                                    <input type="text" placeholder="Full Name" required
+                                        style="padding: 14px 16px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--bg-page); color: var(--color-primary); font-family: var(--font-primary);">
+                                    <input type="tel" placeholder="Phone Number"
+                                        style="padding: 14px 16px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--bg-page); color: var(--color-primary); font-family: var(--font-primary);">
+                                </div>
+
+                                <div class="grid grid-2" style="gap: 16px;">
+                                    <input type="email" placeholder="Email Address" required
+                                        style="padding: 14px 16px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--bg-page); color: var(--color-primary); font-family: var(--font-primary);">
+                                    <input type="text" placeholder="Subject" required
+                                        style="padding: 14px 16px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--bg-page); color: var(--color-primary); font-family: var(--font-primary);">
+                                </div>
+
+                                <textarea placeholder="Your Message..." required rows="5"
+                                    style="padding: 14px 16px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--bg-page); color: var(--color-primary); font-family: var(--font-primary); resize: vertical;"></textarea>
+
+                                <button type="submit" class="hero-btn"
+                                    style="width: 100%; justify-content: center; padding: 16px; font-size: 16px; margin-top: 8px;">Submit<i
+                                        class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i></button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+    </main>
+
+    <div class="form" id="loginModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+
+            <form id="loginForm" novalidate>
+                <H1>Welcome Back</H1>
+                <label for="Email">Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="Password">Password</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <div style="text-align: center; margin-top: -5px; margin-bottom: 10px;">
+                    <a href="#" class="small"
+                        style="color: var(--color-tertiary); font-weight: 500; transition: color 0.2s ease;"
+                        onmouseover="this.style.color='var(--color-accent)'"
+                        onmouseout="this.style.color='var(--color-tertiary)'">Forgot password?</a>
+                </div>
+
+                <button class="nav-button-primary" type="submit">Log In</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+            </form>
+            <p class="text-block">Don't have an account? <a href="#" id="switch-to-signup">Create an Account</a></p>
+        </div>
+    </div>
+
+    <div class="form" id="signupModal">
+        <div class="form-content">
+            <H1>Welcome to CineScore</H1>
+            <span class="close">&times;</span>
+            <form id="signupForm" novalidate="">
+
+                <label for="email">Email:</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" placeholder="Enter your password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="nav-button-primary" type="submit">Submit</button>
+
+                <div class="divider-or"><span>or</span></div>
+
+                <button type="button" class="social-btn-wide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google"
+                        style="width: 18px; height: 18px;">
+                    Continue with Google
+                </button>
+
+                <p class="text-block">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+
+                <p class="text-block" style="font-size: 11px; margin-top: 8px;">By signing up, you agree to our <a
+                        href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="form" id="resetModal">
+        <div class="form-content">
+            <span class="close">&times;</span>
+            <form id="resetForm" novalidate>
+                <H1>Reset Password</H1>
+                <p class="text-block" style="text-align: center; margin-bottom: 20px;">Enter your new credentials below.
+                </p>
+
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter new password" autocomplete="new-password"
+                    required>
+
+                <label for="confirm-password">Re-enter New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password"
+                    autocomplete="new-password" required>
+
+                <p class="error form-error" style="text-align: center; height: 15px;"></p>
+
+                <button class="small nav-button-primary" type="submit" style="width: 100%;">Update Password</button>
+
+                <p class="text-block" style="text-align: center; margin-top: 24px;">
+                    Remembered it? <a href="#" id="back-to-login">Back to Log In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="customAlertModal"
+        style="display: none; z-index: 10000; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="modal-content stack"
+            style="background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); animation: swipeIn 0.3s ease;">
+            <div id="alert-icon-container" style="font-size: 40px; margin-bottom: 12px;"></div>
+            <h2 id="alert-title" style="margin: 0; font-size: 20px; color: var(--color-primary);"></h2>
+            <p id="alert-message"
+                style="color: var(--color-secondary); font-size: 14px; line-height: 1.5; margin-bottom: 24px;"></p>
+            <div id="alert-actions" class="row" style="gap: 12px; justify-content: center;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section parallax-footer">
+        <div class="container">
+
+            <div class="grid grid-4 footer-grid">
+
+                <div class="stack">
+                    <a href="#" class="navlogo">
+                        <img id="footer-logo" src="Assets/CineScore-Light.png" alt="Cine.Metrics" class="logo">
+                    </a>
+                    <p class="small" style="margin-top: 12px; color: var(--color-secondary);">
+                        Predicting Cinematic Success.
+                    </p>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="#" class="disabled-link">Pricing</a></li>
+                        <li><a href="#" class="disabled-link">API Access</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="#" class="disabled-link">Careers</a></li>
+                        <li><a href="#" class="disabled-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="stack">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links stack">
+                        <li><a href="#" class="disabled-link">Privacy Policy</a></li>
+                        <li><a href="#" class="disabled-link">Terms of Service</a></li>
+                        <li><a href="About.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row-between footer-bottom">
+                <span class="meta">© 2026 CineScore. All rights reserved.
+                </span>
+
+
+                <span style="font-size: 13px; color: var(--color-tertiary); line-height: 1;">
+                    Made with <i class="fa-solid fa-heart" style="color: var(--color-danger);"></i> in India by
+                    <strong>Omi</strong>
+                </span>
+
+                <div class="row">
+                    <a href="YOUR_PORTFOLIO_LINK" target="_blank" class="footer-social-link" aria-label="Portfolio">
+                        <i class="fa-solid fa-globe" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="mailto:your.email@example.com" class="footer-social-link" aria-label="Email">
+                        <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin" style="font-size: 20px;"></i>
+                    </a>
+
+                    <a href="#" class="footer-social-link" aria-label="GitHub">
+                        <i class="fa-brands fa-github" style="font-size: 20px;"></i>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="ai-bot-trigger" class="ai-assistant-fab">
+        <i class="fa-solid fa-user-astronaut"></i>
+    </div>
+
+    <div id="splash-loader" class="splash-loader">
+        <div class="loader-content">
+            <div class="speedometer-container">
+                <div class="speedometer-track"></div>
+                <div class="speedometer-inner-track"></div>
+                <div class="speedometer-needle"></div>
+                <div class="speedometer-center-dot"></div>
+            </div>
+            <h2 class="loader-text">Analyzing Box Office Data...</h2>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+            <h2 style="margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-link" style="font-size: 16px; color: var(--color-accent);"></i> Quick Links
+            </h2>
+            <button class="close" id="drawer-close-btn"
+                style="position: static; width: 40px; height: 40px; border-radius: 50%; background: rgba(128, 128, 128, 0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; line-height: 0; border: none; cursor: pointer; color: var(--color-primary); transition: background 0.2s ease;">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">The
+                Private Club</span>
+            <a href="Hub.html#overview-section" class="drawer-link"><i class="fa-solid fa-bullseye"></i> Your
+                Predictions</a>
+            <a href="Hub.html#watchlist-section" class="drawer-link"><i class="fa-solid fa-bookmark"></i> My
+                Watchlist</a>
+            <a href="Hub.html#legacy-section" class="drawer-link"><i class="fa-solid fa-trophy"></i> Legacy & Rank</a>
+
+            <hr style="margin: 24px 0; border-color: var(--color-tertiary);">
+
+            <span class="small"
+                style="text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--color-secondary); margin-bottom: 12px; display: block;">Public
+                Pages</span>
+            <a href="index.html" class="drawer-link"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="Prediction.html" class="drawer-link"><i class="fa-solid fa-bolt"></i> Make Prediction</a>
+            <a href="Features.html" class="drawer-link active"><i class="fa-solid fa-gears"></i> Features</a>
+            <a href="About-Us.html" class="drawer-link"><i class="fa-solid fa-user-group"></i> About Us</a>
+        </div>
+    </div>
+
+    <div class="form" id="onboardingModal" style="display: none; z-index: 10000;">
+        <div class="form-content stack" style="text-align: center;">
+            <h1 style="margin-bottom: 8px;">Welcome to the Crew</h1>
+            <p class="text-block" style="margin-bottom: 24px;">Let's set up your director profile.</p>
+            <form id="onboardingForm" novalidate>
+                <div style="text-align: left;">
+                    <label>First Name</label>
+                    <input type="text" id="ob-fname" placeholder="E.g. Christopher" required>
+                    <label>Last Name</label>
+                    <input type="text" id="ob-lname" placeholder="E.g. Nolan" required>
+                    <label>Director Handle</label>
+                    <input type="text" id="ob-handle" placeholder="@username" required>
+                </div>
+                <button type="submit" class="hero-btn"
+                    style="width: 100%; margin-top: 16px; background: var(--color-accent) !important; color: #FFFFFF !important; border: none !important; opacity: 1 !important; font-weight: 700 !important;">Complete
+                    Profile <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="mockData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
