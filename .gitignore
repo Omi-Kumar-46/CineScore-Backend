@@ -1,0 +1,9 @@
+.env
+*.csv
+*.xlsx
+*.png
+Algorithm.ipynb
+Model.ipynb
+Movie Analysis.ipynb
+Movie Vizualization.ipynb
+*.pkl
