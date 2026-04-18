@@ -13,3 +13,4 @@ __pycache__/
 # Ignore entirely specific folders to prevent data leaks
 Model/Data/
 Archive_V1/
+Front-End/
