@@ -1,9 +1,15 @@
+# Environments and Cache
+.venv/
 .env
+__pycache__/
+*.pyc
+
+# Data & Output Files
 *.csv
 *.xlsx
-*.png
-Algorithm.ipynb
-Model.ipynb
-Movie Analysis.ipynb
-Movie Vizualization.ipynb
 *.pkl
+*.png
+
+# Ignore entirely specific folders to prevent data leaks
+Model/Data/
+Archive_V1/
