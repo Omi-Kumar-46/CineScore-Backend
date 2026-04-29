@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+﻿from fastapi import FastAPI, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
@@ -7,6 +7,8 @@ import numpy as np
 import joblib
 import json
 import traceback
+import requests
+import os
 
 # --- PATH CONFIGURATION (Root-Proof Engine) ---
 # This ensures paths work perfectly whether main.py is in the root or in a /src folder.
@@ -383,7 +385,7 @@ def _call_gemini(prompt: str, fallback: dict) -> dict:
 
 
 def get_groq_verdicts(pitch: PitchRequest, score: float, revenue: float) -> dict:
-    """Groq (LLaMA) → Gemini → Heuristic cascade for executive verdicts."""
+    """Groq (LLaMA) â†’ Gemini â†’ Heuristic cascade for executive verdicts."""
     genre = pitch.primary_genre or "Action"
     rev_m = round(revenue / 1_000_000)
     budget_m = round(get_heuristic_budget(pitch) / 1_000_000)
@@ -392,8 +394,8 @@ def get_groq_verdicts(pitch: PitchRequest, score: float, revenue: float) -> dict
     # Always-available heuristic fallback
     fallback = {
         "general": f"'{pitch.title}' enters the {genre} market with audience tracking that signals {'exceptional' if is_hit else 'cautious'} demand. The film's premise and talent package {'project crossover appeal well beyond the core fanbase' if is_hit else 'will require targeted marketing to convert casual viewers'}. {'Early indicators suggest a dominant opening weekend trajectory.' if is_hit else 'Tracking data suggests a slow-burn performance pattern more reliant on word-of-mouth.'} The {get_season(pitch.release_month or 6)} release window {'amplifies competitive advantage significantly.' if is_hit else 'introduces scheduling risk against tentpole competition.'}",
-        "finance": f"{'A front-loaded revenue curve is projected, with opening weekend expected to exceed budget recovery benchmarks.' if is_hit else 'A conservative opening is projected, with international markets expected to shoulder the profitability burden.'} The estimated production investment of ${budget_m}M {'positions this as a high-ROI asset given genre comps.' if is_hit else 'creates a tight break-even window requiring $' + str(round(budget_m * 2.5)) + 'M in global gross.'} {'Historical franchise data supports a 2.5x–4x theatrical multiplier in this category.' if is_hit else 'Streaming rights and ancillary revenue will be critical to profitability.'} Estimated theatrical ROI stands at {round(revenue / max(get_heuristic_budget(pitch), 1), 1)}x on the production budget.",
-        "critical": f"{'Critical consensus is tracking toward a strong aggregate, which historically extends theatrical legs by 15–20%.' if score > 7.5 else 'A polarized critical response is anticipated, consistent with high-concept ' + genre + ' releases that divide press and audiences.'} The projected audience score of {score:.1f}/10 {'places this firmly in the upper tier of the genre for the year.' if score > 7.5 else 'suggests the film will perform better with general audiences than with critics.'} {'Prestige word-of-mouth could drive a significant second-weekend hold, outperforming opening projections.' if score > 7.5 else 'Marketing messaging will need to manage critical expectations without dampening audience enthusiasm.'} {'The critical profile mirrors that of genre-defining hits in the comparable release set.' if score > 7.5 else 'Comparative titles with similar scores have averaged $' + str(rev_m - 50) + 'M–$' + str(rev_m + 80) + 'M in global gross.'}",
+        "finance": f"{'A front-loaded revenue curve is projected, with opening weekend expected to exceed budget recovery benchmarks.' if is_hit else 'A conservative opening is projected, with international markets expected to shoulder the profitability burden.'} The estimated production investment of ${budget_m}M {'positions this as a high-ROI asset given genre comps.' if is_hit else 'creates a tight break-even window requiring $' + str(round(budget_m * 2.5)) + 'M in global gross.'} {'Historical franchise data supports a 2.5xâ€“4x theatrical multiplier in this category.' if is_hit else 'Streaming rights and ancillary revenue will be critical to profitability.'} Estimated theatrical ROI stands at {round(revenue / max(get_heuristic_budget(pitch), 1), 1)}x on the production budget.",
+        "critical": f"{'Critical consensus is tracking toward a strong aggregate, which historically extends theatrical legs by 15â€“20%.' if score > 7.5 else 'A polarized critical response is anticipated, consistent with high-concept ' + genre + ' releases that divide press and audiences.'} The projected audience score of {score:.1f}/10 {'places this firmly in the upper tier of the genre for the year.' if score > 7.5 else 'suggests the film will perform better with general audiences than with critics.'} {'Prestige word-of-mouth could drive a significant second-weekend hold, outperforming opening projections.' if score > 7.5 else 'Marketing messaging will need to manage critical expectations without dampening audience enthusiasm.'} {'The critical profile mirrors that of genre-defining hits in the comparable release set.' if score > 7.5 else 'Comparative titles with similar scores have averaged $' + str(rev_m - 50) + 'Mâ€“$' + str(rev_m + 80) + 'M in global gross.'}",
     }
 
     # Shared prompt for both LLMs
@@ -402,7 +404,7 @@ def get_groq_verdicts(pitch: PitchRequest, score: float, revenue: float) -> dict
         f"Data: Genre={genre}, Director={pitch.director_name}, Lead={pitch.actor_1_name}, Studio={pitch.primary_studio}, "
         f"Projected Revenue=${rev_m}M, AI Acclaim Score={score:.1f}/10, Budget=${budget_m}M, Release Season={get_season(pitch.release_month or 6)}.\n"
         f"Return ONLY a valid JSON object with exactly 3 keys: 'general', 'finance', 'critical'. "
-        f"Each value must be a SUBSTANTIAL 4-line paragraph (at least 60 words) using the specific data above — no vague language. "
+        f"Each value must be a SUBSTANTIAL 4-line paragraph (at least 60 words) using the specific data above â€” no vague language. "
         f"Be extremely detailed about the title, numbers, genre, and talent. Use industry terminology (e.g., 'four-quadrant appeal', 'theatrical window', 'ancillary recovery'). "
         f"No markdown, no extra text, no keys beyond the 3 required."
     )
@@ -438,7 +440,7 @@ def get_groq_verdicts(pitch: PitchRequest, score: float, revenue: float) -> dict
 
 
 def get_executive_verdicts(pitch: PitchRequest, score: float, revenue: float):
-    """Public wrapper for the Groq → Gemini → Heuristic cascade."""
+    """Public wrapper for the Groq â†’ Gemini â†’ Heuristic cascade."""
     return get_groq_verdicts(pitch, score, revenue)
 
 
@@ -533,6 +535,30 @@ def proxy_upcoming():
         print(f"Proxy Upcoming Error: {e}")
         return []
 
+
+@app.get("/tmdb/poster")
+def proxy_poster(path: str = Query(...), size: str = Query("w500")):
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Referer": "https://www.themoviedb.org/",
+        }
+        safe_path = path if str(path).startswith("/") else f"/{path}"
+        safe_size = size if size in {"original", "w92", "w154", "w185", "w300", "w342", "w500", "w780"} else "w500"
+        resp = requests.get(
+            f"https://image.tmdb.org/t/p/{safe_size}{safe_path}",
+            headers=headers,
+            timeout=15,
+        )
+        resp.raise_for_status()
+        return Response(
+            content=resp.content,
+            media_type=resp.headers.get("Content-Type", "image/jpeg"),
+            headers={"Cache-Control": "public, max-age=86400"},
+        )
+    except Exception as e:
+        print(f"Proxy Poster Error: {e}")
+        return Response(status_code=404)
 
 @app.get("/tmdb/discover")
 def proxy_discover(genre_id: str = None, year: int = None):
@@ -808,3 +834,4 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
